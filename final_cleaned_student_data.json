@@ -1,0 +1,838 @@
+{
+    "35214811922": {
+        "name": "AKSHIT SHARMA",
+        "enrollment_no": "35214811922",
+        "academic_profile": {
+            "institute": "MAHARAJA AGRASEN INSTITUTE OF TECHNOLOGY",
+            "degree": "Bachelor of Technology",
+            "branch": "Artificial Intelligence and Data Science",
+            "overall_cgpa": 8.45,
+            "overall_percentage": 82.06,
+            "semester_performance": [
+                {
+                    "semester": 1,
+                    "sgpa": 7.72,
+                    "percentage": 73.7,
+                    "subjects": [
+                        {
+                            "subject": "ENVIRONMENTAL STUDIES LAB",
+                            "grade": "O",
+                            "marks": 92
+                        },
+                        {
+                            "subject": "ENGINEERING GRAPHICS-I",
+                            "grade": "O",
+                            "marks": 95
+                        },
+                        {
+                            "subject": "PROGRAMMING IN 'C' LAB",
+                            "grade": "O",
+                            "marks": 97
+                        },
+                        {
+                            "subject": "PHYSICS - I LAB",
+                            "grade": "A+",
+                            "marks": 80
+                        },
+                        {
+                            "subject": "MANUFACTURING PROCESS",
+                            "grade": "A",
+                            "marks": 70
+                        },
+                        {
+                            "subject": "COMMUNICATIONS SKILLS",
+                            "grade": "B+",
+                            "marks": 59
+                        },
+                        {
+                            "subject": "APPLIED MATHEMATICS - I",
+                            "grade": "B+",
+                            "marks": 57
+                        },
+                        {
+                            "subject": "ENVIRONMENTAL STUDIES",
+                            "grade": "A",
+                            "marks": 73
+                        },
+                        {
+                            "subject": "APPLIED PHYSICS - I",
+                            "grade": "C",
+                            "marks": 45
+                        },
+                        {
+                            "subject": "PROGRAMMING IN 'C'",
+                            "grade": "A",
+                            "marks": 69
+                        }
+                    ]
+                },
+                {
+                    "semester": 2,
+                    "sgpa": 6.8,
+                    "percentage": 71.08,
+                    "subjects": [
+                        {
+                            "subject": "WORKSHOP PRACTICE",
+                            "grade": "A+",
+                            "marks": 85
+                        },
+                        {
+                            "subject": "ELECTRICAL SCIENCE LAB",
+                            "grade": "A+",
+                            "marks": 78
+                        },
+                        {
+                            "subject": "ENGINEERING GRAPHICS - II",
+                            "grade": "A+",
+                            "marks": 87
+                        },
+                        {
+                            "subject": "APPLIED CHEMISTRY",
+                            "grade": "A+",
+                            "marks": 88
+                        },
+                        {
+                            "subject": "PHYSICS-II LAB",
+                            "grade": "O",
+                            "marks": 94
+                        },
+                        {
+                            "subject": "HUMAN VALUES AND ETHICS",
+                            "grade": "A+",
+                            "marks": 88
+                        },
+                        {
+                            "subject": "INDIAN CONSTITUTION",
+                            "grade": "A+",
+                            "marks": 80
+                        },
+                        {
+                            "subject": "ENGINEERING MECHANICS",
+                            "grade": "B",
+                            "marks": 52
+                        },
+                        {
+                            "subject": "APPLIED MATHEMATICS -II",
+                            "grade": "P",
+                            "marks": 43
+                        },
+                        {
+                            "subject": "ELECTRICAL SCIENCE",
+                            "grade": "B",
+                            "marks": 54
+                        },
+                        {
+                            "subject": "APPLIED PHYSICS - II",
+                            "grade": "B",
+                            "marks": 51
+                        },
+                        {
+                            "subject": "APPLIED CHEMISTRY",
+                            "grade": "B",
+                            "marks": 53
+                        }
+                    ]
+                },
+                {
+                    "semester": 3,
+                    "sgpa": 8.96,
+                    "percentage": 83.85,
+                    "subjects": [
+                        {
+                            "subject": "WEB PROGRAMMING LAB",
+                            "grade": "A+",
+                            "marks": 87
+                        },
+                        {
+                            "subject": "PRINCIPLES OF ARTIFICIAL INTELLIGENCE LAB",
+                            "grade": "O",
+                            "marks": 90
+                        },
+                        {
+                            "subject": "DIGITAL LOGIC DESIGN LAB",
+                            "grade": "O",
+                            "marks": 90
+                        },
+                        {
+                            "subject": "FOUNDATIONS OF DATA SCIENCE LAB",
+                            "grade": "O",
+                            "marks": 96
+                        },
+                        {
+                            "subject": "DATA STRUCTURES LAB",
+                            "grade": "O",
+                            "marks": 92
+                        },
+                        {
+                            "subject": "SELECTED READING",
+                            "grade": "O",
+                            "marks": 94
+                        },
+                        {
+                            "subject": "CRITICAL REASONING AND SYSTEMS THINKING",
+                            "grade": "A+",
+                            "marks": 81
+                        },
+                        {
+                            "subject": "UNIVERSAL HUMAN VALUES - II",
+                            "grade": "A+",
+                            "marks": 77
+                        },
+                        {
+                            "subject": "PROBABILITY, STATISTICS AND LINEAR ALGEBRA",
+                            "grade": "A+",
+                            "marks": 75
+                        },
+                        {
+                            "subject": "PRINCIPLES OF ARTIFICIAL INTELLIGENCE",
+                            "grade": "A",
+                            "marks": 66
+                        },
+                        {
+                            "subject": "DIGITAL LOGIC DESIGN",
+                            "grade": "A+",
+                            "marks": 86
+                        },
+                        {
+                            "subject": "FOUNDATIONS OF DATA SCIENCE",
+                            "grade": "A+",
+                            "marks": 87
+                        },
+                        {
+                            "subject": "DATA STRUCTURES",
+                            "grade": "A",
+                            "marks": 69
+                        }
+                    ]
+                },
+                {
+                    "semester": 4,
+                    "sgpa": 8.68,
+                    "percentage": 85.69,
+                    "subjects": [
+                        {
+                            "subject": "OBJECT ORIENTED PROGRAMMING",
+                            "grade": "A",
+                            "marks": 72
+                        },
+                        {
+                            "subject": "DATABASE MANAGEMENT SYSTEMS",
+                            "grade": "A+",
+                            "marks": 87
+                        },
+                        {
+                            "subject": "SOFTWARE ENGINEERING",
+                            "grade": "A",
+                            "marks": 74
+                        },
+                        {
+                            "subject": "COMPUTER NETWORKS AND INTERNET PROTOCOL",
+                            "grade": "A+",
+                            "marks": 75
+                        },
+                        {
+                            "subject": "FUNDAMENTALS OF MACHINE LEARNING",
+                            "grade": "A+",
+                            "marks": 78
+                        },
+                        {
+                            "subject": "COMPUTATIONAL METHODS",
+                            "grade": "B",
+                            "marks": 51
+                        },
+                        {
+                            "subject": "EFFECTIVE TECHNICAL WRITING",
+                            "grade": "O",
+                            "marks": 99
+                        },
+                        {
+                            "subject": "EMERGING TRENDS IN TECHNOLOGICAL INDUSTRIES",
+                            "grade": "O",
+                            "marks": 98
+                        },
+                        {
+                            "subject": "OBJECT ORIENTED PROGRAMMING LAB",
+                            "grade": "O",
+                            "marks": 95
+                        },
+                        {
+                            "subject": "DATABASE MANAGEMENT SYSTEMS LAB",
+                            "grade": "O",
+                            "marks": 94
+                        },
+                        {
+                            "subject": "COMPUTER NETWORKS AND INTERNET PROTOCOL LAB",
+                            "grade": "O",
+                            "marks": 98
+                        },
+                        {
+                            "subject": "FUNDAMENTALS OF MACHINE LERNING LAB",
+                            "grade": "O",
+                            "marks": 95
+                        },
+                        {
+                            "subject": "PRACTICUM (INTEGERATED PROJECT)",
+                            "grade": "O",
+                            "marks": 98
+                        }
+                    ]
+                },
+                {
+                    "semester": 5,
+                    "sgpa": 9.08,
+                    "percentage": 88.17,
+                    "subjects": [
+                        {
+                            "subject": "OPERATING SYSTEMS",
+                            "grade": "A+",
+                            "marks": 75
+                        },
+                        {
+                            "subject": "DESIGN AND ANALYSIS OF ALGORITHMS",
+                            "grade": "A",
+                            "marks": 66
+                        },
+                        {
+                            "subject": "DATA MINING",
+                            "grade": "A+",
+                            "marks": 82
+                        },
+                        {
+                            "subject": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+                            "grade": "A+",
+                            "marks": 88
+                        },
+                        {
+                            "subject": "INTRODUCTION TO INTERNET OF THINGS",
+                            "grade": "A+",
+                            "marks": 81
+                        },
+                        {
+                            "subject": "PRINCIPLES OF ENTREPRENEURSHIP MINDSET",
+                            "grade": "A+",
+                            "marks": 80
+                        },
+                        {
+                            "subject": "OPERATING SYSTEMS LAB",
+                            "grade": "O",
+                            "marks": 99
+                        },
+                        {
+                            "subject": "DESIGN AND ANALYSIS OF ALGORITHMS LAB",
+                            "grade": "O",
+                            "marks": 96
+                        },
+                        {
+                            "subject": "DATA MINING LAB",
+                            "grade": "O",
+                            "marks": 93
+                        },
+                        {
+                            "subject": "INTRODUCTION TO INTERNET OF THINGS LAB",
+                            "grade": "O",
+                            "marks": 98
+                        },
+                        {
+                            "subject": "SUMMER TRAINING REPORT-1",
+                            "grade": "O",
+                            "marks": 100
+                        },
+                        {
+                            "subject": "SEMINAR ON CASE STUDY OF EMERGING AREAS OF TECHNOLOGY",
+                            "grade": "O",
+                            "marks": 100
+                        }
+                    ]
+                },
+                {
+                    "semester": 6,
+                    "sgpa": 9.38,
+                    "percentage": 88.55,
+                    "subjects": [
+                        {
+                            "subject": "DIGITAL IMAGE PROCESSING",
+                            "grade": "A",
+                            "marks": 73
+                        },
+                        {
+                            "subject": "BLOCKCHAIN TECHNOLOGY LAB",
+                            "grade": "O",
+                            "marks": 98
+                        },
+                        {
+                            "subject": "BLOCKCHAIN TECHNOLOGY",
+                            "grade": "A+",
+                            "marks": 76
+                        },
+                        {
+                            "subject": "FUNDAMENTALS OF DEEP LEARNING LAB",
+                            "grade": "O",
+                            "marks": 96
+                        },
+                        {
+                            "subject": "FUNDAMENTALS OF DEEP LEARNING",
+                            "grade": "A+",
+                            "marks": 84
+                        },
+                        {
+                            "subject": "BIG DATA ANALYTICS LAB",
+                            "grade": "O",
+                            "marks": 95
+                        },
+                        {
+                            "subject": "BIG DATA ANALYTICS",
+                            "grade": "O",
+                            "marks": 93
+                        },
+                        {
+                            "subject": "CRYPTOGRAPHY AND NETWORK SECURITY",
+                            "grade": "A+",
+                            "marks": 84
+                        },
+                        {
+                            "subject": "AI AND SUSTAINABLE COMPUTING",
+                            "grade": "O",
+                            "marks": 91
+                        },
+                        {
+                            "subject": "NSS/ NCC/ CULTURAL CLUBS/ TECHNICAL SOCIETY/ TECHNICAL CLUB",
+                            "grade": "O",
+                            "marks": 92
+                        },
+                        {
+                            "subject": "DIGITAL IMAGE PROCESSING LAB",
+                            "grade": "O",
+                            "marks": 92
+                        }
+                    ]
+                }
+            ]
+        },
+        "coding_profiles": {
+            "leetcode": {
+                "username": "akshitsharma7093",
+                "ranking": 2479447,
+                "totalSolved": 40,
+                "acceptanceRate": 64.08,
+                "problemsByDifficulty": {
+                    "Easy": "25/905",
+                    "Medium": "11/1927",
+                    "Hard": "4/874"
+                },
+                "primaryLanguage": {
+                    "languageName": "C++",
+                    "problemsSolved": 40
+                },
+                "topSkillsSummary": [
+                    {
+                        "skill": "Array",
+                        "solved": 22
+                    },
+                    {
+                        "skill": "String",
+                        "solved": 10
+                    },
+                    {
+                        "skill": "Hash Table",
+                        "solved": 8
+                    },
+                    {
+                        "skill": "Dynamic Programming",
+                        "solved": 7
+                    },
+                    {
+                        "skill": "Binary Search",
+                        "solved": 6
+                    },
+                    {
+                        "skill": "Math",
+                        "solved": 6
+                    },
+                    {
+                        "skill": "Recursion",
+                        "solved": 5
+                    },
+                    {
+                        "skill": "Two Pointers",
+                        "solved": 5
+                    },
+                    {
+                        "skill": "Tree",
+                        "solved": 4
+                    },
+                    {
+                        "skill": "Depth-First Search",
+                        "solved": 4
+                    },
+                    {
+                        "skill": "Stack",
+                        "solved": 4
+                    },
+                    {
+                        "skill": "Segment Tree",
+                        "solved": 3
+                    },
+                    {
+                        "skill": "Binary Tree",
+                        "solved": 3
+                    },
+                    {
+                        "skill": "Sliding Window",
+                        "solved": 3
+                    },
+                    {
+                        "skill": "Linked List",
+                        "solved": 3
+                    }
+                ],
+                "activity": {
+                    "currentStreak": 8,
+                    "totalActiveDays": 31
+                },
+                "recentSubmissions": [
+                    {
+                        "title": "Binary Tree Inorder Traversal",
+                        "timestamp": "2025-09-19"
+                    },
+                    {
+                        "title": "Binary Tree Preorder Traversal",
+                        "timestamp": "2025-09-16"
+                    },
+                    {
+                        "title": "Power of Four",
+                        "timestamp": "2025-08-15"
+                    },
+                    {
+                        "title": "Largest 3-Same-Digit Number in String",
+                        "timestamp": "2025-08-15"
+                    },
+                    {
+                        "title": "Power of Three",
+                        "timestamp": "2025-08-13"
+                    },
+                    {
+                        "title": "Fruits Into Baskets III",
+                        "timestamp": "2025-08-06"
+                    },
+                    {
+                        "title": "Fruits Into Baskets II",
+                        "timestamp": "2025-08-05"
+                    },
+                    {
+                        "title": "Fruit Into Baskets",
+                        "timestamp": "2025-08-04"
+                    },
+                    {
+                        "title": "Maximum Fruits Harvested After at Most K Steps",
+                        "timestamp": "2025-08-03"
+                    },
+                    {
+                        "title": "Pascal's Triangle",
+                        "timestamp": "2025-08-01"
+                    },
+                    {
+                        "title": "Count Hills and Valleys in an Array",
+                        "timestamp": "2025-07-28"
+                    },
+                    {
+                        "title": "Maximize Subarrays After Removing One Conflicting Pair",
+                        "timestamp": "2025-07-26"
+                    },
+                    {
+                        "title": "Maximum Unique Subarray Sum After Deletion",
+                        "timestamp": "2025-07-25"
+                    },
+                    {
+                        "title": "Minimum Score After Removals on a Tree",
+                        "timestamp": "2025-07-24"
+                    },
+                    {
+                        "title": "Maximum Score From Removing Substrings",
+                        "timestamp": "2025-07-23"
+                    },
+                    {
+                        "title": "Maximum Erasure Value",
+                        "timestamp": "2025-07-22"
+                    },
+                    {
+                        "title": "Delete Characters to Make Fancy String",
+                        "timestamp": "2025-07-22"
+                    },
+                    {
+                        "title": "Valid Palindrome",
+                        "timestamp": "2025-07-20"
+                    },
+                    {
+                        "title": "Convert Binary Number in a Linked List to Integer",
+                        "timestamp": "2025-07-19"
+                    },
+                    {
+                        "title": "Pow(x, n)",
+                        "timestamp": "2025-06-28"
+                    }
+                ]
+            },
+            "github": {
+                "username": "akshit7093",
+                "name": "Akshit Sharma",
+                "bio": "Bachelor of Technology in Artificial Intelligence and Data Science\r\nExperienced Full-Stack Web Developer\r\nCurrently studying Machine Learning, with a focus on D",
+                "stats": {
+                    "public_repos": 35,
+                    "followers": 6,
+                    "following": 3
+                },
+                "cleaned_profile_readme": "# 💫 About Me \nI’m a passionate **AI & Data Science undergraduate** building intelligent systems powered by Machine Learning and Generative AI. My work focuses on NLP, Computer Vision, Cloud Computing, and deploying ML models at scale.\n---\n## 🔗 Let's Connect\n[](https://www.linkedin.com/in/akshit-sharma-475a94271/)  \n[](https://x.com/Akshit_7093)\n---\n## 💻 Skills \n### Languages:\n### ML & AI: \n### Web & Cloud: \n### Tools & Platforms: \n---\n## 📂 Featured Projects \n### 🎬 Movie Genre Classifier\nBuilt using scikit-learn and Flask. Achieved 92% accuracy on a dataset of 10,000 movies.  \n🔗 GitHub Repo \n### 💳 Credit Card Fraud Detection\nReduced false positives by 15% using XGBoost and feature engineering on 1 million transactions.  \n🔗 GitHub Repo \n### 🗣️ SMS Spam Detection\nNLP-based model with 95% accuracy deployed using Flask.  \n🔗 GitHub Repo \n### ☁️ OpenStack Cloud Manager with Gemini\nNatural language interface to manage OpenStack resources using Google Gemini.  \n🔗 GitHub Repo \n### 🤖 Universal Website Chatbot\nLlama 3.1 based chatbot with voice assistant via Google TTS.  \n🔗 GitHub Repo \n### 🧏 SignEase - Real-Time Sign Language Translator\nVideo calling app with TensorFlow + WebRTC achieving >89% accuracy.  \n🔗 GitHub Repo \n---\n## 📊 GitHub Stats\n## 🏆 GitHub Trophies",
+                "pinned_repositories": [
+                    {
+                        "name": "SheShield1",
+                        "language": "Java",
+                        "stars": 1,
+                        "forks": 0
+                    },
+                    {
+                        "name": "SheShield",
+                        "language": "Python",
+                        "stars": 0,
+                        "forks": 0
+                    },
+                    {
+                        "name": "WeCare",
+                        "language": "CSS",
+                        "stars": 0,
+                        "forks": 0
+                    },
+                    {
+                        "name": "practice",
+                        "stars": 0,
+                        "forks": 0
+                    },
+                    {
+                        "name": "vd",
+                        "language": "CSS",
+                        "stars": 0,
+                        "forks": 0
+                    }
+                ],
+                "top_repositories": [
+                    {
+                        "name": "SheShield1",
+                        "language": "Java",
+                        "stars": 1,
+                        "forks": 0,
+                        "last_pushed": "2023-04-25"
+                    },
+                    {
+                        "name": "speech-translator-using-vosk",
+                        "language": "HTML",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-09-24"
+                    },
+                    {
+                        "name": "SHL-Assessment-Recommendation-System",
+                        "language": "Python",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-09-05"
+                    },
+                    {
+                        "name": "VM_manager_AgenticAi",
+                        "language": "Python",
+                        "stars": 0,
+                        "forks": 1,
+                        "last_pushed": "2025-08-24"
+                    },
+                    {
+                        "name": "Ayna_assignment_shape_color_ML",
+                        "language": "Jupyter Notebook",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-08-06"
+                    },
+                    {
+                        "name": "Sign-language-translator",
+                        "language": "Jupyter Notebook",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-08-05"
+                    },
+                    {
+                        "name": "AI-polling-system",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-08-01"
+                    },
+                    {
+                        "name": "Educopilot",
+                        "language": "Python",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-07-29"
+                    },
+                    {
+                        "name": "akshit7093",
+                        "description": "Config files for my GitHub profile.",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-07-14"
+                    },
+                    {
+                        "name": "walmarts-supplier-nexus-70",
+                        "language": "TypeScript",
+                        "stars": 0,
+                        "forks": 0,
+                        "last_pushed": "2025-07-07"
+                    }
+                ]
+            },
+            "codeforces": {
+                "username": "akshit7093",
+                "rating": 853,
+                "maxRating": 853,
+                "rank": "newbie",
+                "maxRank": "newbie",
+                "contest_history": [
+                    {
+                        "contestName": "Codeforces Round 1035 (Div. 2)",
+                        "rank": 585,
+                        "oldRating": 0,
+                        "newRating": 670,
+                        "ratingChange": 670
+                    },
+                    {
+                        "contestName": "EPIC Institute of Technology Round Summer 2025 (Codeforces Round 1036, Div. 1 + Div. 2)",
+                        "rank": 10736,
+                        "oldRating": 670,
+                        "newRating": 853,
+                        "ratingChange": 183
+                    }
+                ],
+                "problem_solving_stats": {
+                    "solved_problems": 3,
+                    "total_attempts": 10,
+                    "top_tags": {
+                        "math": 3,
+                        "greedy": 2,
+                        "combinatorics": 1,
+                        "dp": 1,
+                        "geometry": 1,
+                        "bitmasks": 1
+                    },
+                    "verdicts": {
+                        "OK": 3
+                    }
+                },
+                "submissions": [
+                    {
+                        "problem_name": "Minimise Sum",
+                        "problem_tags": [
+                            "greedy"
+                        ],
+                        "problem_rating": 1000,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "WRONG_ANSWER"
+                    },
+                    {
+                        "problem_name": "Deranged Deletions",
+                        "problem_tags": [
+                            "greedy",
+                            "sortings"
+                        ],
+                        "problem_rating": 800,
+                        "language": "Python 3",
+                        "verdict": "TIME_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "problem_name": "Minimise Sum",
+                        "problem_tags": [
+                            "greedy"
+                        ],
+                        "problem_rating": 1000,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "WRONG_ANSWER"
+                    },
+                    {
+                        "problem_name": "And Constraint",
+                        "problem_tags": [
+                            "bitmasks",
+                            "dp",
+                            "greedy"
+                        ],
+                        "problem_rating": 2600,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "WRONG_ANSWER"
+                    },
+                    {
+                        "problem_name": "Volcanic Eruptions",
+                        "problem_tags": [
+                            "dfs and similar",
+                            "dp",
+                            "greedy",
+                            "shortest paths",
+                            "trees"
+                        ],
+                        "problem_rating": 3300,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "TIME_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "problem_name": "Token Removing",
+                        "problem_tags": [
+                            "combinatorics",
+                            "dp",
+                            "math"
+                        ],
+                        "problem_rating": 2100,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "OK"
+                    },
+                    {
+                        "problem_name": "A Good Problem",
+                        "problem_tags": [
+                            "bitmasks",
+                            "constructive algorithms",
+                            "math"
+                        ],
+                        "problem_rating": 1300,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "TIME_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "problem_name": "Line Segments",
+                        "problem_tags": [
+                            "geometry",
+                            "greedy",
+                            "math"
+                        ],
+                        "problem_rating": 1200,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "OK"
+                    },
+                    {
+                        "problem_name": "Add or XOR",
+                        "problem_tags": [
+                            "bitmasks",
+                            "greedy",
+                            "math"
+                        ],
+                        "problem_rating": 800,
+                        "language": "C++23 (GCC 14-64, msys2)",
+                        "verdict": "OK"
+                    },
+                    {
+                        "problem_name": "Add or XOR",
+                        "problem_tags": [
+                            "bitmasks",
+                            "greedy",
+                            "math"
+                        ],
+                        "problem_rating": 800,
+                        "language": "GNU C11",
+                        "verdict": "COMPILATION_ERROR"
+                    }
+                ]
+            }
+        },
+        "errors": {}
+    }
+}

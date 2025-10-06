@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Profile Scraper</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fbfbfe; }
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #fff;}
+        h1 { text-align: center; }
+        .form-vertical { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        input, button { padding: 10px; font-size: 1em; border-radius: 4px; }
+        input { border: 1px solid #ccc; width: 98%; }
+        button { background: #0073e6; color: #fff; border: none; cursor: pointer; margin-top: 8px;}
+        .section { margin-bottom: 28px; padding-bottom: 12px; border-bottom: 1px solid #ebecef; }
+        .section:last-child { border-bottom: none; }
+        .profile-card { background: #f6f8fa; border-radius: 8px; padding: 14px 18px 16px 18px; }
+        .profile-pic { width: 82px; height: 82px; border-radius: 50%; margin-bottom: 8px; }
+        .tags-container { margin-bottom: 6px; }
+        .tag { background: #eaf6fa; color: #222; border-radius: 3px; margin: 0 7px 7px 0; display: inline-block; padding: 2px 7px; font-size: 0.95em;}
+        .readme-preview, .summary-preview { background:#f6f8fa; border-radius:6px; font-size:13px; padding:9px; margin:8px 0; max-height:150px; overflow:auto; }
+        .error-msg { color: #bf1b1b; font-weight: bold; }
+        h2 { font-size: 1.18em; color: #1976d2; }
+        h3 { font-size: 1.05em; margin-bottom: 4px; }
+        ul { margin: 0; padding-left: 22px; }
+        .stat-card, .stats-grid { display:inline-block; margin-right:12px;}
+        .stat-value { font-weight:bold; font-size:1.1em; }
+        .stat-label { color:#666; font-size: 0.96em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All-in-One Profile Scraper</h1>
+        <form id="profileForm" class="form-vertical">
+            <input type="text" id="leetcode_user" name="leetcode_user" placeholder="LeetCode Username">
+            <input type="text" id="github_user" name="github_user" placeholder="GitHub Username">
+            <input type="text" id="codeforces_user" name="codeforces_user" placeholder="Codeforces Username">
+            <button type="submit">Scrape Profiles</button>
+        </form>
+        <div id="results-vertical"></div>
+    </div>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const leetcodeUser = document.getElementById('leetcode_user').value.trim();
+            const githubUser = document.getElementById('github_user').value.trim();
+            const codeforcesUser = document.getElementById('codeforces_user').value.trim();
+            const resultsColumn = document.getElementById('results-vertical');
+            resultsColumn.innerHTML = '<div style="text-align: center; background: #f6f8fa;">Loading...</div>';
+            if (!leetcodeUser && !githubUser && !codeforcesUser) {
+                resultsColumn.innerHTML = '<p class="error-msg">Please enter at least one username to search.</p>';
+                return;
+            }
+            const query = new URLSearchParams();
+            if (leetcodeUser) query.append('leetcode', leetcodeUser); 
+            if (githubUser) query.append('github', githubUser); 
+            if (codeforcesUser) query.append('codeforces', codeforcesUser);
+            fetch(`/api/all?${query.toString()}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsColumn.innerHTML = '';
+                    if (data.data?.leetcode) {
+                        const leetSection = document.createElement('div'); leetSection.className = 'section';
+                        leetSection.append(renderLeetCode(data.data.leetcode, leetcodeUser));
+                        resultsColumn.append(leetSection);
+                    }
+                    if (data.data?.github) {
+                        const gitSection = document.createElement('div'); gitSection.className = 'section';
+                        gitSection.append(renderGitHub(data.data.github, githubUser));
+                        resultsColumn.append(gitSection);
+                    }
+                    if (data.data?.codeforces) {
+                        const cfSection = document.createElement('div'); cfSection.className = 'section';
+                        cfSection.append(renderCodeforces(data.data.codeforces, codeforcesUser));
+                        resultsColumn.append(cfSection);
+                    }
+                })
+                .catch(error => {
+                    resultsColumn.innerHTML = `<p class="error-msg">Error loading profiles: ${error.message || error}</p>`;
+                });
+        });
+
+        function createCard(title) {
+            const card = document.createElement('div');
+            card.className='profile-card';
+            const h2 = document.createElement('h2'); h2.textContent=title; card.append(h2);
+            return card;
+        }
+
+        function renderError(card, error, platform, username) {
+            card.innerHTML += `<div class="error-msg"><strong>Error loading ${platform} profile for "${username}":</strong> ${error}</div>`;
+            return card;
+        }
+
+        function renderLeetCode(data, username) {
+            const card = createCard('LeetCode Profile');
+            if (!data) return renderError(card, "No data", "LeetCode", username);
+
+            // --- Profile Meta Header
+            card.innerHTML += `
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <img src="${data.userAvatar || 'https://leetcode.com/static/images/icons/android-icon-192x192.png'}" alt="Avatar" class="profile-pic">
+                    <div>
+                        <h3>${data.realName || 'Anonymous'} <span style="color:#57606a;">(@${data.username || 'N/A'})</span></h3>
+                        ${(data.school ? `<p><strong>School:</strong> ${data.school}</p>` : '')}
+                        ${(data.company ? `<p><strong>Company:</strong> ${data.company}${data.jobTitle?` (${data.jobTitle})`:''}</p>` : '')}
+                        ${(data.countryName ? `<p><strong>Country:</strong> ${data.countryName}</p>` : '')}
+                        ${(data.aboutMe ? `<p><strong>About:</strong> ${data.aboutMe}</p>` : '')}
+                        ${(data.websites?.length ? `<p><strong>Websites:</strong> ${data.websites.map(w=>`<a href="${w}" target="_blank">${w}</a>`).join(', ')}</p>` : '')}
+                        ${(data.githubUrl || data.linkedinUrl || data.twitterUrl) ? `<p><strong>Social:</strong>
+                        ${data.githubUrl ? `<a href="${data.githubUrl}" target="_blank">GitHub</a> ` : ''}
+                        ${data.linkedinUrl ? `<a href="${data.linkedinUrl}" target="_blank">LinkedIn</a> ` : ''}
+                        ${data.twitterUrl ? `<a href="${data.twitterUrl}" target="_blank">Twitter</a>` : ''}</p>` : ''}
+                        ${(data.skillTags?.length ? `<p><strong>Tags:</strong> ${data.skillTags.join(", ")}</p>` : '')}
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-value">${data.ranking ?? 'Unranked'}</div><div class="stat-label">Global Rank</div></div>
+                    <div class="stat-card"><div class="stat-value">${data.reputation ?? 0}</div><div class="stat-label">Reputation</div></div>
+                    <div class="stat-card"><div class="stat-value">${data.totalSolved || 0}</div><div class="stat-label">Problems Solved</div></div>
+                    <div class="stat-card"><div class="stat-value">${data.acceptanceRate || 0}%</div><div class="stat-label">Acceptance Rate</div></div>
+                    <div class="stat-card"><div class="stat-value">${data.currentStreak || 0}</div><div class="stat-label">Current Streak</div></div>
+                    <div class="stat-card"><div class="stat-value">${data.totalActiveDays || 0}</div><div class="stat-label">Active Days</div></div>
+                    <div class="stat-card"><div class="stat-value">${(data.activeYears||[]).join(', ')}</div><div class="stat-label">Active Years</div></div>
+                </div>
+            `;
+            // --- Badges/Contest Badge
+            if (data.badges?.length)
+                card.innerHTML += `<div><strong>Badges:</strong> ${data.badges.map(b=>b.displayName||b.name).join(', ')}</div>`;
+            if (data.activeBadge?.name)
+                card.innerHTML += `<div><strong>Active Badge:</strong> ${data.activeBadge.name}</div>`;
+            if (data.upcomingBadges?.length)
+                card.innerHTML += `<div><strong>Upcoming Badges:</strong> ${data.upcomingBadges.map(b=>b.name).join(', ')}</div>`;
+            if (data.contestBadge?.name)
+                card.innerHTML += `<div><strong>Contest Badge:</strong> ${data.contestBadge.name}</div>`;
+
+            // --- Problems by difficulty
+            card.innerHTML += `<div class="tags-container"><strong>Problems by Difficulty:</strong> `;
+            ["Easy","Medium","Hard"].forEach(d=>{
+                if(data.problemsSolvedByDifficulty?.[d]) card.innerHTML += `<span class="tag">${d}: ${data.problemsSolvedByDifficulty[d]}</span>`;
+            });
+            card.innerHTML += "</div>";
+
+            // --- Languages
+            if (data.languageStats?.length)
+                card.innerHTML += `<div class="tags-container"><strong>Languages:</strong> ` +
+                data.languageStats.map(l=>`<span class="tag">${l.languageName}: ${l.problemsSolved}</span>`).join('')+'</div>';
+
+            // --- All skills/levels
+            if (data.skillsAdvanced?.length)
+                card.innerHTML += `<div><strong>Advanced:</strong> ${data.skillsAdvanced.map(s=>`${s.tagName} (${s.problemsSolved})`).join(', ')}</div>`;
+            if (data.skillsIntermediate?.length)
+                card.innerHTML += `<div><strong>Intermediate:</strong> ${data.skillsIntermediate.map(s=>`${s.tagName} (${s.problemsSolved})`).join(', ')}</div>`;
+            if (data.skillsFundamental?.length)
+                card.innerHTML += `<div><strong>Fundamental:</strong> ${data.skillsFundamental.map(s=>`${s.tagName} (${s.problemsSolved})`).join(', ')}</div>`;
+
+            // --- Recent Accepted
+            if (data.recentAcSubmissions?.length) {
+                card.innerHTML += "<div style='margin:6px 0 0 0;'><strong>Recent Accepted:</strong><ul>";
+                data.recentAcSubmissions.slice(0,12).forEach(sub=>{
+                    card.innerHTML += `<li>
+                        <a href="https://leetcode.com/problems/${sub.titleSlug}" target="_blank">${sub.title}</a>
+                        <span style="color: #888;">(${new Date(parseInt(sub.timestamp)*1000).toLocaleString()})</span>
+                    </li>`;
+                });
+                card.innerHTML += "</ul></div>";
+            }
+            return card;
+        }
+
+
+        function renderGitHub(data, username) {
+            const card = createCard('GitHub Profile');
+            if (!data) return renderError(card, "No data", "GitHub", username);
+            card.innerHTML += `
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <img src="${data.avatar_url || ''}" alt="Avatar" class="profile-pic">
+                    <div>
+                        <h3>${data.name || ''} <span style="color:#57606a;">(@${data.login || ''})</span></h3>
+                        <p><strong>Repos:</strong> ${data.public_repos || 0} | <strong>Followers:</strong> ${data.followers || 0} | <strong>Following:</strong> ${data.following || 0}</p>
+                    </div>
+                </div>
+            `;
+            // Followers sample
+            if (data.followers_sample?.length) card.innerHTML += `<div class="tags-container"><strong>Followers:</strong> ` +
+                data.followers_sample.slice(0,8).map(f=>`<a href="https://github.com/${f.login}" target="_blank" class="tag"><img src="${f.avatar_url}" width="16" style="border-radius:50%">${f.login}</a>`).join('') +'</div>';
+            // Orgs
+            if (data.orgs?.length) card.innerHTML += `<div class="tags-container"><strong>Organizations:</strong> ` +
+                data.orgs.map(o=>`<span class="tag">${o.login}</span>`).join('')+'</div>';
+            // Top repos
+            if (data.repos?.length) card.innerHTML += `<div><strong>Top Repos (by stars):</strong><ul>` +
+                data.repos.sort((a,b)=>b.stargazers_count-a.stargazers_count).slice(0,5).map(r=>
+                    `<li><a href="${r.html_url}" target="_blank">${r.name}</a> ★${r.stargazers_count}</li>`
+                ).join('') + "</ul></div>";
+            // README preview
+            if (data.user_readme) card.innerHTML += `<hr><div class="readme-preview">${data.user_readme.substring(0,700)}${data.user_readme.length>700?' ...':''}</div>`;
+            return card;
+        }
+
+        function renderCodeforces(data, username) {
+            const card = createCard('Codeforces Profile');
+            if (!data) return renderError(card, "No data", "Codeforces", username);
+            const p = data.profile;
+            card.innerHTML += `
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <img src="${p.avatar || 'https://userpic.codeforces.org/no-avatar.jpg'}" alt="Avatar" class="profile-pic">
+                    <div>
+                        <h3>${p.firstName || ''} ${p.lastName || ''} <span style="color:#57606a;">(@${p.handle || ''})</span></h3>
+                        <p><strong>Rank:</strong> ${p.rank || 'N/A'} | <strong>Rating:</strong> ${p.rating || 'N/A'}</p>
+                        <p><strong>Country:</strong> ${p.country || 'N/A'}</p>
+                    </div>
+                </div>
+            `;
+            // Contests
+            if (data.contests?.length) card.innerHTML += `<div><strong>Recent Contests:</strong><ul>` +
+                data.contests.slice(-5).reverse().map(c=>`<li>${c.contestName}: Δ${c.newRating-c.oldRating}, Rank ${c.rank}, New: ${c.newRating}</li>`).join('') + "</ul></div>";
+            // Tags
+            if (data.solved_stats?.top_tags) card.innerHTML += `<div class="tags-container"><strong>Top Tags:</strong> ` +
+                Object.entries(data.solved_stats.top_tags).slice(0,8).map(([tag,c])=> `<span class="tag">${tag} (${c})</span>`).join('') + "</div>";
+            // Solved stats
+            card.innerHTML += `<p><strong>Solved:</strong> ${data.solved_stats?.solved_problems || 0} | <strong>Attempts:</strong> ${data.solved_stats?.total_attempts || 0}</p>`;
+            // Blog
+            if (data.blogs?.length) card.innerHTML += "<div><strong>Blogs:</strong><ul>" +
+                data.blogs.slice(0,2).map(b=> `<li><a href="https://codeforces.com/blog/entry/${b.id}" target="_blank">${b.title}</a></li>`).join('')+"</ul></div>";
+            // Markdown summary
+            if (data.markdown_summary) card.innerHTML += `<div class="summary-preview">${data.markdown_summary.substring(0,550)}${data.markdown_summary.length>550?' ...':''}</div>`;
+            return card;
+        }
+    </script>
+</body>
+</html>

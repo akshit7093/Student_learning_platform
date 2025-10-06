@@ -1,0 +1,472 @@
+:root {
+    --leetcode-blue: #F0F4F8;
+    --leetcode-dark: #3B5998;
+    --github-gray: #F6F8FA;
+    --github-dark: #333333;
+    --codeforces-orange: #FAFAFA;
+    --codeforces-dark: #FF9900;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+    --error-red: #e53935;
+    --success-green: #43A047;
+    --text-dark: #24292e;
+    --text-light: #586069;
+    --background: #f6f8fa;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--background);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 15px 0;
+}
+
+.highlight {
+    color: var(--leetcode-dark);
+    font-weight: bold;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 10px auto 0;
+}
+
+.search-form {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.input-group:focus-within {
+    box-shadow: 0 0 0 2px rgba(3, 102, 214, 0.3);
+    border-color: #0366d6;
+}
+
+.platform-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.leetcode {
+    background-color: var(--leetcode-blue);
+    color: var(--leetcode-dark);
+}
+
+.github {
+    background-color: var(--github-gray);
+    color: var(--github-dark);
+}
+
+.codeforces {
+    background-color: var(--codeforces-orange);
+    color: var(--codeforces-dark);
+}
+
+input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--text-light);
+}
+
+.search-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #3B5998, #2D46B9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(59, 89, 152, 0.3);
+}
+
+.search-btn:active {
+    transform: translateY(0);
+}
+
+.search-icon {
+    font-size: 1.2rem;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.platform-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.platform-icon-large {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.leetcode-card .platform-header {
+    background-color: var(--leetcode-blue);
+    border-bottom: 1px solid rgba(59, 89, 152, 0.1);
+}
+
+.leetcode-card .platform-icon-large {
+    background-color: var(--leetcode-dark);
+}
+
+.github-card .platform-header {
+    background-color: var(--github-gray);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+}
+
+.github-card .platform-icon-large {
+    background-color: var(--github-dark);
+}
+
+.codeforces-card .platform-header {
+    background-color: var(--codeforces-orange);
+    border-bottom: 1px solid rgba(255, 153, 0, 0.1);
+}
+
+.codeforces-card .platform-icon-large {
+    background-color: var(--codeforces-dark);
+}
+
+.platform-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.profile-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.username {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat-label {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.tags-container {
+    margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #f0f0f0;
+    color: var(--text-dark);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.leetcode-card .tag {
+    background: rgba(59, 89, 152, 0.1);
+    color: var(--leetcode-dark);
+}
+
+.github-card .tag {
+    background: rgba(51, 51, 51, 0.1);
+    color: var(--github-dark);
+}
+
+.codeforces-card .tag {
+    background: rgba(255, 153, 0, 0.1);
+    color: var(--codeforces-dark);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 15px 0 8px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+.leetcode-card .section-title::before {
+    background-color: var(--leetcode-dark);
+}
+
+.github-card .section-title::before {
+    background-color: var(--github-dark);
+}
+
+.codeforces-card .section-title::before {
+    background-color: var(--codeforces-dark);
+}
+
+.content-list {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.content-list li {
+    margin-bottom: 6px;
+}
+
+.readme-preview, .summary-preview {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    max-height: 140px;
+    overflow-y: auto;
+    color: var(--text-dark);
+}
+
+.error-msg {
+    background: #ffebee;
+    color: var(--error-red);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid var(--error-red);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-icon {
+    font-size: 1.5rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-light);
+}
+
+.no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-form {
+        padding: 20px 15px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 8px;
+    }
+    
+    .platform-icon {
+        width: 100%;
+        height: 40px;
+        border-bottom: 1px solid #e1e4e8;
+    }
+    
+    input {
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+/* Add to your existing style.css */
+
+.ipu-card .platform-header {
+    background-color: #e3f2fd;
+    border-bottom: 1px solid rgba(74, 111, 165, 0.1);
+}
+
+.ipu-card .platform-icon-large {
+    background-color: #4a6fa5;
+    color: white;
+}
+
+.ipu-card .tag {
+    background: rgba(74, 111, 165, 0.1);
+    color: #4a6fa5;
+}
+
+.ipu-card .section-title::before {
+    background-color: #4a6fa5;
+}

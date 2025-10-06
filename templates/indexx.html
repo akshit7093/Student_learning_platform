@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Coding Profile Scraper</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><span class="highlight">Code</span>Profile Scraper</h1>
+            <p class="subtitle">Get insights from your LeetCode, GitHub, Codeforces profiles & academic performance in one place</p>
+        </header>
+        
+        <form id="profileForm" class="search-form">
+            <div class="input-group">
+                <div class="platform-icon leetcode"></div>
+                <input type="text" id="leetcode_user" name="leetcode_user" placeholder="LeetCode Username (e.g. neetcode)">
+            </div>
+            
+            <div class="input-group">
+                <div class="platform-icon github"></div>
+                <input type="text" id="github_user" name="github_user" placeholder="GitHub Username (e.g. octocat)">
+            </div>
+            
+            <div class="input-group">
+                <div class="platform-icon codeforces"></div>
+                <input type="text" id="codeforces_user" name="codeforces_user" placeholder="Codeforces Username (e.g. tourist)">
+            </div>
+            
+            <div class="input-group">
+                <div class="platform-icon ipu" style="background-color: #4a6fa5; color: white;">I</div>
+                <input type="text" id="enrollment_no" name="enrollment_no" placeholder="IPU Enrollment Number (e.g. 05414811922)">
+            </div>
+            
+            <button type="submit" id="searchBtn" class="search-btn">
+                <span class="search-icon">🔍</span> Search Profiles
+                <div id="loadingSpinner" class="spinner hidden"></div>
+            </button>
+        </form>
+        
+        <div id="resultsContainer" class="results-container"></div>
+    </div>
+    
+    <script type="module" src="../static/main.js"></script>
+</body>
+</html>

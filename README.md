@@ -1,7 +1,10 @@
-# Flask Web App Starter
+# Flask API Service Starter
 
-A Flask starter template as per [these docs](https://flask.palletsprojects.com/en/3.0.x/quickstart/#a-minimal-application).
+This is a minimal Flask API service starter based on [Google Cloud Run Quickstart](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service).
 
 ## Getting Started
 
-Previews should run automatically when starting a workspace.
+Server should run automatically when starting a workspace. To run manually, run:
+```sh
+./devserver.sh
+```
