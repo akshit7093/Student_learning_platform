@@ -1,25 +1,36 @@
-# data_aggregator.py (Final Version)
+# data_aggregator.py (Complete Version with Resume Parsing)
 
 import json
 import os
 import re
 import time
 from datetime import datetime
+import logging
 
-# Import the scraper functions and classes from your existing files
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('data_aggregator')
+
+# Import the scraper functions and classes
 from github_scraper import get_github_profile
 from codeforces_scraper import get_codeforces_profile
 from leetcode_scraper import get_leetcode_profile
 from ipu_scraper import StudentScraper
+# Import our resume parser
+from resume_parser import parse_resume
 
 # --- Configuration ---
-# Define the list of students you want to fetch data for.
+# Define the list of students with resume paths
 STUDENTS_TO_FETCH = [
     {
         "enrollment_no": "35214811922",
         "leetcode_user": "akshitsharma7093",
         "github_user": "akshit7093",
-        "codeforces_user": "akshit7093"
+        "codeforces_user": "akshit7093",
+        "resume_path": "resume.pdf"  # REQUIRED FIELD
     }
     # Add more student dictionaries here
 ]
@@ -31,6 +42,7 @@ OUTPUT_FILE = 'final_cleaned_student_data.json'
 def clean_ipu_data(raw_data):
     """Transforms raw IPU academic data into a final, clean format."""
     if not raw_data or raw_data.get("status") != "success":
+        logger.warning("IPU data is empty or failed")
         return None
 
     overall = raw_data["academic_summary"]["overall_performance"]
@@ -67,6 +79,7 @@ def clean_ipu_data(raw_data):
 def clean_leetcode_data(raw_data):
     """Cleans and filters LeetCode data, summarizing top skills."""
     if not raw_data:
+        logger.warning("LeetCode data is empty")
         return None
         
     # Flatten all skills into a single list to find the absolute top skills
@@ -103,6 +116,7 @@ def clean_leetcode_data(raw_data):
 def clean_github_data(raw_data):
     """Summarizes GitHub data, cleans README, and fixes pinned repo logic."""
     if not raw_data:
+        logger.warning("GitHub data is empty")
         return None
         
     def summarize_repo(repo):
@@ -156,6 +170,7 @@ def clean_github_data(raw_data):
 def clean_codeforces_data(raw_data):
     """Cleans Codeforces data, focusing on performance and simplifying contest history."""
     if not raw_data:
+        logger.warning("Codeforces data is empty")
         return None
         
     profile = raw_data.get("profile", {})
@@ -190,6 +205,57 @@ def clean_codeforces_data(raw_data):
         ]
     }
 
+def clean_resume_data(raw_resume_data):
+    """Processes raw resume data into final structured format"""
+    if not raw_resume_data:
+        logger.warning("Resume data is empty")
+        return None
+    
+    # Extract only professional hyperlinks (filter out common non-professional links)
+    professional_links = [
+        url for url in raw_resume_data["hyperlinks"]
+        if not re.search(r'(facebook|instagram|twitter|linkedin\.com\/in\/[^\/]+\/(detail|overlay)|youtube)', url, re.I)
+    ]
+    
+    # Extract skills from resume text (simplified approach)
+    skills = []
+    skill_keywords = ['python', 'java', 'javascript', 'react', 'node', 'angular', 'vue', 'sql', 
+                     'mongodb', 'aws', 'docker', 'kubernetes', 'git', 'c++', 'c#', 'typescript',
+                     'html', 'css', 'spring', 'django', 'flask', 'tensorflow', 'pytorch', 'dsa',
+                     'data structures', 'algorithms', 'problem solving', 'full stack', 'backend',
+                     'frontend', 'mobile', 'android', 'ios', 'flutter', 'react native']
+    
+    resume_text = raw_resume_data["full_text"].lower()
+    for keyword in skill_keywords:
+        if keyword in resume_text and keyword not in skills:
+            skills.append(keyword.capitalize())
+    
+    # Identify missing elements (simplified approach)
+    missing_elements = []
+    if 'projects' not in resume_text and 'project' not in resume_text:
+        missing_elements.append("Projects section")
+    if 'internship' not in resume_text and 'experience' not in resume_text and 'work' not in resume_text:
+        missing_elements.append("Work experience")
+    if 'education' not in resume_text and 'degree' not in resume_text:
+        missing_elements.append("Education details")
+    if len(skills) < 3:
+        missing_elements.append("Technical skills listing")
+    
+    # Clean summary text (remove excessive whitespace and special characters)
+    cleaned_summary = re.sub(r'\s{2,}', ' ', raw_resume_data["summary"])
+    cleaned_summary = re.sub(r'[^\w\s.,;:!?()\-]', '', cleaned_summary)
+    
+    return {
+        "full_text": raw_resume_data["full_text"],
+        "full_text_preview": raw_resume_data["full_text"][:500] + "..." if len(raw_resume_data["full_text"]) > 500 else raw_resume_data["full_text"],
+        "professional_links": professional_links,
+        "skills_summary": cleaned_summary,
+        "key_skills": skills,
+        "total_hyperlinks": len(raw_resume_data["hyperlinks"]),
+        "professional_link_count": len(professional_links),
+        "missing_elements": missing_elements
+    }
+
 # --- Main Execution Logic ---
 
 def main():
@@ -197,15 +263,15 @@ def main():
     ipu_scraper = StudentScraper(encryption_key="Qm9sRG9OYVphcmEK")
     all_student_data = {}
 
-    print(f"Starting data aggregation for {len(STUDENTS_TO_FETCH)} student(s)...")
+    logger.info(f"Starting data aggregation for {len(STUDENTS_TO_FETCH)} student(s)...")
 
     for student in STUDENTS_TO_FETCH:
         enrollment_no = student.get("enrollment_no")
         if not enrollment_no:
-            print("Skipping entry due to missing enrollment number.")
+            logger.warning("Skipping entry due to missing enrollment number.")
             continue
 
-        print(f"\nFetching & Cleaning data for Enrollment No: {enrollment_no}")
+        logger.info(f"\nProcessing data for Enrollment No: {enrollment_no}")
         
         student_record = {
             "name": None,
@@ -216,72 +282,89 @@ def main():
                 "github": None,
                 "codeforces": None,
             },
+            "resume": None,  # NEW FIELD
             "errors": {}
         }
 
         # Fetch, Clean, and Assign Data
         try:
-            print("  - Processing IPU data...")
+            logger.info("  - Processing IPU data...")
             raw_ipu_data = ipu_scraper.get_student_data(enrollment_no)
             student_record["academic_profile"] = clean_ipu_data(raw_ipu_data)
             if student_record["academic_profile"]:
                 student_record["name"] = raw_ipu_data.get("student_info", {}).get("name")
-                print("    > Success.")
+                logger.info("    > IPU data processed successfully.")
             else:
-                 raise Exception("Failed to process IPU data.")
+                raise Exception("Failed to process IPU data.")
         except Exception as e:
             student_record["errors"]["ipu"] = str(e)
-            print(f"    > FAILED: {e}")
+            logger.error(f"    > IPU processing FAILED: {e}")
 
         if student.get("leetcode_user"):
             try:
-                print(f"  - Processing LeetCode data for '{student['leetcode_user']}'...")
+                logger.info(f"  - Processing LeetCode data for '{student['leetcode_user']}'...")
                 raw_leetcode_result = get_leetcode_profile(student["leetcode_user"])
                 if raw_leetcode_result.get("success"):
                     student_record["coding_profiles"]["leetcode"] = clean_leetcode_data(raw_leetcode_result["data"])
-                    print("    > Success.")
+                    logger.info("    > LeetCode data processed successfully.")
                 else:
                     raise Exception(raw_leetcode_result.get("error", "Unknown error"))
             except Exception as e:
                 student_record["errors"]["leetcode"] = str(e)
-                print(f"    > FAILED: {e}")
+                logger.error(f"    > LeetCode processing FAILED: {e}")
         
         if student.get("github_user"):
             try:
-                print(f"  - Processing GitHub data for '{student['github_user']}'...")
+                logger.info(f"  - Processing GitHub data for '{student['github_user']}'...")
                 raw_github_result = get_github_profile(student["github_user"])
                 if raw_github_result.get("success"):
                     student_record["coding_profiles"]["github"] = clean_github_data(raw_github_result["data"])
-                    print("    > Success.")
+                    logger.info("    > GitHub data processed successfully.")
                 else:
                     raise Exception(raw_github_result.get("error", "Unknown error"))
             except Exception as e:
                 student_record["errors"]["github"] = str(e)
-                print(f"    > FAILED: {e}")
+                logger.error(f"    > GitHub processing FAILED: {e}")
 
         if student.get("codeforces_user"):
             try:
-                print(f"  - Processing Codeforces data for '{student['codeforces_user']}'...")
+                logger.info(f"  - Processing Codeforces data for '{student['codeforces_user']}'...")
                 raw_codeforces_result = get_codeforces_profile(student["codeforces_user"])
                 if raw_codeforces_result.get("success"):
                     student_record["coding_profiles"]["codeforces"] = clean_codeforces_data(raw_codeforces_result["data"])
-                    print("    > Success.")
+                    logger.info("    > Codeforces data processed successfully.")
                 else:
                     raise Exception(raw_codeforces_result.get("error", "Unknown error"))
             except Exception as e:
                 student_record["errors"]["codeforces"] = str(e)
-                print(f"    > FAILED: {e}")
+                logger.error(f"    > Codeforces processing FAILED: {e}")
+        
+        # Process resume data
+        if student.get("resume_path"):
+            try:
+                logger.info(f"  - Processing resume from '{student['resume_path']}'...")
+                
+                # Check if file exists
+                if not os.path.exists(student["resume_path"]):
+                    raise FileNotFoundError(f"Resume file not found at {student['resume_path']}")
+                
+                raw_resume_data = parse_resume(student["resume_path"])
+                student_record["resume"] = clean_resume_data(raw_resume_data)
+                logger.info("    > Resume data processed successfully.")
+            except Exception as e:
+                student_record["errors"]["resume"] = str(e)
+                logger.error(f"    > Resume processing FAILED: {e}")
         
         all_student_data[enrollment_no] = student_record
-        time.sleep(1)
+        time.sleep(1)  # Respectful delay between requests
 
     # Save the final cleaned & aggregated data
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             json.dump(all_student_data, f, indent=4, ensure_ascii=False)
-        print(f"\n✅ Final cleaning complete. Data saved to '{OUTPUT_FILE}'.")
+        logger.info(f"\n✅ Final cleaning complete. Data saved to '{OUTPUT_FILE}'.")
     except Exception as e:
-        print(f"\n❌ Error saving final JSON file: {e}")
+        logger.error(f"\n❌ Error saving final JSON file: {e}")
 
 if __name__ == "__main__":
     main()

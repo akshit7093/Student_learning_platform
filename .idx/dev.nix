@@ -22,11 +22,16 @@
       enable = true;
       previews = {
         web = {
-          command = [ "./devserver.sh" ];
-          env = { PORT = "$PORT"; };
+          command = [ "sh" "-c" "source .venv/bin/activate && python -u 'app copy.py'" ];
+          env = { 
+            PORT = "$PORT";
+            GOOGLE_API_KEY = "AIzaSyCc8ggBCJY0XimSrE1NU8z9Ax4qAPMXO_w";
+           };
           manager = "web";
         };
       };
     };
   };
+  
 }
+

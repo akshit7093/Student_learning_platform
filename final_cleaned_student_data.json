@@ -833,6 +833,50 @@
                 ]
             }
         },
+        "resume": {
+            "full_text": "Akshit Sharma \nFinal‑Year B.Tech (AI & Data Science) | Backend & AI/ML Engineer | Cloud‑Native Systems \nakshitsharma7096@gmail.com/ +91 8810248097/Github / Linkedin / LeetCode / CodeForces \nSKILLS\n \n●​\nProgramming Languages: Python, Java, C/C++, JavaScript, SQL, React, Node.js, TypeScript, Flask, FastAPI \n●​\nDatabases & Tools: Pandas, NumPy, Matplotlib, MongoDB, Postgre \n●​\nML/AI & Frameworks: TensorFlow, PyTorch, NLP, Computer Vision, Transformers, RAG, LangChain \n●​\nCloud & DevOps: AWS, Google Cloud Platform, OpenStack SDK, Docker, Kubernetes \n●​\nSystems & Fundamentals: Unix/Linux, TCP/IP Networking, Git, Data Structures & Algorithms, Computer Networks \nEXPERIENCE\n \nResearch Intern | Directorate of Research, Government of Arunachal Pradesh​\n​\n                    \n(August  2025 – Present) \n●​\nDeveloped a low-resource speech-to-speech translation pipeline using Wav2Vec 2.0 for ASR, MarianMT for NMT, and Tacotron 2 \nfor TTS, focusing on endangered languages with context-dependent meanings. \n●​\nOptimised system architecture to reduce translation latency to under 2 seconds, enabling real time deployment for field use. \nDeep Learning Intern | Akanila Technologies ​ ​\n                        https://github.com/akshit7093/Chatbot-for-websites \n(July 2024 – December 2024) \n●​\nDeveloped a universal chatbot platform by fine‑tuning Llama3.1 LLM using LoRA and integrating RAG with FAISS for \ndomain‑specific retrieval, boosting query accuracy to 90 % and improving response relevance by 25 %. \n●​\nDesigned a flexible Python backend with modular components in FastAPI increasing code reusability to 65% . \n●​\nImplemented automated deployments on AWS EC2, leveraging Docker for containerization and Kubernetes for container \norchestration. \nMachine Learning Intern | CodSoft                            ​\n        https://github.com/akshit7093/CODSOFT \n(August 2024 – September 2024) \n●​\nDeveloped a credit card fraud detection system using XGBoost, analyzing 1 million transaction records. \n●​\nEngineered 20+ features from behavioral and time-series data then trained an XGBoost model on SageMaker to drop false \npositives from 20% to 5% while keeping recall over 90%. \n●​\nBuilt an NLP model for SMS spam detection using Python and scikit-learn, achieving 95% accuracy on test data. \nPROJECT\n \nOpenStack Cloud Management System with Natural Language Interface          https://github.com/akshit7093/VM_manager_AgenticAi \n●​\nBuilt a cloud management system interfacing with OpenStack infrastructure APIs. \n●​\nEnabled users to issue natural language prompts (e.g., \"create a server\" or \"delete a volume\"), which an AI agent created using \nLangChain and Google's Gemini-2.5 pro model translated into precise OpenStack API calls. \n●​\nBuilt an interactive CLI and a web app for remote management, featuring resource analytics and container monitoring per VM. \n●​\nDesigned RESTful backend with Fastapi and containerized the application using Docker. \n●​\nTechnologies: Python, OpenStack SDK, Gemini, Fastapi, Docker, LangChain \nSignEase -Video calling platform for individuals with disabilities​                        https://github.com/akshit7093/Sign-language-translator.git \n●​\nCreated a video chat application using React and Node.js to enable video communication with ASL translation. \n●​\nImplemented American Sign Language (ASL) detection using MediaPipe for landmarks and an LSTM network in TensorFlow, \nreaching 89% accuracy on a small dataset of 20 videos. \n●​\nReduced latency from 500ms to 180ms using model quantization (TensorFlow Lite) and frame-rate optimization. \n●​\nTechnologies: Python, TensorFlow, WebRTC, React, Node.js, MediaPipe. \nEDUCATION \n \nMaharaja Agrasen Institute of Technology​\n​\n​\n​\n​\n​\n​\n(June 2022 - June 2026) \n●​\nB.Tech. in Computer Science with a specialization in Artificial Intelligence and Data Science \n●​\nCGPA:8.96/10 ​\n​\n​\n​\n​\n​\n​\n​\n  \n●​\nRelevant Coursework: Machine Learning, Data Mining, Image Processing, Data Structures and Algorithms, Computer Networks \nCERTIFICATIONS \n \n●​\nData Science (Pwskills) \n●​\nMachine Learning and Deep Learning Specialization (Coursera) \n●​\nAWS Solutions Architect Virtual Experience Program (Forage)  \n●​\nIntroduction to Generative AI (Google) \n●​\nDevelop GenAI Apps with Gemini and Streamlit (Google) \n●​\nPrompt Design in Vertex AI (Google) \nACHIEVEMENTS \n \n●​\nWinner – AceCloud X RTDS Hackathon ‘25",
+            "full_text_preview": "Akshit Sharma \nFinal‑Year B.Tech (AI & Data Science) | Backend & AI/ML Engineer | Cloud‑Native Systems \nakshitsharma7096@gmail.com/ +91 8810248097/Github / Linkedin / LeetCode / CodeForces \nSKILLS\n \n●​\nProgramming Languages: Python, Java, C/C++, JavaScript, SQL, React, Node.js, TypeScript, Flask, FastAPI \n●​\nDatabases & Tools: Pandas, NumPy, Matplotlib, MongoDB, Postgre \n●​\nML/AI & Frameworks: TensorFlow, PyTorch, NLP, Computer Vision, Transformers, RAG, LangChain \n●​\nCloud & DevOps: AWS, Google...",
+            "professional_links": [
+                "mailto:akshitsharma7096@gmail.com",
+                "https://github.com/akshit7093",
+                "https://www.linkedin.com/in/akshit-sharma-475a94271/",
+                "https://leetcode.com/u/akshitsharma7093/",
+                "https://codeforces.com/profile/akshit7093",
+                "https://github.com/akshit7093/Chatbot-for-websites",
+                "https://github.com/akshit7093/CODSOFT",
+                "https://github.com/akshit7093/VM_manager_AgenticAi",
+                "https://github.com/akshit7093/Sign-language-translator.git",
+                "https://www.cloudskillsboost.google/public_profiles/1b626606-8403-4450-9b1a-dbba876587d7/badges/9194948",
+                "https://www.cloudskillsboost.google/public_profiles/1b626606-8403-4450-9b1a-dbba876587d7/badges/9194066",
+                "https://www.cloudskillsboost.google/public_profiles/1b626606-8403-4450-9b1a-dbba876587d7/badges/9140322",
+                "https://drive.google.com/file/d/1OeO7jFd7le1gg_6I0oBGjmsBIfA50p73/view?usp=sharing"
+            ],
+            "skills_summary": "Akshit Sharma FinalYear B.Tech (AI  Data Science)  Backend  AIML Engineer  CloudNative Systems akshitsharma7096gmail.com 91 8810248097Github  Linkedin  LeetCode  CodeForces SKILLS  Programming Languages: Python, Java, CC, JavaScript, SQL, React, Node.js, TypeScript, Flask, FastAPI  Databases  Tools: Pandas, NumPy, Matplotlib, MongoDB, Postgre  MLAI  Frameworks: TensorFlow, PyTorch, NLP, Computer Vision, Transformers, RAG, LangChain  Cloud  DevOps: AWS, Google Cloud Platform, OpenStack SDK, Docker, Kubernetes  Systems  Fundamentals: UnixLinux, TCPIP Networking, Git, Data Structures  Algorithms, Computer Networks EXPERIENCE Research Intern  Directorate of Research, Government of Arunachal Pradesh  (August 2025  Present)  Developed a low-resource speech-to-speech translation pipeline using Wav2Vec 2.0 for ASR, MarianMT for NMT, and Tacotron 2 for TTS, focusing on endangered languages with context-dependent meanings.  Optimised system architecture to reduce translation latency to under 2 seconds, enabling real time deployment for field use. Deep Learning Intern  Akanila Technologies   https:github.comakshit7093Chatbot-for-websites (July 2024  December 2024)  Developed a universal chatbot platform by finetuning Llama3.1 LLM using LoRA and integrating RAG with FAISS for domainspecific retrieval, boosting query accuracy to 90  and improving response relevance by 25 .  Designed a flexible Python...",
+            "key_skills": [
+                "Python",
+                "Java",
+                "Javascript",
+                "React",
+                "Node",
+                "Sql",
+                "Mongodb",
+                "Aws",
+                "Docker",
+                "Kubernetes",
+                "Git",
+                "C++",
+                "Typescript",
+                "Flask",
+                "Tensorflow",
+                "Pytorch",
+                "Data structures",
+                "Algorithms",
+                "Backend"
+            ],
+            "total_hyperlinks": 13,
+            "professional_link_count": 13,
+            "missing_elements": []
+        },
         "errors": {}
     }
 }

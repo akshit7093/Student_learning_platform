@@ -4,403 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Student Analyzer</title>
-    
-    <!-- CSS is now embedded directly in the HTML -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-        :root {
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --text-light: #666;
-            --primary-color: #007bff;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            padding: 30px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        header p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        #student-selector, button {
-            padding: 12px 18px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        #student-selector {
-            flex-grow: 1;
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        button:hover:not(:disabled) {
-            background-color: #0056b3;
-        }
-
-        .hidden { display: none !important; }
-
-        /* Spinner */
-        .spinner {
-            border: 4px solid rgba(0,0,0,0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: var(--primary-color);
-            animation: spin 1s ease infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Report Styling */
-        #report-title {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .report-section {
-            background-color: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .report-section h3, .report-section h4 {
-            margin-top: 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-        .report-section ul {
-            padding-left: 20px;
-            line-height: 1.7;
-        }
-        #scores-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        .score-card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-        }
-        .score-card .parameter {
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .score-card .score {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .score-card .justification {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 8px;
-        }
-
-        /* Chatbot Styling */
-        #chatbot-container {
-            margin-top: 30px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-        #chat-history {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: #fafafa;
-        }
-        .chat-message {
-            margin-bottom: 15px;
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-        }
-        .user-message {
-            align-items: flex-end;
-        }
-        .user-message p {
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 15px 15px 0 15px;
-        }
-        .ai-message {
-            align-items: flex-start;
-        }
-        .ai-message p {
-            background-color: #e9ecef;
-            border-radius: 15px 15px 15px 0;
-        }
-        .chat-message p {
-            display: inline-block;
-            padding: 10px 15px;
-            max-width: 80%;
-            margin: 0;
-        }
-        #chat-form {
-            display: flex;
-            gap: 10px;
-        }
-        #chat-input {
-            flex-grow: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/final.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI Student Profile Analyzer</h1>
-            <p>Select a student to generate a detailed performance report or ask questions.</p>
-        </header>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <header class="app-header">
+                <h1>Ai</h1>
+                <p>AI Student Analyzer</p>
+            </header>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+                    <li><a href="#students" class="nav-link">Students</a></li>
+                    <li><a href="#reports" class="nav-link">Reports</a></li>
+                    <li><a href="#job-analysis" class="nav-link">Job Analysis</a></li>
+                    <li><a href="#chat" class="nav-link">Chat</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <div class="controls">
-            <select id="student-selector">
-                <option value="">-- Select a Student --</option>
-            </select>
-            <button id="generate-report-btn" disabled>Generate Full Report</button>
-        </div>
-
-        <div id="loading-spinner" class="spinner hidden"></div>
-
-        <!-- Report Display Area -->
-        <div id="report-container" class="hidden">
-            <h2 id="report-title"></h2>
-            <div id="report-content">
-                <div class="report-section summary">
-                    <h3>HR Summary</h3>
-                    <p id="summary-text"></p>
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Control Bar -->
+            <header class="top-bar">
+                <div class="input-group">
+                    <label for="student-selector">Select Student</label>
+                    <select id="student-selector">
+                        <option value="">-- Select a Student --</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                    <button id="generate-report-btn" class="btn btn-secondary" disabled>Generate Report</button>
                 </div>
-                <div class="report-section scores">
-                    <h3>Detailed Scores</h3>
-                    <div id="scores-grid"></div>
+                <div class="input-group">
+                    <label for="job-application-input">Job Application Link</label>
+                    <input type="text" id="job-application-input" placeholder="Paste job application link here...">
+                     <button id="analyze-job-btn" class="btn btn-primary" disabled>Analyze</button>
                 </div>
-                <div class="report-section analysis">
-                    <h3>Analysis</h3>
-                    <div id="analysis-content">
-                        <h4>Strengths</h4>
-                        <ul id="strengths-list"></ul>
-                        <h4>Weaknesses</h4>
-                        <ul id="weaknesses-list"></ul>
+            </header>
+
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+
+            <!-- Dashboard / Overview -->
+            <section id="dashboard" class="content-section active">
+                <h2>Dashboard Overview</h2>
+                <div class="dashboard-grid">
+                    <!-- Metric Cards Row -->
+                    <div class="metric-cards-grid">
+                        <div class="card">
+                            <h3>Total Students</h3>
+                            <p class="metric" id="total-students-count">1</p> <!-- ID added for JS -->
+                        </div>
+                        <div class="card">
+                            <h3>Reports Generated</h3>
+                            <p class="metric" id="reports-generated-count">0</p> <!-- ID added for JS -->
+                        </div>
+                        <div class="card">
+                            <h3>Job Analyses</h3>
+                            <p class="metric" id="job-analyses-count">0</p> <!-- ID added for JS -->
+                        </div>
+                    </div>
+
+                    <!-- Large Card for Skills Distribution -->
+                    <div class="card large-card chart-container">
+                        <h3>Skills Distribution (for selected student)</h3>
+                        <!-- Replace placeholder with canvas for Chart.js -->
+                        <canvas id="skills-chart-canvas"></canvas>
+                    </div>
+
+                    <!-- Row for DSA and Job Match -->
+                    <div class="chart-row">
+                        <div class="card chart-container">
+                            <h3>DSA Performance (for selected student)</h3>
+                             <!-- Replace placeholder with canvas for Chart.js -->
+                            <canvas id="dsa-chart-canvas"></canvas>
+                        </div>
+                        <div class="card chart-container">
+                            <h3>Job Match Score (for selected student)</h3>
+                             <!-- Replace placeholder with canvas for Chart.js -->
+                            <canvas id="job-match-chart-canvas"></canvas>
+                        </div>
                     </div>
                 </div>
-                <div class="report-section advice">
-                    <h3>Actionable Advice</h3>
-                    <ul id="advice-list"></ul>
-                </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Chatbot Interface -->
-        <div id="chatbot-container" class="hidden">
-            <h2>Ask a Question</h2>
-            <div id="chat-history"></div>
-            <form id="chat-form">
-                <input type="text" id="chat-input" placeholder="e.g., What are their strongest DSA topics?" autocomplete="off" required>
-                <button type="submit">Send</button>
-            </form>
-        </div>
+            <!-- Student Report Display Area -->
+            <section id="reports" class="content-section hidden">
+                <h2 id="report-title">Student Performance Report</h2>
+                <div class="report-grid">
+                    <div class="report-section summary card">
+                        <h3>HR Summary</h3>
+                        <p id="summary-text">Summary will appear here...</p>
+                    </div>
+                    <div class="report-section resume card">
+                         <h3>Resume Analysis</h3>
+                        <div class="resume-section">
+                            <div class="resume-column">
+                                <h4>Key Skills</h4>
+                                <div class="skills-list" id="resume-skills"></div>
+                                <h4 style="margin-top: 20px;">Professional Links</h4>
+                                <ul class="links-list" id="resume-links"></ul>
+                            </div>
+                            <div class="resume-column">
+                                <h4>Missing Elements</h4>
+                                <ul id="resume-missing"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-section scores card">
+                        <h3>Detailed Scores</h3>
+                        <div id="scores-grid"></div>
+                    </div>
+                    <div class="report-section analysis card">
+                        <h3>Analysis</h3>
+                        <div id="analysis-content">
+                            <div class="analysis-grid">
+                                <div class="analysis-column">
+                                    <h4>Strengths</h4>
+                                    <ul id="strengths-list"></ul>
+                                </div>
+                                <div class="analysis-column">
+                                    <h4>Weaknesses</h4>
+                                    <ul id="weaknesses-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-section advice card">
+                        <h3>Actionable Advice</h3>
+                        <ul id="advice-list"></ul>
+                    </div>
+                    <div class="report-section youtube card">
+                        <h3>Recommended Learning Resources</h3>
+                        <div class="youtube-recommendations" id="youtube-recommendations"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Job Application Analysis Display Area -->
+            <section id="job-analysis" class="content-section hidden">
+                <h2>Job Application Analysis</h2>
+                <div class="job-analysis-grid">
+                    <div class="job-section job-strengths card">
+                        <h3>Strengths</h3>
+                        <div id="job-strengths-list"></div>
+                    </div>
+                    <div class="job-section job-weaknesses card">
+                        <h3>Weaknesses</h3>
+                        <div id="job-weaknesses-list"></div>
+                    </div>
+                    <div class="job-section job-enhancements card">
+                        <h3>Enhancement Recommendations</h3>
+                        <div id="job-enhancements-list"></div>
+                    </div>
+                    <div class="job-section youtube card">
+                        <h3>Recommended Learning Resources</h3>
+                        <div class="youtube-recommendations" id="job-youtube-recommendations"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chatbot Interface -->
+            <section id="chat" class="content-section hidden">
+                <h2>Student Q&A</h2>
+                <div class="chat-container card">
+                    <div id="chat-history"></div>
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="e.g., What are their strongest DSA topics?" autocomplete="off" required>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <!-- JavaScript is now embedded directly in the HTML -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const studentSelector = document.getElementById('student-selector');
-            const generateReportBtn = document.getElementById('generate-report-btn');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const reportContainer = document.getElementById('report-container');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const chatHistory = document.getElementById('chat-history');
-
-            // 1. Populate student dropdown on page load
-            fetch('/api/students')
-                .then(response => response.json())
-                .then(students => {
-                    students.forEach(student => {
-                        const option = document.createElement('option');
-                        option.value = student.enrollment_no;
-                        option.textContent = `${student.name} (${student.enrollment_no})`;
-                        studentSelector.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching students:', error));
-
-            // 2. Enable button when a student is selected
-            studentSelector.addEventListener('change', () => {
-                const hasSelection = !!studentSelector.value;
-                generateReportBtn.disabled = !hasSelection;
-                chatbotContainer.classList.toggle('hidden', !hasSelection);
-                reportContainer.classList.add('hidden'); // Hide old report on new selection
-                chatHistory.innerHTML = ''; // Clear chat history
-            });
-
-            // 3. Handle "Generate Report" button click
-            generateReportBtn.addEventListener('click', () => {
-                const enrollmentNo = studentSelector.value;
-                if (!enrollmentNo) return;
-
-                loadingSpinner.classList.remove('hidden');
-                reportContainer.classList.add('hidden');
-                chatbotContainer.classList.add('hidden');
-
-                fetch(`/api/report/${enrollmentNo}`)
-                    .then(response => response.json())
-                    .then(report => {
-                        loadingSpinner.classList.add('hidden');
-                        if (report.error) {
-                            alert(`Error generating report: ${report.error}`);
-                        } else {
-                            displayReport(report);
-                            reportContainer.classList.remove('hidden');
-                            chatbotContainer.classList.remove('hidden');
-                        }
-                    })
-                    .catch(error => {
-                        loadingSpinner.classList.add('hidden');
-                        alert(`An unexpected error occurred: ${error}`);
-                    });
-            });
-
-            // 4. Handle chat form submission
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const enrollmentNo = studentSelector.value;
-                const question = chatInput.value.trim();
-
-                if (!question || !enrollmentNo) return;
-                
-                appendMessage(question, 'user');
-                chatInput.value = '';
-                appendMessage('Thinking...', 'ai', true); // Show loading indicator
-
-                fetch('/api/ask', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ enrollment_no: enrollmentNo, question: question })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const loadingElement = chatHistory.querySelector('.loading');
-                    if (loadingElement) {
-                        loadingElement.parentElement.remove();
-                    }
-                    appendMessage(data.answer, 'ai');
-                })
-                .catch(error => {
-                    const loadingElement = chatHistory.querySelector('.loading');
-                    if (loadingElement) {
-                        loadingElement.parentElement.remove();
-                    }
-                    appendMessage('Sorry, an error occurred while fetching the answer.', 'ai');
-                });
-            });
-
-            // --- Helper Functions ---
-
-            function displayReport(report) {
-                document.getElementById('report-title').textContent = `Performance Report for ${studentSelector.options[studentSelector.selectedIndex].text}`;
-                document.getElementById('summary-text').textContent = report.overall_summary;
-
-                const scoresGrid = document.getElementById('scores-grid');
-                scoresGrid.innerHTML = '';
-                report.detailed_scores.forEach(item => {
-                    scoresGrid.innerHTML += `
-                        <div class="score-card">
-                            <div class="parameter">
-                                <span>${item.parameter}</span>
-                                <span class="score">${item.score}/10</span>
-                            </div>
-                            <div class="justification">${item.justification}</div>
-                        </div>
-                    `;
-                });
-
-                const createListItems = (items) => items.map(item => `<li>${item}</li>`).join('');
-
-                document.getElementById('strengths-list').innerHTML = createListItems(report.analysis.strengths);
-                document.getElementById('weaknesses-list').innerHTML = createListItems(report.analysis.weaknesses);
-                document.getElementById('advice-list').innerHTML = createListItems(report.actionable_advice.recommendations);
-            }
-
-            function appendMessage(text, sender, isLoading = false) {
-                const messageWrapper = document.createElement('div');
-                messageWrapper.classList.add('chat-message', `${sender}-message`);
-                
-                const messageP = document.createElement('p');
-                messageP.textContent = text;
-                if (isLoading) {
-                    messageP.classList.add('loading');
-                }
-                
-                messageWrapper.appendChild(messageP);
-                chatHistory.appendChild(messageWrapper);
-                chatHistory.scrollTop = chatHistory.scrollHeight; // Auto-scroll to bottom
-            }
-        });
-    </script>
+    <script src="../static/final.js"></script>
 </body>
 </html>

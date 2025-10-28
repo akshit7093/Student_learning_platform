@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --text-light: #666;
+    --primary-color: #007bff;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --job-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#student-selector, #job-application-input, button {
+    padding: 12px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#student-selector, #job-application-input {
+    flex-grow: 1;
+}
+
+#job-application-input {
+    flex-grow: 2;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.hidden { display: none !important; }
+
+/* Spinner */
+.spinner {
+    border: 4px solid rgba(0,0,0,0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: var(--primary-color);
+    animation: spin 1s ease infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Report Styling */
+#report-title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.report-section {
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.job-section {
+    background-color: var(--job-bg);
+    border-left: 4px solid #28a745;
+}
+
+.report-section h3, .report-section h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.job-section h3, .job-section h4 {
+    color: #28a745;
+}
+
+.report-section ul {
+    padding-left: 20px;
+    line-height: 1.7;
+}
+
+#scores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.score-card {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.score-card .parameter {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score-card .score {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.score-card .justification {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* Resume Section Styling */
+.resume-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.resume-column {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.resume-column h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.skill-tag {
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.links-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.links-list li {
+    margin-bottom: 8px;
+}
+
+.links-list a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.links-list a:hover {
+    text-decoration: underline;
+}
+
+.missing-items {
+    color: #dc3545;
+}
+
+/* YouTube Recommendations Styling */
+.youtube-recommendations {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.youtube-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.youtube-embed {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.youtube-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.youtube-info {
+    padding: 15px;
+}
+
+.youtube-title {
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-color);
+}
+
+.youtube-reason {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Chatbot Styling */
+#chatbot-container {
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+#chat-history {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+}
+
+.chat-message {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-message {
+    align-items: flex-end;
+}
+
+.user-message p {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 15px 15px 0 15px;
+}
+
+.ai-message {
+    align-items: flex-start;
+}
+
+.ai-message p {
+    background-color: #e9ecef;
+    border-radius: 15px 15px 15px 0;
+}
+
+.chat-message p {
+    display: inline-block;
+    padding: 10px 15px;
+    max-width: 80%;
+    margin: 0;
+}
+
+#chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+#chat-input {
+    flex-grow: 1;
+}
+
+/* Job Application Analysis */
+.job-analysis-container {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.job-analysis-container h2 {
+    margin-top: 0;
+    color: #28a745;
+}
+
+.job-section-content {
+    margin-top: 20px;
+}
+
+.job-strengths, .job-weaknesses, .job-enhancements {
+    margin-bottom: 25px;
+}
+
+.job-strengths h4, .job-weaknesses h4, .job-enhancements h4 {
+    color: #28a745;
+    border-bottom: 1px solid #c3e6cb;
+}
+
+.job-strengths ul, .job-weaknesses ul, .job-enhancements ul {
+    padding-left: 20px;
+}
+
+.job-strength-item, .job-weakness-item, .job-enhancement-item {
+    margin-bottom: 10px;
+}
+
+.job-item-aspect {
+    font-weight: bold;
+}
+
+.job-item-description {
+    margin-top: 5px;
+}
+
+.job-item-relevance, .job-item-importance, .job-item-suggestion {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
