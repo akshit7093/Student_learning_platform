@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Student Analyzer</title>
     <link rel="stylesheet" href="../static/final.css">
+    <link rel="stylesheet" href="../static/job_listings.css"> <!-- New CSS file for job listings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +26,7 @@
                     <li><a href="#students" class="nav-link">Students</a></li>
                     <li><a href="#reports" class="nav-link">Reports</a></li>
                     <li><a href="#job-analysis" class="nav-link">Job Analysis</a></li>
+                    <li><a href="#job-listings" class="nav-link">Job Listings</a></li> <!-- New Link -->
                     <li><a href="#chat" class="nav-link">Chat</a></li>
                 </ul>
             </nav>
@@ -174,6 +176,55 @@
                 </div>
             </section>
 
+            <!-- New Job Listings Page -->
+            <section id="job-listings" class="content-section hidden">
+                <h2>Job Listings</h2>
+                <div class="job-listings-container">
+                    <!-- Info Panel -->
+                    <div class="info-panel card">
+                        <h3>About Job Recommendations</h3>
+                        <p>
+                            <strong>Recommended Jobs:</strong> These jobs are highly aligned with your current profile, skills, and experience. Applying to these positions is likely to result in a higher success rate.
+                        </p>
+                        <p>
+                            <strong>Non-Recommended Jobs:</strong> These jobs may have requirements that differ significantly from your current profile. While you are free to apply, you might need to acquire additional skills or experience to be a strong candidate.
+                        </p>
+                    </div>
+
+                    <!-- Tabs for On-Campus / Off-Campus -->
+                    <div class="job-listings-tabs">
+                        <button class="tab-btn active" data-category="on-campus">On-Campus</button>
+                        <button class="tab-btn" data-category="off-campus">Off-Campus</button>
+                    </div>
+
+                    <!-- On-Campus Listings -->
+                    <div class="job-category-section" data-category="on-campus">
+                        <h3>Recommended</h3>
+                        <div class="job-listings-grid" id="on-campus-recommended-listings">
+                            <!-- Recommended jobs will be populated here by JS -->
+                        </div>
+
+                        <h3>Non-Recommended</h3>
+                        <div class="job-listings-grid" id="on-campus-non-recommended-listings">
+                            <!-- Non-recommended jobs will be populated here by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Off-Campus Listings (Initially Hidden) -->
+                    <div class="job-category-section hidden" data-category="off-campus">
+                        <h3>Recommended</h3>
+                        <div class="job-listings-grid" id="off-campus-recommended-listings">
+                            <!-- Recommended jobs will be populated here by JS -->
+                        </div>
+
+                        <h3>Non-Recommended</h3>
+                        <div class="job-listings-grid" id="off-campus-non-recommended-listings">
+                            <!-- Non-recommended jobs will be populated here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Chatbot Interface -->
             <section id="chat" class="content-section hidden">
                 <h2>Student Q&A</h2>
@@ -189,5 +240,6 @@
     </div>
 
     <script src="../static/final.js"></script>
+    <script src="../static/job_listings.js"></script> <!-- New JS file for job listings -->
 </body>
 </html>

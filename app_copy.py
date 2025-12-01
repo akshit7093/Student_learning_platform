@@ -43,11 +43,39 @@ def test_frontend():
     return render_template('final.html') # Make sure index.html exists in templates/
 
 # --- Example route for students (adjust as needed) ---
+import json
+import os
+
 @app.route('/api/students', methods=['GET'])
 def get_students_list():
-    # Dummy implementation or integrate with your student data
-    # This is just an example, replace with actual logic
-    return jsonify([{"enrollment_no": "35214811922", "name": "Akshit Sharma"}])
+    enrollment_no = request.args.get('enrollment_no')  # Optional query param
+
+    # Path to your JSON file
+    json_path = 'final_cleaned_student_data.json'
+    
+    if not os.path.exists(json_path):
+        logger.error("Student data file not found.")
+        return jsonify({'error': 'Student data file not found.'}), 404
+
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            all_students = json.load(f)
+
+        if enrollment_no:
+            # Return specific student if enrollment_no is provided
+            student = all_students.get(enrollment_no)
+            if not student:
+                logger.warning(f"Student with enrollment {enrollment_no} not found.")
+                return jsonify({'error': 'Student not found.'}), 404
+            return jsonify(student)
+        else:
+            # Return all students (values only, not keys)
+            print(all_students.values())
+            return jsonify(list(all_students.values()))
+
+    except Exception as e:
+        logger.error(f"Error reading student data: {e}", exc_info=True)
+        return jsonify({'error': 'Failed to load student data.'}), 500
 
 # --- Job Analysis Route (Corrected) ---
 @app.route('/api/job-analysis', methods=['POST'])
@@ -193,7 +221,7 @@ def get_student_report(enrollment_no: str):
              return jsonify(report_data), 404 # Or appropriate error code
         return jsonify(report_data)
     except Exception as e:
-        logger.error(f"Error generating report for {enrollment_no}: {e}", exc_info=True)
+        logger.error(f"Error generating report for {enrollment_no}: {e}",exc_info=True)
         return jsonify({'error': 'Failed to generate report.'}), 500
 
 

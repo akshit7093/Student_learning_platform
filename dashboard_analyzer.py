@@ -172,13 +172,29 @@ def _analyze_github(github_data: dict) -> dict:
     elif activity_level in ["Very Active", "Active"] or stats.get('public_repos', 0) > 10: rating = "Good Profile"
     return {"rating": rating, "activity_level": activity_level, "top_languages": top_languages, "stats": stats}
 
-def _extract_skills(student_data: dict) -> list:
-    """Extracts, combines, and cleans a list of key skills."""
+def _extract_skills(student_data: dict) -> dict: # MODIFIED to return a dict
+    """
+    Extracts, combines, cleans, and COUNTS key skills for chart display.
+    """
+    from collections import Counter
+
     resume_skills = student_data.get("resume", {}).get("key_skills", [])
-    leetcode_skills = [item.get("skill") for item in student_data.get("coding_profiles", {}).get("leetcode", {}).get("topSkillsSummary", [])]
+    leetcode_skills = [
+        item.get("skill") for item in student_data.get("coding_profiles", {}).get("leetcode", {}).get("topSkillsSummary", [])
+    ]
+    
+    # Normalize skills to title case for consistency
     normalized_resume = [s.strip().title() for s in resume_skills]
     normalized_leetcode = [s.strip().title() for s in leetcode_skills]
-    return list(dict.fromkeys(normalized_resume + normalized_leetcode))
+
+    # Combine and count occurrences (though here they are unique, this is a robust way to handle it)
+    all_skills = normalized_resume + normalized_leetcode
+    
+    # Using Counter will give a dict like {'Python': 2, 'Java': 1}, perfect for charts
+    # In this case, since we combine unique lists, counts will be 1 or 2, but it provides the right structure.
+    skill_counts = dict(Counter(all_skills))
+    
+    return skill_counts
 
 def _calculate_profile_completeness(student_data: dict) -> dict:
     """Scores the profile based on the presence of key data points."""

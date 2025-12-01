@@ -8,6 +8,9 @@
     --text-color-muted: #8A8A8A; /* Dimmer text for labels/placeholders */
     --accent-color: #00E5FF; /* Vibrant cyan/teal for highlights */
     --accent-color-hover: #00B8CC;
+    --success-color: #4ade80; /* Green for positive elements */
+    --warning-color: #facc15; /* Amber for warnings */
+    --danger-color: #f87171; /* Red for errors */
     --font-family: 'Inter', sans-serif;
 }
 
@@ -39,6 +42,9 @@ h3 {
     font-size: 1.1rem;
     margin-bottom: 12px;
     color: var(--text-color);
+    /* Ensure title stays above the absolutely positioned canvas */
+    position: relative;
+    z-index: 2;
 }
 
 a {
@@ -204,30 +210,20 @@ input[type="text"]::placeholder {
     color: var(--text-color-muted);
 }
 
-
 /* --- Content Sections & Cards --- */
 .content-section.hidden {
     display: none;
 }
 
 .card {
-    background: rgba(26, 26, 26, 0.7); /* The semi-transparent panel color for the gloss effect */
-    backdrop-filter: blur(10px); /* The "frosted glass" effect */
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 24px;
 }
 
-.chart-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--text-color-muted);
-    font-size: 1.2rem;
-}
-
-/* --- Dashboard --- */
+/* --- Dashboard & Chart Fix --- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -253,6 +249,26 @@ input[type="text"]::placeholder {
     color: var(--accent-color);
 }
 
+.chart-row {
+    grid-column: 1 / -1; /* Span full width of the grid */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* CORRECTED CHART CONTAINER STYLES */
+.chart-container {
+    position: relative; /* This is the key: creates a positioning context for the canvas */
+    min-height: 350px; /* Give the container a minimum height */
+}
+
+.chart-container canvas {
+    position: absolute; /* Takes the canvas out of the layout flow */
+    top: 60px;          /* Leave space for the h3 title */
+    left: 24px;         /* Align with the card's left padding */
+    width: calc(100% - 48px) !important;  /* Fill container width, respecting padding */
+    height: calc(100% - 84px) !important; /* Fill container height, respecting title space and padding */
+}
 
 /* --- Report & Job Analysis Grids --- */
 .report-grid, .job-analysis-grid {
@@ -273,11 +289,158 @@ input[type="text"]::placeholder {
     font-size: 0.85rem;
 }
 
+/* --- Job Listings Page Specific Styles --- */
+.job-listings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.info-panel {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    transition: var(--transition);
+}
+
+.info-panel h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.info-panel p {
+    margin-bottom: 8px;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.job-listings-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border-radius: 12px 12px 0 0;
+    font-weight: 600;
+    color: var(--text-color-muted);
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.tab-btn:hover {
+    background: var(--panel-color);
+}
+
+.tab-btn.active {
+    color: var(--text-color);
+    background: var(--panel-color);
+    border-color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.job-category-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--panel-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0 12px 12px 12px; /* Rounded top removed to connect with tabs */
+    padding: 20px;
+}
+
+.job-category-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.job-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.job-card {
+    background: rgba(44, 44, 44, 0.5); /* Slightly lighter than panel */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards in a row are the same height */
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent-color);
+}
+
+.job-card h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.job-card .company {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+}
+
+.job-card .location,
+.job-card .type {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    margin: 3px 0;
+}
+
+.job-card .aligns-with {
+    color: var(--success-color);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.job-card .mismatch {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+.apply-btn {
+    margin-top: auto; /* Push button to the bottom */
+    align-self: flex-start; /* Align button to the left */
+    margin-top: 15px;
+    padding: 8px 16px; /* Slightly smaller padding for consistency */
+    font-size: 0.9rem;
+}
+
 /* --- Chat Interface --- */
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 70vh; /* Adjust height as needed */
+    height: 70vh;
     padding: 0;
 }
 
@@ -328,7 +491,6 @@ input[type="text"]::placeholder {
     white-space: pre-wrap;
 }
 
-
 /* --- Loading Spinner --- */
 .loading-overlay {
     position: fixed;
@@ -366,84 +528,139 @@ input[type="text"]::placeholder {
 .hidden {
     display: none !important;
 }
-/* Add these rules to your existing final.css */
 
-/* Ensure the chart containers have a defined size */
-.chart-container {
-    /* You can adjust these values as needed */
-    min-height: 300px; /* Set a minimum height */
-    /* Optional: Set a max-height if needed */
-    /* max-height: 400px; */
-    /* Ensure the canvas fills the container */
-    display: flex;
-    flex-direction: column; /* Stack chart title and canvas vertically */
-    justify-content: center; /* Center the chart vertically if needed */
-    align-items: center;   /* Center the chart horizontally */
-    position: relative; /* Needed for Chart.js responsiveness */
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .app-container {
+        grid-template-columns: 200px 1fr; /* Slimmer sidebar */
+    }
+    .main-content {
+        padding: 24px;
+    }
 }
 
-/* Ensure the canvas elements themselves have a defined size */
-.chart-container canvas {
-    width: 100% !important; /* Override any inline styles Chart.js might add */
-    height: 100% !important; /* Override any inline styles Chart.js might add */
-    max-width: 100%; /* Prevent overflow */
-    max-height: 100%; /* Prevent overflow */
+@media (max-width: 992px) {
+    .app-container {
+        grid-template-columns: 1fr; /* Stack sidebar and content */
+    }
+    .sidebar {
+        /* This example hides the sidebar, but you could make it a toggleable menu */
+        display: none;
+    }
+    .dashboard-grid, .chart-row, .report-grid, .job-analysis-grid, .job-listings-grid {
+        grid-template-columns: 1fr; /* Single column layout for cards */
+    }
+    .large-card {
+        grid-column: 1 / -1; /* Ensure it spans the single column */
+        grid-row: auto;
+    }
+    .metric-cards-grid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .job-listings-grid {
+        grid-template-columns: 1fr; /* Single column for job cards on smaller screens */
+    }
+    .job-category-section {
+        border-radius: 12px; /* Restore full border radius when tabs are above */
+    }
+    .job-listings-tabs {
+        flex-wrap: wrap; /* Allow tabs to wrap if needed */
+    }
 }
-
-/* Optional: Style the placeholder text if no data is shown */
-.chart-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    color: var(--gray); /* Use your defined CSS variable */
-    font-style: italic;
-}
-
-/* Adjust the grid layout if necessary */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Default to single column */
-    gap: 20px;
+/* --- Students Section --- */
+.students-container {
     margin-top: 20px;
 }
 
-.metric-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust minmax width as needed */
-    gap: 20px;
-    margin-bottom: 20px; /* Space below the metric row */
+.students-container .card {
+    padding: 0; /* Remove default card padding for full table width */
+    overflow: hidden; /* Contain shadows/borders */
 }
 
-/* Responsive grid for dashboard sections */
-@media (min-width: 992px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr 1fr; /* Two columns for most dashboard items */
-    }
-    .metric-cards-grid {
-        grid-column: span 2; /* Metrics span full width */
-    }
-    .large-card {
-        grid-column: span 2; /* Large card spans 2 columns */
-    }
-    .chart-row {
-        grid-column: span 2; /* Chart row spans 2 columns */
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two charts side-by-side within the row */
-        gap: 20px;
-    }
-    .chart-container {
-        /* Remove min-height from individual containers if using chart-row */
-        min-height: auto;
-    }
+.students-container h3 {
+    padding: 24px 24px 12px 24px; /* Match card padding */
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* Fallback for smaller screens */
-@media (max-width: 991px) {
-    .chart-row {
-        display: grid;
-        grid-template-columns: 1fr; /* Charts stack vertically on smaller screens */
-        gap: 20px;
-    }
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
 }
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.students-table thead {
+    background-color: var(--input-bg);
+}
+
+.students-table th,
+.students-table td {
+    padding: 16px 24px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.students-table th {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.students-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.students-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.students-table td {
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.select-student-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* --- Messages within Students Section --- */
+#students-loading-message,
+#students-error-message {
+    padding: 24px;
+    text-align: center;
+    font-style: italic;
+}
+
+#students-loading-message {
+    color: var(--text-color-muted);
+}
+
+#students-error-message {
+    color: var(--danger-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Optional: Style the "Select" button if needed differently */
+/* .select-student-btn.btn-secondary {
+    background-color: #444;
+    border-color: #555;
+}
+.select-student-btn.btn-secondary:hover:not(:disabled) {
+    background-color: #555;
+} */

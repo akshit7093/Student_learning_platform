@@ -1,0 +1,119 @@
+/* job_listings.css */
+
+.job-listings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.info-panel {
+    background: var(--bg-panel);
+    border-radius: var(--panel-radius);
+    padding: 15px 20px;
+    box-shadow: var(--panel-shadow);
+    border: 1px solid var(--border-panel);
+    transition: var(--transition);
+}
+
+.info-panel h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.info-panel p {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.job-listings-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 600;
+    color: var(--gray);
+    background: var(--border-panel);
+    border: 1px solid var(--border-panel);
+    cursor: pointer;
+    transition: var(--transition);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    background: var(--bg-panel);
+    border-bottom: 2px solid var(--primary);
+}
+
+.job-category-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.job-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.job-card {
+    background: var(--bg-panel);
+    border-radius: var(--panel-radius);
+    padding: 15px;
+    box-shadow: var(--panel-shadow);
+    border: 1px solid var(--border-panel);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-primary);
+}
+
+.job-card .company {
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+}
+
+.job-card .location,
+.job-card .type {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin: 5px 0;
+}
+
+.job-card .aligns-with {
+    color: var(--success);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.job-card .mismatch {
+    color: var(--danger);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.apply-btn {
+    margin-top: auto; /* Push button to the bottom */
+    align-self: flex-start; /* Align button to the left */
+    margin-top: 10px;
+}

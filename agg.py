@@ -31,9 +31,25 @@ STUDENTS_TO_FETCH = [
         "github_user": "akshit7093",
         "codeforces_user": "akshit7093",
         "resume_path": "resume.pdf"  # REQUIRED FIELD
+    },
+    {
+        "enrollment_no": "35314811922",
+        "leetcode_user": "Nikita_06211",
+        "github_user": "Nikita06211",
+        "codeforces_user": "Nikita06211",
+        "resume_path": "Nikita_Bansal.pdf"
+    },
+    {
+        "enrollment_no": "05414811922",
+        "leetcode_user": "Vineet_Goyal10",
+        "github_user": "Vineetg2003",
+        "codeforces_user": "Nikita06211",
+        "resume_path": "Vineet_Goyal_Resume (4).pdf"
     }
+
     # Add more student dictionaries here
 ]
+
 
 OUTPUT_FILE = 'final_cleaned_student_data.json'
 
@@ -263,16 +279,41 @@ def main():
     ipu_scraper = StudentScraper(encryption_key="Qm9sRG9OYVphcmEK")
     all_student_data = {}
 
-    logger.info(f"Starting data aggregation for {len(STUDENTS_TO_FETCH)} student(s)...")
+    # Load existing data if output file exists
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                all_student_data = json.load(f)
+            logger.info(f"Loaded existing data for {len(all_student_data)} student(s) from '{OUTPUT_FILE}'.")
+        except Exception as e:
+            logger.warning(f"Could not load existing data: {e}. Starting fresh.")
+            all_student_data = {}
+    else:
+        logger.info(f"No existing output file found. Starting fresh.")
 
-    for student in STUDENTS_TO_FETCH:
+    # Get set of already processed enrollment numbers
+    existing_enrollments = set(all_student_data.keys())
+
+    # Filter STUDENTS_TO_FETCH to only include unprocessed enrollments
+    students_to_process = [
+        student for student in STUDENTS_TO_FETCH
+        if student.get("enrollment_no") not in existing_enrollments
+    ]
+
+    if not students_to_process:
+        logger.info("✅ No new students to process. All enrollments already exist.")
+        return
+
+    logger.info(f"Starting data aggregation for {len(students_to_process)} new student(s)...")
+
+    for student in students_to_process:
         enrollment_no = student.get("enrollment_no")
         if not enrollment_no:
             logger.warning("Skipping entry due to missing enrollment number.")
             continue
 
         logger.info(f"\nProcessing data for Enrollment No: {enrollment_no}")
-        
+
         student_record = {
             "name": None,
             "enrollment_no": enrollment_no,
@@ -282,7 +323,7 @@ def main():
                 "github": None,
                 "codeforces": None,
             },
-            "resume": None,  # NEW FIELD
+            "resume": None,
             "errors": {}
         }
 
@@ -312,7 +353,7 @@ def main():
             except Exception as e:
                 student_record["errors"]["leetcode"] = str(e)
                 logger.error(f"    > LeetCode processing FAILED: {e}")
-        
+
         if student.get("github_user"):
             try:
                 logger.info(f"  - Processing GitHub data for '{student['github_user']}'...")
@@ -338,31 +379,30 @@ def main():
             except Exception as e:
                 student_record["errors"]["codeforces"] = str(e)
                 logger.error(f"    > Codeforces processing FAILED: {e}")
-        
+
         # Process resume data
         if student.get("resume_path"):
             try:
                 logger.info(f"  - Processing resume from '{student['resume_path']}'...")
-                
-                # Check if file exists
+
                 if not os.path.exists(student["resume_path"]):
                     raise FileNotFoundError(f"Resume file not found at {student['resume_path']}")
-                
+
                 raw_resume_data = parse_resume(student["resume_path"])
                 student_record["resume"] = clean_resume_data(raw_resume_data)
                 logger.info("    > Resume data processed successfully.")
             except Exception as e:
                 student_record["errors"]["resume"] = str(e)
                 logger.error(f"    > Resume processing FAILED: {e}")
-        
-        all_student_data[enrollment_no] = student_record
-        time.sleep(1)  # Respectful delay between requests
 
-    # Save the final cleaned & aggregated data
+        all_student_data[enrollment_no] = student_record
+        time.sleep(1)  # Respectful delay
+
+    # Save merged data (existing + new)
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             json.dump(all_student_data, f, indent=4, ensure_ascii=False)
-        logger.info(f"\n✅ Final cleaning complete. Data saved to '{OUTPUT_FILE}'.")
+        logger.info(f"\n✅ Final data saved to '{OUTPUT_FILE}' ({len(all_student_data)} total students).")
     except Exception as e:
         logger.error(f"\n❌ Error saving final JSON file: {e}")
 

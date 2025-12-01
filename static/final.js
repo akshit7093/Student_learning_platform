@@ -681,7 +681,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 skillsChart = new Chart(skillsCtx, {
                     type: 'bar', // or 'doughnut', 'pie', etc.
-                     {
+                    // CORRECTED: Added the 'data' key for the chart data object
+                    data: {
                         labels: labels,
                         datasets: [{
                             label: 'Skill Count',
@@ -728,7 +729,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // For simplicity, let's use a bar chart here showing score out of 10
                 dsaChart = new Chart(dsaCtx, {
                     type: 'bar', // Could be 'radar', 'doughnut' for score
-                     {
+                    // CORRECTED: Added the 'data' key for the chart data object
+                    data: {
                         labels: ['DSA Score'],
                         datasets: [{
                             label: 'DSA Performance (0-10)',
@@ -801,7 +803,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageP = document.createElement('p');
         // Apply markdown formatting if the flag is true (e.g., for AI responses)
         if (useMarkdown) {
-            messageP.innerHTML = text; // Use innerHTML to render the formatted HTML
+            // CORRECTED: Call the conversion function to turn markdown into HTML
+            messageP.innerHTML = convertMarkdownToHTML(text);
         } else {
             messageP.textContent = text; // Use textContent for plain text (e.g., user messages, loading)
         }
