@@ -1,43 +1,54 @@
-# rag.py
+# rag_system.py - Enhanced for deeper analysis
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import JsonOutputParser
-from prompts import REPORT_PROMPT, QA_PROMPT, StudentReport
+from prompts import REPORT_PROMPT, QA_PROMPT, StudentReport, RESUME_TAILORING_PROMPT
 import json
 from langchain_core.prompts import PromptTemplate
 import os
 import re
 import logging
 from youtube_search_tool import YouTubeSearchTool
-# Import the new JobApplicationAnalyzer
-from job_scraper import JobApplicationAnalyzer # Corrected import name
-# Import the new dashboard analyzer logic
-from dashboard_analyzer import get_dashboard_metrics # Import the main function
+from job_scraper import JobApplicationAnalyzer
+from dashboard_analyzer import get_dashboard_metrics
 
 logger = logging.getLogger('rag_system')
 DATA_PATH = "final_cleaned_student_data.json"
 
 class StudentApiRAG:
     def __init__(self):
-        print("Initializing API-based RAG system...")
+        print("🚀 Initializing Enhanced RAG System with Deep Analysis...")
         api_key = os.getenv("GOOGLE_API_KEY")
         if not api_key:
             raise ValueError("GOOGLE_API_KEY environment variable not set!")
+        
+        # Use more creative temperature for detailed, nuanced analysis
         self.llm = ChatGoogleGenerativeAI(
-            model="models/gemini-flash-latest", # Updated model name if needed
+            model="models/gemini-2.5-pro",  # Use Pro for better analysis
             google_api_key=api_key,
-            temperature=0.2
+            temperature=0.4,  # Increased for more creative, detailed responses
+            top_p=0.95,
+            top_k=40
         )
-        # Initialize the YouTube search tool
+        
+        # Secondary LLM for structured output (lower temperature)
+        self.structured_llm = ChatGoogleGenerativeAI(
+            model="models/gemini-2.5-pro",
+            google_api_key=api_key,
+            temperature=0.2,  # Lower for consistent JSON structure
+            top_p=0.9
+        )
+        
         self.youtube_tool = YouTubeSearchTool()
-        print("Loading student data into memory...")
+        
+        print("📚 Loading student data into memory...")
         with open(DATA_PATH, 'r', encoding='utf-8') as f:
             self.student_data = json.load(f)
-        print(f"✅ Loaded data for {len(self.student_data)} students. System ready.")
+        print(f"✅ Loaded data for {len(self.student_data)} students.")
+        print("🎯 Enhanced analysis engine ready for comprehensive reports!")
         
-        # Initialize the new JobApplicationAnalyzer
         self.job_analyzer = JobApplicationAnalyzer()
         
-        # Define topic categories for better search organization (kept for potential other uses)
         self.topic_categories = {
             "DSA": [
                 "Arrays", "Strings", "Linked Lists", "Stacks", "Queues", 
@@ -75,180 +86,222 @@ class StudentApiRAG:
 
     def _identify_learning_topics(self, student_report: dict) -> list:
         """Have the AI identify specific topic areas where the student needs improvement."""
-        print("  > Identifying specific learning topics for YouTube recommendations...")
-        # Extract relevant information from the report
+        print("  🎯 Identifying personalized learning topics...")
+        
         weaknesses = student_report.get("analysis", {}).get("weaknesses", [])
         strengths = student_report.get("analysis", {}).get("strengths", [])
-        # Get scores from the report
+        
+        # Extract scores
         dev_orientation_score = 5
         dsa_orientation_score = 5
-        # Try to extract scores from detailed_scores if available
+        
         for score in student_report.get("detailed_scores", []):
             if "Development" in score["parameter"] or "Project" in score["parameter"]:
                 dev_orientation_score = score["score"]
             if "DSA" in score["parameter"] or "Problem" in score["parameter"]:
                 dsa_orientation_score = score["score"]
-        # Create a more robust prompt template
+        
         prompt_template = """
-        Analyze this student's academic and coding profile to identify 3-5 specific topic areas 
-        where they need improvement. Focus on concrete, actionable topics that have dedicated 
-        learning resources on YouTube.
-        Student Profile:
-        - DSA Score: {dsa_orientation_score}/10
-        - Development/Project Score: {dev_orientation_score}/10
-        - Strengths: {strengths}
-        - Weaknesses: {weaknesses}
-        Identify specific topic areas where the student needs improvement. For each topic:
-        1. Provide a concise, specific topic name (e.g., "Binary Search", "React Hooks", "SQL Joins")
-        2. Explain why this topic is important for the student
-        3. Ensure the topic is narrow enough to have dedicated YouTube tutorials
-        Return ONLY a valid JSON array in this exact format:
+        As an expert learning advisor, analyze this student's profile and identify 4-6 specific,
+        actionable learning topics where they need the most improvement.
+        
+        Student Profile Analysis:
+        - DSA Proficiency: {dsa_orientation_score}/10
+        - Development Skills: {dev_orientation_score}/10
+        - Key Strengths: {strengths}
+        - Areas for Growth: {weaknesses}
+        
+        For each recommended topic:
+        1. Choose a SPECIFIC, searchable topic (e.g., "Dynamic Programming Patterns", "React Hooks", "System Design Basics")
+        2. Explain WHY this is critical for the student's growth (50-100 words)
+        3. Ensure the topic has quality YouTube content available
+        4. Prioritize high-impact areas that address their weaknesses
+        
+        Return ONLY valid JSON in this EXACT format:
         [
             {{
-                "topic": "Binary Search",
-                "reason": "The student struggles with searching algorithms and needs to understand binary search for efficient problem solving."
+                "topic": "Binary Search and Two Pointers",
+                "reason": "Your LeetCode profile shows only 15% accuracy on searching problems. These patterns are fundamental building blocks appearing in 30% of technical interviews. Mastering binary search variants and two-pointer techniques will unlock solutions to 50+ common problem types and significantly improve your problem-solving speed."
             }},
             {{
-                "topic": "React State Management",
-                "reason": "The student's projects show difficulty managing component state in complex UIs."
+                "topic": "React State Management with Redux",
+                "reason": "Your projects show basic React knowledge but lack complex state management. As applications scale, Redux becomes essential. Learning this now will make your projects production-ready and is a must-have skill for 70% of frontend positions at product companies."
             }}
         ]
-        Make sure your JSON is properly formatted with double quotes around all keys and string values.
+        
+        Requirements:
+        - Return 4-6 topics
+        - Use double quotes for all JSON keys and values
+        - Each reason should be 50-100 words
+        - Topics must be specific and searchable
+        - No extra text before or after the JSON array
         """
+        
         try:
-            # Create a chain to get the topic recommendations
             chain = PromptTemplate(
                 template=prompt_template, 
                 input_variables=["dsa_orientation_score", "dev_orientation_score", "strengths", "weaknesses"]
             ) | self.llm
-            # Invoke the chain with the actual values
+            
             response = chain.invoke({
                 "dsa_orientation_score": dsa_orientation_score,
                 "dev_orientation_score": dev_orientation_score,
-                "strengths": ', '.join(strengths) if strengths else 'None specifically identified',
-                "weaknesses": ', '.join(weaknesses) if weaknesses else 'None specifically identified'
+                "strengths": ', '.join(strengths[:3]) if strengths else 'None specifically identified',
+                "weaknesses": ', '.join(weaknesses[:3]) if weaknesses else 'None specifically identified'
             })
+            
             response_text = response.content
-            # Try to extract JSON from the response
+            
+            # Extract JSON
             json_start = response_text.find('[')
             json_end = response_text.rfind(']') + 1
+            
             if json_start == -1 or json_end == 0:
-                logger.error("No JSON array found in topic identification response")
-                logger.debug(f"Response text: {response_text}")
+                logger.error("No JSON array found in topic identification")
                 return self._get_default_topics()
+            
             json_text = response_text[json_start:json_end]
-            # Clean up common JSON issues
             json_text = json_text.replace('\n', ' ').replace('\r', '')
+            
             try:
-                # Parse JSON
                 topics_data = json.loads(json_text)
             except json.JSONDecodeError as e:
-                logger.error(f"Failed to parse topic identification as JSON: {e}")
-                logger.debug(f"JSON text: {json_text}")
-                # Try to fix common JSON issues
+                logger.error(f"JSON parsing error: {e}")
+                # Try fixing common issues
+                fixed_json = json_text.replace("'", '"')
                 try:
-                    # Replace single quotes with double quotes
-                    fixed_json = json_text.replace("'", '"')
                     topics_data = json.loads(fixed_json)
                 except:
-                    # If still fails, return default topics
                     return self._get_default_topics()
+            
             if not isinstance(topics_data, list):
-                logger.error("Topic identification response is not a list")
+                logger.error("Topic data is not a list")
                 return self._get_default_topics()
-            # Validate and clean the topics
+            
+            # Validate and process topics
             valid_topics = []
-            for item in topics_data[:5]:  # Limit to 5 topics
+            for item in topics_data[:6]:  # Max 6 topics
                 topic = item.get("topic", "").strip()
                 reason = item.get("reason", "").strip()
-                if topic and reason:
+                
+                if topic and reason and len(reason) > 30:  # Ensure substantial reason
                     valid_topics.append({
                         "topic": topic,
                         "reason": reason,
                         "category": self._determine_topic_category(topic)
                     })
+            
             if not valid_topics:
                 logger.warning("No valid topics identified, using defaults")
                 return self._get_default_topics()
-            print(f"    > Identified {len(valid_topics)} specific learning topics.")
+            
+            print(f"    ✅ Identified {len(valid_topics)} personalized learning topics")
             return valid_topics
+            
         except Exception as e:
-            logger.error(f"Error identifying learning topics: {e}")
+            logger.error(f"Error identifying topics: {e}")
             return self._get_default_topics()
+
+    def generate_tailored_resume(self, enrollment_no: str, job_description: str) -> str:
+        """Generates a tailored resume in Markdown format based on the job description."""
+        print(f"📄 Generating tailored resume for {enrollment_no}...")
+        
+        # 1. Get Student Profile
+        student_profile = self.student_data.get(enrollment_no) # Assuming _get_student_context is replaced by direct access
+        if not student_profile:
+            return "Error: Student profile not found."
+
+        # 2. Prepare Prompt
+        prompt = RESUME_TAILORING_PROMPT.format(
+            student_profile=json.dumps(student_profile, indent=2), # Convert dict to JSON string for prompt
+            job_description=job_description
+        )
+
+        # 3. Call LLM
+        try:
+            response = self.llm.invoke(prompt)
+            return response.content
+        except Exception as e:
+            logger.error(f"Error generating resume: {e}")
+            return f"Error generating resume: {str(e)}"
 
     def _determine_topic_category(self, topic: str) -> str:
         """Determine the most appropriate category for a topic."""
         topic_lower = topic.lower()
-        # Check against our predefined categories
+        
         for category, topics in self.topic_categories.items():
             for predefined_topic in topics:
                 if predefined_topic.lower() in topic_lower or topic_lower in predefined_topic.lower():
                     return category
-        # Fallback categories based on keywords
+        
+        # Fallback categorization
         if any(kw in topic_lower for kw in ["algorithm", "data structure", "dsa", "binary", "dynamic", "greedy", "tree", "graph", "array", "string"]):
             return "DSA"
         elif any(kw in topic_lower for kw in ["web", "react", "angular", "vue", "node", "express", "api", "html", "css", "javascript"]):
             return "Web Development"
         elif any(kw in topic_lower for kw in ["python", "java", "c++", "c#", "javascript", "go", "rust"]):
             return "Programming Languages"
+        
         return "Computer Science Fundamentals"
 
     def _get_default_topics(self) -> list:
-        """Return default topics in case of errors."""
+        """Return default topics with detailed reasons."""
         return [
             {
-                "topic": "Binary Search",
-                "reason": "Essential searching algorithm that forms the basis for many problem-solving techniques",
+                "topic": "Dynamic Programming Fundamentals",
+                "reason": "Dynamic Programming is a critical problem-solving technique that appears in 25-30% of technical interviews at top companies. It's essential for optimization problems and demonstrates strong algorithmic thinking. Mastering DP patterns will significantly improve your problem-solving arsenal and interview success rate.",
                 "category": "DSA"
             },
             {
-                "topic": "Dynamic Programming",
-                "reason": "Fundamental technique for solving optimization problems with overlapping subproblems",
+                "topic": "Binary Search Variations",
+                "reason": "Binary search is a fundamental algorithm that extends beyond simple array searching. Understanding its variations (rotated arrays, finding boundaries, search in unknown size arrays) unlocks solutions to 40+ LeetCode problems and is frequently tested in interviews. This skill demonstrates strong understanding of time complexity optimization.",
                 "category": "DSA"
             },
             {
-                "topic": "React Fundamentals",
-                "reason": "Core concepts for building modern web applications with component-based architecture",
+                "topic": "React Advanced Patterns",
+                "reason": "Moving beyond basics to advanced React patterns (custom hooks, context API, render props, compound components) is crucial for building scalable applications. These patterns are used in production codebases at major companies and demonstrate senior-level frontend skills that command premium salaries.",
                 "category": "Web Development"
             }
         ]
 
     def _get_youtube_recommendations(self, student_report: dict) -> list:
-        """Generate real YouTube video recommendations based on specific learning topics."""
-        print("  > Generating topic-based YouTube recommendations...")
-        # First, identify specific learning topics
+        """Generate comprehensive YouTube video recommendations."""
+        print("  📺 Generating personalized YouTube recommendations...")
+        
         learning_topics = self._identify_learning_topics(student_report)
-        # Now search for videos for each topic
         topic_recommendations = []
+        
         for topic_info in learning_topics:
             topic = topic_info["topic"]
             category = topic_info["category"]
-            print(f"    > Searching for videos on topic: '{topic}' (category: {category})")
+            
+            print(f"    🔍 Searching videos for: '{topic}' ({category})")
+            
             try:
-                # Search YouTube for this specific topic
                 youtube_videos = self.youtube_tool.run({
                     "query": topic,
                     "max_results": 5,
                     "topic_category": category
                 })
-                # Format the videos for this topic
+                
                 topic_videos = [{
                     "title": video["title"],
                     "url": video["url"],
                     "embed_url": video["embed_url"],
                     "reason": video["description"]
                 } for video in youtube_videos]
-                # Add to recommendations
+                
                 topic_recommendations.append({
                     "topic": topic,
                     "reason": topic_info["reason"],
                     "category": category,
                     "videos": topic_videos
                 })
-                print(f"      > Found {len(topic_videos)} videos for topic '{topic}'")
+                
+                print(f"      ✅ Found {len(topic_videos)} high-quality videos")
+                
             except Exception as e:
-                print(f"    > Warning: Failed to get videos for topic '{topic}': {e}")
-                # Add fallback videos for this topic
+                print(f"    ⚠️ Error fetching videos for '{topic}': {e}")
                 fallback_videos = self.youtube_tool._get_fallback_videos(topic, 5, category)
                 topic_videos = [{
                     "title": video["title"],
@@ -256,141 +309,199 @@ class StudentApiRAG:
                     "embed_url": video["embed_url"],
                     "reason": video["description"]
                 } for video in fallback_videos]
+                
                 topic_recommendations.append({
                     "topic": topic,
                     "reason": topic_info["reason"],
                     "category": category,
                     "videos": topic_videos
                 })
-        print(f"    > Generated {len(topic_recommendations)} topic sections with video recommendations.")
+        
+        print(f"    ✅ Generated {len(topic_recommendations)} comprehensive learning modules")
         return topic_recommendations
 
     def generate_structured_report(self, enrollment_no: str) -> dict:
-        """Generates the full, structured student report via API call including video suggestions."""
-        print(f"Generating full report for {enrollment_no}...")
+        """Generate comprehensive student report with deep analysis."""
+        print(f"\n{'='*80}")
+        print(f"🎓 GENERATING COMPREHENSIVE REPORT FOR: {enrollment_no}")
+        print(f"{'='*80}\n")
+        
         student_profile = self.student_data.get(enrollment_no)
         if not student_profile:
             return {"error": "No data found for this student."}
+        
         context = json.dumps(student_profile, indent=2)
-        # Use JsonOutputParser with the Pydantic model
+        
+        # Use structured LLM for JSON parsing
         parser = JsonOutputParser(pydantic_object=StudentReport)
         prompt_with_format = REPORT_PROMPT.partial(
             format_instructions=parser.get_format_instructions()
         )
-        chain = prompt_with_format | self.llm | parser
+        
+        chain = prompt_with_format | self.structured_llm | parser
+        
         try:
-            # Get the base report
+            print("🤖 AI analyzing student profile comprehensively...")
             report_dict = chain.invoke({"context": context})
-            # Now generate topic-based video recommendations
+            
+            # Inject CGPA Trend Data
             try:
-                youtube_recommendations = self._get_youtube_recommendations(report_dict)
-                # Add video suggestions to the report
-                report_dict["youtube_recommendations"] = youtube_recommendations
-                print(f"    > Added {len(youtube_recommendations)} topic sections with video recommendations.")
+                semester_performance = student_profile.get("academic_profile", {}).get("semester_performance", [])
+                if semester_performance:
+                    labels = [f"Sem {sem['semester']}" for sem in semester_performance]
+                    values = [sem['sgpa'] for sem in semester_performance]
+                    report_dict["cgpa_trend"] = {
+                        "labels": labels,
+                        "values": values
+                    }
+                    print(f"    📊 Injected CGPA trend: {len(values)} semesters")
+                else:
+                    report_dict["cgpa_trend"] = None
             except Exception as e:
-                print(f"    > Warning: Failed to generate video suggestions: {e}")
+                print(f"    ⚠️ CGPA trend extraction failed: {e}")
+                report_dict["cgpa_trend"] = None
+            
+            # Generate video recommendations
+            try:
+                print("\n📹 Generating personalized learning resources...")
+                youtube_recommendations = self._get_youtube_recommendations(report_dict)
+                report_dict["youtube_recommendations"] = youtube_recommendations
+                print(f"    ✅ Added {len(youtube_recommendations)} curated learning modules")
+            except Exception as e:
+                print(f"    ⚠️ Video recommendations failed: {e}")
                 report_dict["youtube_recommendations"] = self._get_default_topic_recommendations()
+            
+            print(f"\n{'='*80}")
+            print("✅ COMPREHENSIVE REPORT GENERATION COMPLETE!")
+            print(f"{'='*80}\n")
+            
             return report_dict
+            
         except Exception as e:
-            print(f"Error invoking LLM or parsing output: {e}")
+            logger.error(f"Report generation error: {e}", exc_info=True)
+            print(f"\n❌ ERROR: {e}\n")
             return {
-                "error": "Failed to generate a valid report from the LLM.",
-                "overall_summary": "Error generating report. Please try again later.",
+                "error": "Failed to generate report",
+                "overall_summary": "Report generation encountered an error. Please try again.",
+                "executive_summary": "Error generating analysis.",
                 "detailed_scores": [],
                 "analysis": {
-                    "strengths": ["Report generation error"],
-                    "weaknesses": ["Unable to analyze profile due to system error"]
+                    "strengths": ["System error occurred"],
+                    "weaknesses": ["Unable to analyze due to technical issue"],
+                    "hidden_talents": []
                 },
                 "actionable_advice": {
-                    "recommendations": ["Please try generating the report again or contact support"]
+                    "recommendations": [{
+                        "title": "System Error",
+                        "description": "Please try generating the report again or contact support.",
+                        "priority": "HIGH",
+                        "estimated_time": "N/A",
+                        "expected_impact": "N/A",
+                        "mermaid_flowchart": ""
+                    }]
                 },
                 "resume_analysis": {
-                    "summary": "Resume analysis unavailable",
+                    "summary": "Analysis unavailable",
                     "key_skills": [],
                     "professional_links": [],
-                    "missing_elements": ["Analysis failed"]
+                    "missing_elements": [],
+                    "ats_score": 0,
+                    "improvement_suggestions": []
+                },
+                "skills": [],
+                "learning_path": [],
+                "career_insights": {
+                    "current_trajectory": "Analysis unavailable",
+                    "potential_roles": [],
+                    "salary_range": "N/A",
+                    "competitive_advantage": "N/A",
+                    "market_positioning": "N/A"
                 },
                 "youtube_recommendations": self._get_default_topic_recommendations()
             }
 
     def _get_default_topic_recommendations(self) -> list:
-        """Return default topic-based recommendations in case of errors."""
+        """Return default comprehensive recommendations."""
         default_topics = self._get_default_topics()
         topic_recommendations = []
+        
         for topic_info in default_topics:
             topic = topic_info["topic"]
             category = topic_info["category"]
-            # Get fallback videos for this topic
             fallback_videos = self.youtube_tool._get_fallback_videos(topic, 5, category)
-            # Format the videos
+            
             topic_videos = [{
                 "title": video["title"],
                 "url": video["url"],
                 "embed_url": video["embed_url"],
                 "reason": video["description"]
             } for video in fallback_videos]
+            
             topic_recommendations.append({
                 "topic": topic,
                 "reason": topic_info["reason"],
                 "category": category,
                 "videos": topic_videos
             })
+        
         return topic_recommendations
 
     def analyze_job_application(self, job_application_link: str, enrollment_no: str) -> dict:
-        """
-        Analyzes a student's profile against a job description link using the new JobApplicationAnalyzer.
-        This method now performs a comparative analysis and integrates YouTube recommendations based on specific AI-generated queries.
-        It fetches the student profile internally using the enrollment_no.
-        """
-        print(f"  > Starting job analysis using the new analyzer for link: {job_application_link} and student: {enrollment_no}")
+        """Analyze student profile against job requirements."""
+        print(f"\n🎯 Starting comprehensive job analysis...")
+        print(f"   Student: {enrollment_no}")
+        print(f"   Job Link: {job_application_link}\n")
         
-        # Fetch the student profile internally
         student_profile = self.student_data.get(enrollment_no)
         if not student_profile:
-            logger.error(f"No data found for enrollment number: {enrollment_no}")
+            logger.error(f"Student not found: {enrollment_no}")
             return {
-                "error": "No data found for the provided student enrollment number.",
-                "strategic_overview": {"summary": "Error: Student data not found.", "your_key_opportunity": "Please check the enrollment number."},
+                "error": "Student data not found",
+                "strategic_overview": {
+                    "summary": "Error: Student data unavailable",
+                    "your_key_opportunity": "Please verify enrollment number"
+                },
                 "your_core_strengths_for_this_role": [],
                 "strategic_areas_for_growth": [],
                 "video_recommendations": []
             }
         
-        # Use the imported JobApplicationAnalyzer's analyze method
         analysis_result = self.job_analyzer.analyze(job_application_link, student_profile)
+        print("✅ Job analysis complete!\n")
         
         return analysis_result
 
     def get_student_dashboard_metrics(self, enrollment_no: str) -> dict:
-        """
-        Retrieves and analyzes a specific student's profile data using the dashboard_analyzer logic.
-        """
-        print(f"  > Calculating dashboard metrics for student: {enrollment_no}")
+        """Get comprehensive dashboard metrics."""
+        print(f"📊 Calculating comprehensive metrics for: {enrollment_no}")
+        
         student_profile = self.student_data.get(enrollment_no)
         if not student_profile:
-            logger.error(f"No data found for enrollment number: {enrollment_no}")
-            return {"error": "No data found for the provided student enrollment number."}
+            logger.error(f"Student not found: {enrollment_no}")
+            return {"error": "Student data not found"}
         
-        # Use the imported get_dashboard_metrics function from dashboard_analyzer.py
         metrics = get_dashboard_metrics(student_profile)
+        print("✅ Dashboard metrics calculated\n")
         
         return metrics
 
-
     def answer_question(self, query: str, enrollment_no: str) -> str:
-        """Answers a specific question using a targeted context from the JSON."""
-        print(f"Answering question for {enrollment_no}: '{query}'")
+        """Answer questions with detailed, comprehensive responses."""
+        print(f"\n💬 Answering question for {enrollment_no}")
+        print(f"   Query: {query}\n")
+        
         student_profile = self.student_data.get(enrollment_no)
         if not student_profile:
-            return "Could not find data for the selected student."
+            return "❌ Could not find data for the selected student."
 
         sources_to_use = self._determine_sources_from_query(query)
-        print(f"  > Targeting data sources: {sources_to_use}")
+        print(f"   📂 Using data sources: {', '.join(sources_to_use)}")
 
+        # Build targeted context
         targeted_context = {}
         if "academic_profile" in sources_to_use:
             targeted_context["academic_profile"] = student_profile.get("academic_profile")
+        
         coding_profiles = {}
         if "leetcode" in sources_to_use:
             coding_profiles["leetcode"] = student_profile.get("coding_profiles", {}).get("leetcode")
@@ -398,6 +509,7 @@ class StudentApiRAG:
             coding_profiles["github"] = student_profile.get("coding_profiles", {}).get("github")
         if "codeforces" in sources_to_use:
             coding_profiles["codeforces"] = student_profile.get("coding_profiles", {}).get("codeforces")
+        
         if coding_profiles:
             targeted_context["coding_profiles"] = coding_profiles
         if "coding_profiles" in sources_to_use and not coding_profiles:
@@ -406,9 +518,23 @@ class StudentApiRAG:
             targeted_context["resume"] = student_profile.get("resume")
 
         if not targeted_context:
-            return "I could not find any relevant information in this student's profile to answer that question."
+            return "❌ Could not find relevant information in the student's profile to answer that question."
 
         context_str = json.dumps(targeted_context, indent=2)
         chain = QA_PROMPT | self.llm
         result = chain.invoke({"context": context_str, "question": query})
+        
+        print("   ✅ Response generated\n")
         return result.content
+
+    def get_all_students_summary(self) -> list:
+        """Returns a summary list of all students."""
+        summaries = []
+        for enrollment_no, data in self.student_data.items():
+            summaries.append({
+                "enrollment_no": enrollment_no,
+                "name": data.get("personal_info", {}).get("name", "Unknown"),
+                "cgpa": data.get("academic_performance", {}).get("current_cgpa", "N/A"),
+                "key_skills": data.get("skills", {}).get("technical_skills", [])[:3] # Top 3 skills
+            })
+        return summaries

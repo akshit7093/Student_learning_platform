@@ -1,15 +1,11 @@
 // Helper function to convert basic markdown to HTML
-// This handles **bold**, *italic*, and \n (newlines)
 function convertMarkdownToHTML(text) {
     if (typeof text !== 'string') {
-        return text; // Return as-is if not a string
+        return text;
     }
     let htmlText = text;
-    // Handle **bold**
     htmlText = htmlText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    // Handle *italic* (single underscores might interfere with URLs, so using single asterisks here)
     htmlText = htmlText.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    // Handle line breaks (\n)
     htmlText = htmlText.replace(/\n/g, '<br>');
     return htmlText;
 }
@@ -20,19 +16,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const jobApplicationInput = document.getElementById('job-application-input');
     const analyzeJobBtn = document.getElementById('analyze-job-btn');
     const loadingSpinner = document.getElementById('loading-spinner');
-    const reportContainer = document.getElementById('reports'); // Updated to match new HTML ID
-    const jobAnalysisContainer = document.getElementById('job-analysis'); // Updated to match new HTML ID
-    const chatbotContainer = document.getElementById('chat'); // Updated to match new HTML ID
+    const reportContainer = document.getElementById('reports');
+    const jobAnalysisContainer = document.getElementById('job-analysis');
+    const chatbotContainer = document.getElementById('chat');
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
     const chatHistory = document.getElementById('chat-history');
+    const newChatBtn = document.getElementById('new-chat-btn');
+    const chatSessionsList = document.getElementById('chat-sessions-list');
 
-    // --- Chart Instances (To destroy/recreate when data changes) ---
+    // Chat State
+    let currentSessionId = null;
+
+    // Chart Instances
     let skillsChart = null;
     let dsaChart = null;
-    let jobMatchChart = null; // This one might be tricky without specific data
+    let jobMatchChart = null;
+    let cgpaTrendChart = null;
+    let dsaPerformanceChart = null;
 
-    // --- Navigation Elements ---
+    // Store pan-zoom instances to prevent memory leaks
+    const panZoomInstances = new Map();
+
+    // Initialize Mermaid
+    mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+            primaryColor: '#00E5FF',
+            primaryTextColor: '#F0F0F0',
+            primaryBorderColor: '#00E5FF',
+            lineColor: '#00E5FF',
+            secondaryColor: '#0099CC',
+            tertiaryColor: '#2C2C2C'
+        },
+        flowchart: {
+            useMaxWidth: false,
+            htmlLabels: true,
+            curve: 'basis'
+        }
+    });
+
+    // Navigation Elements
     const navLinks = document.querySelectorAll('.nav-link');
     const contentSections = document.querySelectorAll('.content-section');
 
@@ -40,23 +65,18 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
 
-            const targetId = link.getAttribute('href').substring(1); // Get ID without '#'
-
-            // Update active link
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
 
-            // Show target section, hide others
             contentSections.forEach(section => {
                 section.classList.add('hidden');
                 if (section.id === targetId) {
                     section.classList.remove('hidden');
                     section.classList.add('active');
-                    // Load dashboard data when the dashboard section becomes active
                     if (targetId === 'dashboard') {
-                        console.log("Dashboard section activated, attempting to load data.");
-                        loadDashboardData(); // Call loadDashboardData here
+                        loadDashboardData();
                     }
                 } else {
                     section.classList.remove('active');
@@ -65,14 +85,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Initial Navigation Setup (Show Dashboard by default) ---
-    const dashboardLink = document.querySelector('.nav-link[href="#dashboard"]');
-    if (dashboardLink) {
-        dashboardLink.click(); // Programmatically click the dashboard link to show it initially
+    // --- Tab Navigation for Report Section ---
+    initializeTabs('.ai-analysis-report', 'data-tab');
+    initializeTabs('.ai-suggestion-channel', 'data-tab');
+
+    function initializeTabs(containerSelector, attribute) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        const tabButtons = container.querySelectorAll('.tab-btn');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute(attribute);
+
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${targetTab}-tab`) {
+                        content.classList.add('active');
+                        if (targetTab === 'performance' && studentSelector.value) {
+                            loadPerformanceCharts(studentSelector.value);
+                        }
+                    }
+                });
+            });
+        });
     }
 
+    // --- Initial Navigation Setup ---
+    const dashboardLink = document.querySelector('.nav-link[href="#dashboard"]');
+    if (dashboardLink) {
+        dashboardLink.click();
+    }
 
-    // 1. Populate student dropdown on page load
+    // --- Populate student dropdown ---
     fetch('/api/students')
         .then(response => response.json())
         .then(students => {
@@ -85,37 +135,113 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching students:', error));
 
-    // 2. Enable buttons when inputs are filled
+    // --- Enable buttons when inputs are filled ---
     studentSelector.addEventListener('change', () => {
         const hasSelection = !!studentSelector.value;
         generateReportBtn.disabled = !hasSelection;
-        // Note: chatbotContainer is now a section, not tied directly to student selection visibility here
-        // reportContainer.classList.add('hidden'); // Hide old report on new selection - Handled by nav now
-        // chatHistory.innerHTML = ''; // Clear chat history - Handled by nav or separately if needed
-        console.log("Student selection changed to:", studentSelector.value);
-        // Reload dashboard data if currently on the dashboard page
-        if (document.querySelector('#dashboard')?.classList.contains('active')) { // Added optional chaining
-             console.log("Currently on dashboard, reloading data for new selection.");
-             loadDashboardData();
-        }
     });
 
     jobApplicationInput.addEventListener('input', () => {
         analyzeJobBtn.disabled = !jobApplicationInput.value.trim();
     });
 
-    // 3. Handle "Generate Report" button click
+    // --- Report History Logic ---
+    const reportHistoryBtn = document.getElementById('report-history-btn');
+    const reportHistoryModal = document.getElementById('report-history-modal');
+    const reportHistoryList = document.getElementById('report-history-list');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+
+    if (reportHistoryBtn) {
+        reportHistoryBtn.addEventListener('click', () => {
+            const enrollmentNo = studentSelector.value;
+            if (!enrollmentNo) {
+                alert('Please select a student first.');
+                return;
+            }
+            loadReportHistory(enrollmentNo);
+            reportHistoryModal.classList.remove('hidden');
+        });
+    }
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            reportHistoryModal.classList.add('hidden');
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === reportHistoryModal) {
+            reportHistoryModal.classList.add('hidden');
+        }
+    });
+
+    function loadReportHistory(enrollmentNo) {
+        reportHistoryList.innerHTML = '<div class="loading">Loading history...</div>';
+
+        fetch(`/api/reports/history/${enrollmentNo}`)
+            .then(response => response.json())
+            .then(history => {
+                reportHistoryList.innerHTML = '';
+                if (history.length === 0) {
+                    reportHistoryList.innerHTML = '<p style="text-align:center; color:var(--text-tertiary)">No saved reports found.</p>';
+                    return;
+                }
+
+                history.forEach(report => {
+                    const item = document.createElement('div');
+                    item.className = 'report-item';
+
+                    const date = new Date(report.timestamp).toLocaleDateString(undefined, {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+
+                    item.innerHTML = `
+                        <div class="report-title">${report.title}</div>
+                        <div class="report-date">${date}</div>
+                    `;
+
+                    item.addEventListener('click', () => {
+                        loadSavedReport(enrollmentNo, report.id);
+                        reportHistoryModal.classList.add('hidden');
+                    });
+
+                    reportHistoryList.appendChild(item);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching report history:', error);
+                reportHistoryList.innerHTML = '<p style="color:var(--error)">Failed to load history.</p>';
+            });
+    }
+
+    function loadSavedReport(enrollmentNo, reportId) {
+        loadingSpinner.classList.remove('hidden');
+
+        fetch(`/api/report/load/${enrollmentNo}/${reportId}`)
+            .then(response => response.json())
+            .then(report => {
+                loadingSpinner.classList.add('hidden');
+                if (report.error) {
+                    alert(`Error loading report: ${report.error}`);
+                } else {
+                    displayNewReport(report);
+                }
+            })
+            .catch(error => {
+                loadingSpinner.classList.add('hidden');
+                console.error('Error loading saved report:', error);
+                alert('Failed to load report.');
+            });
+    }
+
+    // --- Handle "Generate Report" button click ---
     generateReportBtn.addEventListener('click', () => {
         const enrollmentNo = studentSelector.value;
         if (!enrollmentNo) return;
 
         loadingSpinner.classList.remove('hidden');
-        // Hide other sections while loading
-        reportContainer.classList.add('hidden');
-        jobAnalysisContainer.classList.add('hidden');
-        // chatbotContainer.classList.add('hidden'); // Don't hide chat, just report
-
-        // Navigate to the reports section
         document.querySelector('.nav-link[href="#reports"]').click();
 
         fetch(`/api/report/${enrollmentNo}`)
@@ -130,8 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (report.error) {
                     alert(`Error generating report: ${report.error}`);
                 } else {
-                    displayReport(report);
-                    // The section is shown by the navigation click above
+                    displayNewReport(report);
                 }
             })
             .catch(error => {
@@ -139,597 +264,478 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Report generation error:', error);
                 alert(`An unexpected error occurred: ${error.message}`);
             });
+        if (enrollmentNo) {
+            // Also load chat history for this student
+            loadChatSessions(enrollmentNo);
+        } else {
+            alert('Please select a student first.');
+        }
     });
 
-    // 4. Handle "Analyze Job Application" button click
+    // New Chat Button
+    if (newChatBtn) {
+        newChatBtn.addEventListener('click', () => {
+            currentSessionId = null;
+            chatHistory.innerHTML = '';
+            // Remove active class from all sessions
+            document.querySelectorAll('.session-item').forEach(item => item.classList.remove('active'));
+            appendMessage('Start a new conversation!', 'ai', false, true);
+        });
+    }
+
+    // --- Handle "Analyze Job Application" button click ---
     analyzeJobBtn.addEventListener('click', () => {
-        const jobApplicationLink = jobApplicationInput.value.trim();
-        // Get the enrollment number from the currently selected student in the dropdown
+        const jobDescription = jobApplicationInput.value.trim();
         const enrollmentNo = studentSelector.value;
 
-        if (!jobApplicationLink || !enrollmentNo) { // Check if both values exist
-             alert('Please select a student and provide a job application link.');
-             return; // Stop execution if either value is missing
+        if (!jobDescription) {
+            alert('Please paste a job description.');
+            return;
+        }
+        if (!enrollmentNo) {
+            alert('Please select a student first.');
+            return;
         }
 
         loadingSpinner.classList.remove('hidden');
-        // Hide other sections while loading
-        reportContainer.classList.add('hidden');
         jobAnalysisContainer.classList.add('hidden');
-        // chatbotContainer.classList.add('hidden'); // Don't hide chat, just job analysis
-
-        // Navigate to the job analysis section
-        document.querySelector('.nav-link[href="#job-analysis"]').click();
 
         fetch('/api/job-analysis', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // Include both the job link and the enrollment number in the request body
-            body: JSON.stringify({
-                job_application_link: jobApplicationLink,
-                enrollment_no: enrollmentNo // <-- Add this line
+            body: JSON.stringify({ enrollment_no: enrollmentNo, job_description: jobDescription })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
             })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            loadingSpinner.classList.add('hidden');
-            if (data.error) {
-                alert(`Error analyzing job application: ${data.error}`);
-            } else {
-                displayJobAnalysis(data.data); // Access data.data as per API response structure
-                // The section is shown by the navigation click above
-            }
-        })
-        .catch(error => {
-            loadingSpinner.classList.add('hidden');
-            console.error('Job analysis error:', error);
-            alert(`An unexpected error occurred: ${error.message}`);
-        });
+            .then(data => {
+                loadingSpinner.classList.add('hidden');
+                if (data.error) {
+                    alert(`Error analyzing job application: ${data.error}`);
+                } else {
+                    displayJobAnalysis(data.data);
+                }
+            })
+            .catch(error => {
+                loadingSpinner.classList.add('hidden');
+                console.error('Job analysis error:', error);
+                alert(`An unexpected error occurred: ${error.message}`);
+            });
     });
 
-    // 5. Handle chat form submission
+    // --- Chat form submission ---
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const enrollmentNo = studentSelector.value;
         const question = chatInput.value.trim();
 
-        if (!question || !enrollmentNo) return;
+        if (!question || !enrollmentNo) {
+            if (!enrollmentNo) alert('Please select a student first.');
+            return;
+        }
 
-        // Navigate to the chat section if not already there
-        document.querySelector('.nav-link[href="#chat"]').click();
+        // If not already in chat tab, switch to it
+        const chatTabLink = document.querySelector('.nav-link[href="#chat"]');
+        if (chatTabLink && !chatTabLink.classList.contains('active')) {
+            chatTabLink.click();
+        }
 
         appendMessage(question, 'user');
         chatInput.value = '';
-        appendMessage('Thinking...', 'ai', true); // Show loading indicator
+        appendMessage('Thinking...', 'ai', true);
 
         fetch('/api/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ enrollment_no: enrollmentNo, question: question })
+            body: JSON.stringify({
+                enrollment_no: enrollmentNo,
+                question: question,
+                session_id: currentSessionId
+            })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const loadingElement = chatHistory.querySelector('.loading');
-            if (loadingElement) {
-                loadingElement.parentElement.remove();
-            }
-            // Apply markdown formatting to the AI's answer before displaying
-            appendMessage(data.answer, 'ai', false, true); // Pass true for markdown formatting
-            chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to bottom after adding message
-        })
-        .catch(error => {
-            console.error('Chat error:', error);
-            const loadingElement = chatHistory.querySelector('.loading');
-            if (loadingElement) {
-                loadingElement.parentElement.remove();
-            }
-            appendMessage('Sorry, an error occurred while fetching the answer.', 'ai', false, true); // Apply markdown to error message too
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const loadingElement = chatHistory.querySelector('.loading');
+                if (loadingElement) {
+                    loadingElement.parentElement.remove();
+                }
+
+                if (data.success) {
+                    appendMessage(data.answer, 'ai', false, true);
+
+                    // Update session ID if it was a new session
+                    if (!currentSessionId && data.session_id) {
+                        currentSessionId = data.session_id;
+                        // Reload sessions list to show the new one
+                        loadChatSessions(enrollmentNo);
+                    }
+                } else {
+                    appendMessage(`Error: ${data.error}`, 'ai');
+                }
+
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Chat error:', error);
+                const loadingElement = chatHistory.querySelector('.loading');
+                if (loadingElement) {
+                    loadingElement.parentElement.remove();
+                }
+                appendMessage('Sorry, an error occurred while fetching the answer.', 'ai', false, true);
+            });
     });
 
-    // --- Helper Functions ---
+    // --- Chat History Functions ---
+    function loadChatSessions(enrollmentNo) {
+        if (!chatSessionsList) return;
 
-    function displayReport(report) {
-        const reportTitleElement = document.getElementById('report-title');
-        if (reportTitleElement) {
-            reportTitleElement.textContent = `Performance Report for ${studentSelector.options[studentSelector.selectedIndex].text}`;
-        }
-        // Apply markdown formatting to the summary
-        const summaryTextElement = document.getElementById('summary-text');
-        if (summaryTextElement) {
-             summaryTextElement.innerHTML = convertMarkdownToHTML(report.overall_summary);
-        }
+        fetch(`/api/chat/history/${enrollmentNo}`)
+            .then(res => res.json())
+            .then(sessions => {
+                chatSessionsList.innerHTML = '';
+                if (sessions.error) {
+                    console.error(sessions.error);
+                    return;
+                }
 
-        // Display resume analysis
-        displayResumeAnalysis(report.resume_analysis);
+                if (sessions.length === 0) {
+                    chatSessionsList.innerHTML = '<div style="padding:1rem; color:var(--text-tertiary); text-align:center;">No history</div>';
+                    return;
+                }
 
-        const scoresGrid = document.getElementById('scores-grid');
-        if (scoresGrid) {
-            scoresGrid.innerHTML = '';
-            report.detailed_scores.forEach(item => {
-                // Apply markdown to justification
-                scoresGrid.innerHTML += `
-                    <div class="score-card">
-                        <div class="parameter">
-                            <span>${item.parameter}</span>
-                            <span class="score">${item.score}/10</span>
-                        </div>
-                        <div class="justification">${convertMarkdownToHTML(item.justification)}</div>
-                    </div>
-                `;
-            });
-        }
-
-        const createListItems = (items) => items.map(item => `<li>${convertMarkdownToHTML(item)}</li>`).join(''); // Apply to list items
-
-        const strengthsListElement = document.getElementById('strengths-list');
-        if (strengthsListElement) {
-            strengthsListElement.innerHTML = createListItems(report.analysis.strengths);
-        }
-        const weaknessesListElement = document.getElementById('weaknesses-list');
-        if (weaknessesListElement) {
-            weaknessesListElement.innerHTML = createListItems(report.analysis.weaknesses);
-        }
-        const adviceListElement = document.getElementById('advice-list');
-        if (adviceListElement) {
-            adviceListElement.innerHTML = createListItems(report.actionable_advice.recommendations);
-        }
-
-        // Display YouTube recommendations
-        displayYouTubeRecommendations(report.youtube_recommendations);
+                sessions.forEach(session => {
+                    const el = document.createElement('div');
+                    el.className = `session-item ${session.id === currentSessionId ? 'active' : ''}`;
+                    el.innerHTML = `
+                        <div class="session-title">${session.title}</div>
+                        <div class="session-date">${new Date(session.timestamp).toLocaleDateString()} ${new Date(session.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                    `;
+                    el.addEventListener('click', () => {
+                        loadChatMessages(session);
+                        // Update active state
+                        document.querySelectorAll('.session-item').forEach(item => item.classList.remove('active'));
+                        el.classList.add('active');
+                    });
+                    chatSessionsList.appendChild(el);
+                });
+            })
+            .catch(err => console.error('Error loading chat sessions:', err));
     }
 
-    function displayResumeAnalysis(resumeAnalysis) {
-        // Display skills as tags
-        const skillsContainer = document.getElementById('resume-skills');
-        if (skillsContainer) {
-            skillsContainer.innerHTML = '';
-            resumeAnalysis.key_skills.forEach(skill => {
-                const tag = document.createElement('span');
-                tag.className = 'skill-tag';
-                tag.textContent = skill;
-                skillsContainer.appendChild(tag);
-            });
+    function loadChatMessages(session) {
+        currentSessionId = session.id;
+        chatHistory.innerHTML = '';
+
+        session.messages.forEach(msg => {
+            appendMessage(msg.text, msg.sender, false, true); // Assuming stored messages are markdown safe or plain text
+        });
+
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    // --- IMPROVED: Initialize Mermaid Flowchart with Pan/Zoom ---
+    function initializeMermaidFlowchart(flowchartId, mermaidCode) {
+        const flowchartCanvas = document.getElementById(flowchartId);
+        if (!flowchartCanvas) {
+            console.error(`Flowchart canvas not found: ${flowchartId}`);
+            return;
         }
 
+        // Clean up existing pan-zoom instance if any
+        if (panZoomInstances.has(flowchartId)) {
+            try {
+                panZoomInstances.get(flowchartId).destroy();
+                panZoomInstances.delete(flowchartId);
+            } catch (e) {
+                console.warn('Error destroying previous pan-zoom instance:', e);
+            }
+        }
 
-        // Display professional links
-        const linksContainer = document.getElementById('resume-links');
-        if (linksContainer) {
-            linksContainer.innerHTML = '';
-            resumeAnalysis.professional_links.forEach(link => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = link;
-                a.target = '_blank';
+        // Clear existing content
+        flowchartCanvas.innerHTML = '';
 
-                // Extract domain for display
+        // Create mermaid div
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = mermaidCode;
+        flowchartCanvas.appendChild(mermaidDiv);
+
+        // Render mermaid diagram
+        mermaid.run({
+            nodes: [mermaidDiv]
+        }).then(() => {
+            // Wait for render to complete
+            setTimeout(() => {
+                const svg = flowchartCanvas.querySelector('svg');
+                if (!svg) {
+                    console.error('SVG not found after mermaid render');
+                    return;
+                }
+
                 try {
-                    const url = new URL(link);
-                    a.textContent = url.hostname.replace('www.', '');
-                } catch (e) {
-                    a.textContent = link;
-                }
+                    // Get the actual SVG dimensions
+                    const bbox = svg.getBBox();
+                    const padding = 40;
 
-                li.appendChild(a);
-                linksContainer.appendChild(li);
-            });
+                    // Set viewBox with padding to prevent cutoff
+                    svg.setAttribute('viewBox',
+                        `${bbox.x - padding} ${bbox.y - padding} ${bbox.width + padding * 2} ${bbox.height + padding * 2}`
+                    );
+
+                    // Remove fixed dimensions to allow responsive sizing
+                    svg.removeAttribute('width');
+                    svg.removeAttribute('height');
+                    svg.style.width = '100%';
+                    svg.style.height = '100%';
+                    svg.style.maxWidth = 'none';
+                    svg.style.maxHeight = 'none';
+
+                    // Initialize svg-pan-zoom
+                    if (typeof svgPanZoom !== 'undefined') {
+                        setTimeout(() => {
+                            try {
+                                const panZoomInstance = svgPanZoom(svg, {
+                                    zoomEnabled: true,
+                                    controlIconsEnabled: false,
+                                    fit: true,
+                                    center: true,
+                                    minZoom: 0.1,
+                                    maxZoom: 10,
+                                    zoomScaleSensitivity: 0.3,
+                                    dblClickZoomEnabled: true,
+                                    mouseWheelZoomEnabled: true,
+                                    preventMouseEventsDefault: true,
+                                    panEnabled: true,
+                                    refreshRate: 'auto'
+                                });
+
+                                // Store instance for cleanup
+                                panZoomInstances.set(flowchartId, panZoomInstance);
+
+                                // Apply initial zoom and center
+                                setTimeout(() => {
+                                    panZoomInstance.resize();
+                                    panZoomInstance.fit();
+                                    panZoomInstance.center();
+                                    // Zoom in slightly for better readability
+                                    panZoomInstance.zoomBy(1.2);
+                                }, 100);
+
+                                // Add control instructions
+                                if (!flowchartCanvas.querySelector('.flowchart-instructions')) {
+                                    const instructions = document.createElement('div');
+                                    instructions.className = 'flowchart-instructions';
+                                    instructions.innerHTML = '🖱️ Drag to pan • Scroll to zoom • Double-click to reset';
+                                    flowchartCanvas.appendChild(instructions);
+                                }
+                            } catch (panZoomError) {
+                                console.error('Pan-zoom initialization error:', panZoomError);
+                            }
+                        }, 300);
+                    }
+                } catch (error) {
+                    console.error('Error setting up flowchart:', error);
+                }
+            }, 200);
+        }).catch(error => {
+            console.error('Mermaid rendering error:', error);
+            flowchartCanvas.innerHTML = '<p style="color: var(--danger-color); padding: 20px;">Error rendering flowchart. Please check the diagram syntax.</p>';
+        });
+    }
+
+    // --- Display Report Function ---
+    function displayNewReport(report) {
+        // Update Profile Card
+        document.getElementById('student-name').textContent = report.name || 'Student Name';
+        document.getElementById('student-id').textContent = `ID: ${report.enrollment_no || 'N/A'}`;
+        document.getElementById('student-phone').textContent = report.phone || '+91 9876543210';
+        document.getElementById('student-email').textContent = report.email || 'student@example.com';
+
+        if (report.photo) {
+            document.getElementById('student-photo').src = report.photo;
         }
 
+        // Update Summary Tab
+        document.getElementById('hr-summary').innerHTML = convertMarkdownToHTML(report.overall_summary || 'No summary available.');
 
-        // Display missing elements
-        const missingContainer = document.getElementById('resume-missing');
-        if (missingContainer) {
-            missingContainer.innerHTML = '';
-            resumeAnalysis.missing_elements.forEach(item => {
+        const strengthsList = document.getElementById('summary-strengths');
+        strengthsList.innerHTML = '';
+        if (report.analysis?.strengths) {
+            report.analysis.strengths.forEach(strength => {
                 const li = document.createElement('li');
-                li.className = 'missing-items';
-                // Apply markdown to missing elements (though unlikely to have formatting)
-                li.innerHTML = convertMarkdownToHTML(item);
-                missingContainer.appendChild(li);
+                li.innerHTML = convertMarkdownToHTML(strength);
+                strengthsList.appendChild(li);
             });
         }
-    }
 
-    function displayYouTubeRecommendations(recommendations) {
-        const container = document.getElementById('youtube-recommendations');
-        if (!container) {
-            console.error("Container #youtube-recommendations not found.");
-            return;
-        }
-        container.innerHTML = '';
-
-        if (!recommendations || recommendations.length === 0) {
-            container.innerHTML = '<p>No YouTube recommendations available for this student.</p>';
-            return;
+        const weaknessesList = document.getElementById('summary-weaknesses');
+        weaknessesList.innerHTML = '';
+        if (report.analysis?.weaknesses) {
+            report.analysis.weaknesses.forEach(weakness => {
+                const li = document.createElement('li');
+                li.innerHTML = convertMarkdownToHTML(weakness);
+                weaknessesList.appendChild(li);
+            });
         }
 
-        recommendations.forEach(topic => {
-            // Check if this is a topic with videos or a single video
-            if (topic.videos && Array.isArray(topic.videos)) {
-                // This is a topic with multiple videos
-                const topicSection = document.createElement('div');
-                topicSection.className = 'topic-section';
-
-                const topicHeader = document.createElement('h3');
-                topicHeader.textContent = topic.topic;
-                topicSection.appendChild(topicHeader);
-
-                const topicReason = document.createElement('p');
-                topicReason.className = 'topic-reason';
-                // Apply markdown to reason/description
-                topicReason.innerHTML = convertMarkdownToHTML(topic.reason);
-                topicSection.appendChild(topicReason);
-
-                const videosContainer = document.createElement('div');
-                videosContainer.className = 'videos-container';
-
-                topic.videos.forEach(video => {
-                    const card = document.createElement('div');
-                    card.className = 'youtube-card';
-
-                    // Fix URL formatting - remove extra spaces
-                    const embedUrl = (video.embed_url || video.url).replace(/\s+/g, '');
-
-                    card.innerHTML = `
-                        <div class="youtube-embed">
-                            <iframe src="${embedUrl}"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+        // Update Skills Tab
+        const skillsList = document.getElementById('skills-list');
+        skillsList.innerHTML = '';
+        if (report.skills) {
+            report.skills.forEach(skill => {
+                const skillRow = document.createElement('div');
+                skillRow.className = 'skill-row';
+                skillRow.innerHTML = `
+                    <div class="skill-cell">${skill.name || 'Skill'}</div>
+                    <div class="skill-cell">${skill.category || 'General'}</div>
+                    <div class="skill-cell">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: ${skill.performance || 50}%"></div>
                         </div>
-                        <div class="youtube-info">
-                            <h3 class="youtube-title">${video.title}</h3>
-                            <p class="youtube-reason">${convertMarkdownToHTML(video.reason || video.description)}</p>
-                        </div>
-                    `;
-
-                    videosContainer.appendChild(card);
-                });
-
-                topicSection.appendChild(videosContainer);
-                container.appendChild(topicSection);
-            } else {
-                // This is a single video (fallback case)
-                const card = document.createElement('div');
-                card.className = 'youtube-card';
-
-                // Fix URL formatting - remove extra spaces
-                const embedUrl = (topic.embed_url || topic.url).replace(/\s+/g, '');
-
-                card.innerHTML = `
-                    <div class="youtube-embed">
-                        <iframe src="${embedUrl}"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="youtube-info">
-                        <h3 class="youtube-title">${topic.title || 'Untitled Video'}</h3>
-                        <p class="youtube-reason">${convertMarkdownToHTML(topic.reason || topic.description)}</p>
+                        <span class="percentage">${skill.performance || 50}%</span>
                     </div>
                 `;
-
-                container.appendChild(card);
-            }
-        });
-    }
-
-    function displayJobAnalysis(data) {
-        console.log("Job analysis ", data); // Debug log
-
-        // --- Map new structure to expected display structure ---
-
-        // 1. Display Strategic Overview (Summary and Key Opportunity)
-        const reportTitleElement = document.getElementById('report-title'); // Reuse title element or create a new one if needed for job analysis
-        if (reportTitleElement) {
-            reportTitleElement.textContent = `Job Application Analysis`; // Or use data.strategic_overview.summary if it's a full sentence
-        }
-        // Assuming you might want to display summary and key opportunity in a dedicated area if available
-        // const overviewSummaryElement = document.getElementById('overview-summary'); // Add this element in HTML if needed
-        // if (overviewSummaryElement && data.strategic_overview && data.strategic_overview.summary) {
-        //     overviewSummaryElement.innerHTML = convertMarkdownToHTML(data.strategic_overview.summary);
-        // }
-        // const keyOpportunityElement = document.getElementById('key-opportunity'); // Add this element in HTML if needed
-        // if (keyOpportunityElement && data.strategic_overview && data.strategic_overview.your_key_opportunity) {
-        //     keyOpportunityElement.innerHTML = convertMarkdownToHTML(data.strategic_overview.your_key_opportunity);
-        // }
-
-        // 2. Display Strengths (from 'your_core_strengths_for_this_role')
-        const strengthsContainer = document.getElementById('job-strengths-list');
-        if (strengthsContainer) {
-            strengthsContainer.innerHTML = '';
-
-            const strengths = data['your_core_strengths_for_this_role'] || [];
-
-            if (Array.isArray(strengths) && strengths.length > 0) {
-                strengths.forEach(strength => {
-                    const item = document.createElement('div');
-                    item.className = 'job-strength-item';
-                    // Map the new keys to the expected keys in the HTML structure
-                    // Apply markdown formatting to description and relevance
-                    item.innerHTML = `
-                        <div class="job-item-aspect">${convertMarkdownToHTML(strength.strength_area || 'N/A')}</div>
-                        <div class="job-item-description">${convertMarkdownToHTML(strength.evidence_from_your_profile || 'N/A')}</div>
-                        <div class="job-item-relevance">${convertMarkdownToHTML(strength.how_it_matches_the_job || 'N/A')}</div>
-                    `;
-                    strengthsContainer.appendChild(item);
-                });
-            } else {
-                strengthsContainer.innerHTML = '<p class="no-data">No strengths data available.</p>';
-            }
+                skillsList.appendChild(skillRow);
+            });
         }
 
-        // 3. Display Weaknesses (from 'strategic_areas_for_growth')
-        const weaknessesContainer = document.getElementById('job-weaknesses-list');
-        if (weaknessesContainer) {
-            weaknessesContainer.innerHTML = '';
-
-            const weaknesses = data['strategic_areas_for_growth'] || [];
-
-            if (Array.isArray(weaknesses) && weaknesses.length > 0) {
-                weaknesses.forEach(weakness => {
-                    const item = document.createElement('div');
-                    item.className = 'job-weakness-item';
-                    // Map the new keys to the expected keys in the HTML structure
-                    // Apply markdown formatting to description, importance, and suggestion
-                    item.innerHTML = `
-                        <div class="job-item-aspect">${convertMarkdownToHTML(weakness.area_to_develop || 'N/A')}</div>
-                        <div class="job-item-description">${convertMarkdownToHTML(weakness.insight || 'N/A')}</div>
-                        <div class="job-item-importance">${convertMarkdownToHTML("Importance: " + (weakness.severity || 'N/A'))}</div>
-                        <div class="job-item-suggestion">${convertMarkdownToHTML(weakness.path_to_improvement ? weakness.path_to_improvement.join('<br>') : 'N/A')}</div>
-                    `;
-                    weaknessesContainer.appendChild(item);
-                });
-            } else {
-                weaknessesContainer.innerHTML = '<p class="no-data">No weaknesses data available.</p>';
-            }
-        }
-
-        // 4. Display Enhancement Recommendations (from 'strategic_areas_for_growth' as well)
-        const enhancementsContainer = document.getElementById('job-enhancements-list');
-        if (enhancementsContainer) {
-            enhancementsContainer.innerHTML = '';
-
-            // We can reuse the 'strategic_areas_for_growth' for enhancement recommendations
-            const weaknessesForRecs = data['strategic_areas_for_growth'] || []; // Use the same array
-            if (Array.isArray(weaknessesForRecs) && weaknessesForRecs.length > 0) {
-                weaknessesForRecs.forEach(rec => {
-                    const item = document.createElement('div');
-                    item.className = 'job-enhancement-item';
-                    // Map the new keys to the expected keys in the HTML structure
-                    // Apply markdown formatting to description and priority
-                    item.innerHTML = `
-                        <div class="job-item-aspect">${convertMarkdownToHTML(rec.area_to_develop || 'N/A')}</div>
-                        <div class="job-item-description">${convertMarkdownToHTML(rec.path_to_improvement ? rec.path_to_improvement.join('<br>') : 'N/A')}</div>
-                        <div class="job-item-importance">${convertMarkdownToHTML("Priority: " + (rec.severity || 'N/A'))}</div>
-                    `;
-                    enhancementsContainer.appendChild(item);
-                });
-            } else {
-                enhancementsContainer.innerHTML = '<p class="no-data">No enhancement recommendations available.</p>';
-            }
-        }
-
-
-        // 5. Display YouTube recommendations (should already be in the correct format)
-        displayJobYouTubeRecommendations(data.video_recommendations);
-    }
-
-    function displayJobYouTubeRecommendations(recommendations) {
-        const container = document.getElementById('job-youtube-recommendations');
-        if (!container) {
-            console.error("Container #job-youtube-recommendations not found.");
-            return;
-        }
-        container.innerHTML = '';
-
-        if (!recommendations || !Array.isArray(recommendations) || recommendations.length === 0) {
-            container.innerHTML = '<p class="no-data">No YouTube recommendations available for this job application.</p>';
-            return;
-        }
-
-        recommendations.forEach(topic => {
-            // Check if this is a topic with videos or a single video
-            if (topic.videos && Array.isArray(topic.videos)) {
-                // This is a topic with multiple videos
-                const topicSection = document.createElement('div');
-                topicSection.className = 'topic-section';
-
-                const topicHeader = document.createElement('h3');
-                topicHeader.textContent = topic.topic || 'Recommended Topic';
-                topicSection.appendChild(topicHeader);
-
-                const topicReason = document.createElement('p');
-                topicReason.className = 'topic-reason';
-                // Apply markdown to reason
-                topicReason.innerHTML = convertMarkdownToHTML(topic.reason || 'Recommended to improve your skills');
-                topicSection.appendChild(topicReason);
-
-                const videosContainer = document.createElement('div');
-                videosContainer.className = 'videos-container';
-
-                topic.videos.forEach(video => {
-                    const card = document.createElement('div');
-                    card.className = 'youtube-card';
-
-                    // Fix URL formatting - remove extra spaces
-                    const embedUrl = (video.embed_url || video.url).replace(/\s+/g, '');
-
-                    card.innerHTML = `
-                        <div class="youtube-embed">
-                            <iframe src="${embedUrl}"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                        </div>
-                        <div class="youtube-info">
-                            <h3 class="youtube-title">${video.title || 'Untitled Video'}</h3>
-                            <p class="youtube-reason">${convertMarkdownToHTML(video.reason || video.description || 'Recommended for skill development')}</p>
-                        </div>
-                    `;
-
-                    videosContainer.appendChild(card);
-                });
-
-                topicSection.appendChild(videosContainer);
-                container.appendChild(topicSection);
-            } else {
-                // This is a single video (fallback case)
-                const card = document.createElement('div');
-                card.className = 'youtube-card';
-
-                // Fix URL formatting - remove extra spaces
-                const embedUrl = (topic.embed_url || topic.url).replace(/\s+/g, '');
-
-                card.innerHTML = `
-                    <div class="youtube-embed">
-                        <iframe src="${embedUrl}"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="youtube-info">
-                        <h3 class="youtube-title">${topic.title || 'Untitled Video'}</h3>
-                        <p class="youtube-reason">${convertMarkdownToHTML(topic.reason || topic.description || 'Recommended for skill development')}</p>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            }
-        });
-    }
-
-    // --- Updated Dashboard Data Loading Function with Chart.js ---
-    async function loadDashboardData() {
-        console.log("Loading dashboard data for selected student...");
-        const selectedEnrollment = studentSelector.value;
-
-        // Clear previous charts *first* to prevent infinite stretching if new data fails
-        if (skillsChart) { skillsChart.destroy(); skillsChart = null; }
-        if (dsaChart) { dsaChart.destroy(); dsaChart = null; }
-        if (jobMatchChart) { jobMatchChart.destroy(); jobMatchChart = null; }
-
-        // Get canvas elements and their contexts
-        const skillsCanvas = document.getElementById('skills-chart-canvas');
-        const dsaCanvas = document.getElementById('dsa-chart-canvas');
-        const jobMatchCanvas = document.getElementById('job-match-chart-canvas');
-
-        // Check if canvases exist before proceeding
-        if (!skillsCanvas || !dsaCanvas || !jobMatchCanvas) {
-            console.error("One or more dashboard chart canvases not found in the DOM.");
-            return;
-        }
-
-        const skillsCtx = skillsCanvas.getContext('2d');
-        const dsaCtx = dsaCanvas.getContext('2d');
-        const jobMatchCtx = jobMatchCanvas.getContext('2d');
-
-        // Clear canvases
-        if (skillsCtx) skillsCtx.clearRect(0, 0, skillsCtx.canvas.width, skillsCtx.canvas.height);
-        if (dsaCtx) dsaCtx.clearRect(0, 0, dsaCtx.canvas.width, dsaCtx.canvas.height);
-        if (jobMatchCtx) jobMatchCtx.clearRect(0, 0, jobMatchCtx.canvas.width, jobMatchCtx.canvas.height);
-
-        if (!selectedEnrollment) {
-            console.log("No student selected, showing placeholder.");
-            // Show placeholder text on canvases if contexts are available
-            [skillsCtx, dsaCtx, jobMatchCtx].forEach(ctx => {
-                if (ctx) { // Check if context exists
-                    ctx.font = "16px Arial";
-                    ctx.fillStyle = "gray";
-                    ctx.textAlign = "center";
-                    ctx.fillText("Select a student to see details", ctx.canvas.width / 2, ctx.canvas.height / 2);
+        // Update Performance Tab (CGPA Chart)
+        if (report.cgpa_trend) {
+            const ctx = document.getElementById('cgpa-trend-chart');
+            if (ctx) {
+                if (cgpaTrendChart) {
+                    cgpaTrendChart.destroy();
                 }
-            });
-            // Reset metric counters if needed (e.g., to 0 or N/A)
-            const totalStudentsEl = document.querySelector('#total-students-count');
-            const reportsGeneratedEl = document.querySelector('#reports-generated-count');
-            const jobAnalysesEl = document.querySelector('#job-analyses-count');
-            if (totalStudentsEl) totalStudentsEl.textContent = 'N/A';
-            if (reportsGeneratedEl) reportsGeneratedEl.textContent = 'N/A';
-            if (jobAnalysesEl) jobAnalysesEl.textContent = 'N/A';
-            return; // Exit if no student is selected
-        }
-
-        try {
-            console.log(`Fetching dashboard metrics for enrollment: ${selectedEnrollment}`);
-            const response = await fetch(`/api/dashboard/metrics/${selectedEnrollment}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const dashboardData = await response.json();
-            console.log("Dashboard data for selected student:", dashboardData);
-
-            // --- Update Dashboard Elements ---
-            // 1. Metrics Cards (Example: Using data from student's profile if available)
-            // document.querySelector('#total-students-count').textContent = dashboardData.academics.cgpa || 0; // Example for CGPA
-            // This section requires more specific data points from your dashboard analyzer output.
-
-            // 2. Skills Distribution Chart
-            if (dashboardData.skills_distribution && skillsCtx) { // Check if data and context exist
-                const topSkills = Object.entries(dashboardData.skills_distribution)
-                    .sort((a, b) => b[1] - a[1])
-                    .slice(0, 5); // Get top 5
-                const labels = topSkills.map(item => item[0]);
-                const data = topSkills.map(item => item[1]);
-
-                skillsChart = new Chart(skillsCtx, {
-                    type: 'bar', // or 'doughnut', 'pie', etc.
-                    // CORRECTED: Added the 'data' key for the chart data object
+                cgpaTrendChart = new Chart(ctx, {
+                    type: 'line',
                     data: {
-                        labels: labels,
+                        labels: report.cgpa_trend.labels || ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6'],
                         datasets: [{
-                            label: 'Skill Count',
-                            data: data,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 205, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)',
-                                'rgb(75, 192, 192)',
-                                'rgb(153, 102, 255)'
-                            ],
-                            borderWidth: 1
+                            label: 'CGPA',
+                            data: report.cgpa_trend.values || [7.5, 7.8, 8.0, 8.2, 8.1, 8.3],
+                            backgroundColor: 'rgba(0, 229, 255, 0.2)',
+                            borderColor: 'rgba(0, 229, 255, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false, // Allows the chart to fill its container
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: false,
+                                min: 6,
+                                max: 10
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
                             }
                         }
                     }
                 });
-            } else if (skillsCtx) { // Check context exists before drawing
-                // If no data, show a message
-                skillsCtx.font = "16px Arial";
-                skillsCtx.fillStyle = "gray";
-                skillsCtx.textAlign = "center";
-                skillsCtx.fillText("No Skills Data Available", skillsCtx.canvas.width / 2, skillsCtx.canvas.height / 2);
             }
+        }
 
+        // Update Action Plan Tab with IMPROVED flowchart rendering
+        const actionPlanContent = document.querySelector('.action-plan-content');
+        actionPlanContent.innerHTML = '';
+        if (report.actionable_advice?.recommendations) {
+            report.actionable_advice.recommendations.forEach((recommendation, index) => {
+                const actionItem = document.createElement('div');
+                actionItem.className = 'action-item';
 
-            // 3. DSA Performance Chart
-            if (dashboardData.coding_profiles?.leetcode?.score !== undefined && dsaCtx) { // Check if data and context exist
-                // Example: Using a radial gauge or a simple bar chart for score
-                // For simplicity, let's use a bar chart here showing score out of 10
-                dsaChart = new Chart(dsaCtx, {
-                    type: 'bar', // Could be 'radar', 'doughnut' for score
-                    // CORRECTED: Added the 'data' key for the chart data object
+                const flowchartId = `flowchart-${index}`;
+                actionItem.innerHTML = `
+                    <h4>${recommendation.title || 'Action Item'}</h4>
+                    <p>${convertMarkdownToHTML(recommendation.description || '')}</p>
+                    ${recommendation.mermaid_flowchart ? `
+                        <div class="flowchart-container">
+                            <div class="flowchart-canvas" id="${flowchartId}"></div>
+                        </div>
+                    ` : ''}
+                `;
+                actionPlanContent.appendChild(actionItem);
+
+                // Render Mermaid diagram using improved function
+                if (recommendation.mermaid_flowchart) {
+                    // Delay to ensure DOM is ready
+                    setTimeout(() => {
+                        initializeMermaidFlowchart(flowchartId, recommendation.mermaid_flowchart);
+                    }, 100);
+                }
+            });
+        }
+
+        // Update Learning Path Tab
+        const learningPathContent = document.querySelector('.learning-path-content');
+        learningPathContent.innerHTML = '';
+        if (report.learning_path) {
+            report.learning_path.forEach(path => {
+                const pathItem = document.createElement('div');
+                pathItem.className = 'path-item';
+                pathItem.innerHTML = `
+                    <h4>${path.title || 'Learning Path'}</h4>
+                    <p>${convertMarkdownToHTML(path.description || '')}</p>
+                `;
+
+                if (path.resources) {
+                    const resourcesDiv = document.createElement('div');
+                    resourcesDiv.className = 'recommended-resources';
+                    resourcesDiv.innerHTML = '<h5>Recommended Resources:</h5>';
+
+                    path.resources.forEach(resource => {
+                        const resourceItem = document.createElement('div');
+                        resourceItem.className = 'resource-item';
+                        resourceItem.innerHTML = `
+                            <div class="resource-info">
+                                <h6>${resource.title || 'Resource'}</h6>
+                                <p>${resource.description || ''}</p>
+                            </div>
+                            <button class="btn btn-primary start-learning-btn" onclick="window.open('${resource.url}', '_blank')">
+                                Start Learning
+                            </button>
+                        `;
+                        resourcesDiv.appendChild(resourceItem);
+                    });
+                    pathItem.appendChild(resourcesDiv);
+                }
+
+                learningPathContent.appendChild(pathItem);
+            });
+        }
+    }
+
+    // --- Load Performance Charts ---
+    async function loadPerformanceCharts(enrollmentNo) {
+        if (!enrollmentNo) return;
+
+        if (dsaPerformanceChart) {
+            dsaPerformanceChart.destroy();
+            dsaPerformanceChart = null;
+        }
+
+        try {
+            const response = await fetch(`/api/dashboard/metrics/${enrollmentNo}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const dashboardData = await response.json();
+
+            const dsaCtx = document.getElementById('dsa-performance-chart');
+            if (dsaCtx && dashboardData.coding_profiles?.leetcode?.score !== undefined) {
+                dsaPerformanceChart = new Chart(dsaCtx, {
+                    type: 'bar',
                     data: {
                         labels: ['DSA Score'],
                         datasets: [{
@@ -746,67 +752,46 @@ document.addEventListener('DOMContentLoaded', () => {
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 10 // Set max scale to 10
+                                max: 10
                             }
                         }
                     }
                 });
-            } else if (dsaCtx) { // Check context exists before drawing
-                 // If no data, show a message
-                dsaCtx.font = "16px Arial";
-                dsaCtx.fillStyle = "gray";
-                dsaCtx.textAlign = "center";
-                dsaCtx.fillText("No DSA Data Available", dsaCtx.canvas.width / 2, dsaCtx.canvas.height / 2);
             }
-
-            // 4. Job Match Score Chart (Placeholder - requires specific data from job analysis)
-            // This would need data from a job analysis call, which is tied to a specific job link.
-            // For now, show a placeholder or message.
-            if (jobMatchCtx) { // Check context exists before drawing
-                jobMatchCtx.font = "16px Arial";
-                jobMatchCtx.fillStyle = "gray";
-                jobMatchCtx.textAlign = "center";
-                jobMatchCtx.fillText("Job Match Score (requires Job Analysis)", jobMatchCtx.canvas.width / 2, jobMatchCtx.canvas.height / 2);
-            }
-
         } catch (error) {
-            console.error('Error loading dashboard data for selected student:', error);
-            // Show error message on canvases if contexts are available
-            [skillsCtx, dsaCtx, jobMatchCtx].forEach(ctx => {
-                if (ctx) { // Check if context exists
-                    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear again just in case
-                    ctx.font = "16px Arial";
-                    ctx.fillStyle = "red";
-                    ctx.textAlign = "center";
-                    ctx.fillText("Error Loading Data", ctx.canvas.width / 2, ctx.canvas.height / 2);
-                }
-            });
+            console.error('Error loading performance charts:', error);
         }
-
-        // Example: Static metrics for Total Students, Reports Generated, Job Analyses
-        // These would ideally come from a server-side counter or an aggregate API call
-        // For now, keep them static or update based on global counts if available separately
-        // const totalStudentsEl = document.querySelector('#total-students-count');
-        // const reportsGeneratedEl = document.querySelector('#reports-generated-count');
-        // const jobAnalysesEl = document.querySelector('#job-analyses-count');
-        // if (totalStudentsEl) totalStudentsEl.textContent = '1'; // Total Students
-        // if (reportsGeneratedEl) reportsGeneratedEl.textContent = '0'; // Reports Generated
-        // if (jobAnalysesEl) jobAnalysesEl.textContent = '0'; // Job Analyses
     }
 
+    // --- Load Dashboard Metrics ---
+    async function loadDashboardData() {
+        const totalStudentsEl = document.getElementById('total-students-count');
+        const reportsGeneratedEl = document.getElementById('reports-generated-count');
+        const jobAnalysesEl = document.getElementById('job-analyses-count');
 
-    // Modified appendMessage function to accept a markdown flag
+        try {
+            const studentsResponse = await fetch('/api/students');
+            const students = await studentsResponse.json();
+            if (totalStudentsEl) totalStudentsEl.textContent = students.length;
+
+            if (reportsGeneratedEl) reportsGeneratedEl.textContent = '0';
+            if (jobAnalysesEl) jobAnalysesEl.textContent = '0';
+
+        } catch (error) {
+            console.error('Error loading dashboard metrics:', error);
+        }
+    }
+
+    // --- Helper Functions ---
     function appendMessage(text, sender, isLoading = false, useMarkdown = false) {
         const messageWrapper = document.createElement('div');
         messageWrapper.classList.add('chat-message', `${sender}-message`);
 
         const messageP = document.createElement('p');
-        // Apply markdown formatting if the flag is true (e.g., for AI responses)
         if (useMarkdown) {
-            // CORRECTED: Call the conversion function to turn markdown into HTML
             messageP.innerHTML = convertMarkdownToHTML(text);
         } else {
-            messageP.textContent = text; // Use textContent for plain text (e.g., user messages, loading)
+            messageP.textContent = text;
         }
 
         if (isLoading) {
@@ -815,6 +800,203 @@ document.addEventListener('DOMContentLoaded', () => {
 
         messageWrapper.appendChild(messageP);
         chatHistory.appendChild(messageWrapper);
-        chatHistory.scrollTop = chatHistory.scrollHeight; // Auto-scroll to bottom
+        chatHistory.scrollTop = chatHistory.scrollHeight;
     }
-});
+
+    // --- Keep existing display functions for backward compatibility ---
+    function displayReport(report) {
+        console.warn('displayReport is deprecated. Use displayNewReport instead.');
+        displayNewReport(report);
+    }
+
+    // --- Display Job Analysis Results ---
+    function displayJobAnalysis(data) {
+        console.log("Job Analysis Data:", data);
+
+        const strengthsList = document.getElementById('job-strengths-list');
+        if (strengthsList && data.your_core_strengths_for_this_role) {
+            strengthsList.innerHTML = '';
+            data.your_core_strengths_for_this_role.forEach(strength => {
+                const li = document.createElement('li');
+                const text = typeof strength === 'string' ? strength :
+                    (strength.strength || strength.text || strength.description || JSON.stringify(strength));
+                li.textContent = text;
+                strengthsList.appendChild(li);
+            });
+        }
+
+        const weaknessesList = document.getElementById('job-weaknesses-list');
+        if (weaknessesList && data.strategic_areas_for_growth) {
+            weaknessesList.innerHTML = '';
+            data.strategic_areas_for_growth.forEach(area => {
+                const li = document.createElement('li');
+                const text = typeof area === 'string' ? area : (area.area_to_develop || JSON.stringify(area));
+                li.textContent = text;
+                weaknessesList.appendChild(li);
+            });
+        }
+
+        const enhancementsList = document.getElementById('job-enhancements-list');
+        if (enhancementsList && data.strategic_overview) {
+            enhancementsList.innerHTML = '';
+
+            if (data.strategic_overview.summary) {
+                const summaryItem = document.createElement('div');
+                summaryItem.className = 'enhancement-item';
+                summaryItem.innerHTML = `<strong>Summary:</strong> ${data.strategic_overview.summary}`;
+                enhancementsList.appendChild(summaryItem);
+            }
+
+            if (data.strategic_overview.your_key_opportunity) {
+                const opportunityItem = document.createElement('div');
+                opportunityItem.className = 'enhancement-item';
+                opportunityItem.innerHTML = `<strong>Key Opportunity:</strong> ${data.strategic_overview.your_key_opportunity}`;
+                enhancementsList.appendChild(opportunityItem);
+            }
+        }
+
+        const youtubeContainer = document.getElementById('job-youtube-recommendations');
+        if (youtubeContainer && data.video_recommendations) {
+            youtubeContainer.innerHTML = '';
+
+            data.video_recommendations.forEach(topic => {
+                // Create Topic Section
+                const topicSection = document.createElement('div');
+                topicSection.className = 'video-topic-section';
+
+                const topicTitle = document.createElement('h4');
+                topicTitle.className = 'video-topic-title';
+                topicTitle.textContent = topic.topic || 'Recommended Topic';
+                topicSection.appendChild(topicTitle);
+
+                const topicReason = document.createElement('p');
+                topicReason.className = 'video-topic-reason';
+                topicReason.textContent = topic.reason || '';
+                topicSection.appendChild(topicReason);
+
+                // Video Grid for this topic
+                const videoGrid = document.createElement('div');
+                videoGrid.className = 'video-grid';
+
+                if (topic.videos && topic.videos.length > 0) {
+                    topic.videos.forEach(video => {
+                        const videoCard = document.createElement('div');
+                        videoCard.className = 'youtube-card';
+
+                        const embedUrl = video.embed_url || video.url.replace('watch?v=', 'embed/');
+                        const title = video.title || 'Video Tutorial';
+
+                        videoCard.innerHTML = `
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="${embedUrl}" 
+                                    title="${title}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h5>${title}</h5>
+                                <p>${video.reason || ''}</p>
+                            </div>
+                        `;
+                        videoGrid.appendChild(videoCard);
+                    });
+                } else {
+                    videoGrid.innerHTML = '<p>No videos found for this topic.</p>';
+                }
+
+                topicSection.appendChild(videoGrid);
+                youtubeContainer.appendChild(topicSection);
+            });
+        }
+    }
+
+    // --- Dashboard Logic ---
+    const refreshDashboardBtn = document.getElementById('refresh-dashboard-btn');
+    if (refreshDashboardBtn) {
+        refreshDashboardBtn.addEventListener('click', loadDashboardData);
+    }
+
+    function loadDashboardData() {
+        console.log("Loading dashboard data...");
+        fetch('/api/dashboard/students')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error("Error loading dashboard:", data.error);
+                    return;
+                }
+
+                // Update Summary Cards
+                const totalStudentsEl = document.getElementById('total-students-count');
+                if (totalStudentsEl) totalStudentsEl.textContent = data.total_students;
+
+                const classAvgEl = document.getElementById('class-avg-cgpa');
+                if (classAvgEl) classAvgEl.textContent = data.class_average_cgpa;
+
+                // Count reports ready
+                const reportsReady = data.students.filter(s => s.report_status === 'Generated').length;
+                const reportsReadyEl = document.getElementById('reports-ready-count');
+                if (reportsReadyEl) reportsReadyEl.textContent = reportsReady;
+
+                // Populate Student Table
+                const tableBody = document.getElementById('student-table-body');
+                if (tableBody) {
+                    tableBody.innerHTML = '';
+
+                    data.students.forEach(student => {
+                        const row = document.createElement('tr');
+
+                        // Status Badges
+                        const reportBadgeClass = student.report_status === 'Generated' ? 'badge-success' : 'badge-pending';
+                        const cgpaClass = parseFloat(student.cgpa) >= 8.0 ? 'text-success' : (parseFloat(student.cgpa) >= 6.0 ? 'text-warning' : 'text-danger');
+
+                        row.innerHTML = `
+                            <td><div class="student-name-cell">${student.name}</div></td>
+                            <td>${student.enrollment_no}</td>
+                            <td class="${cgpaClass}"><strong>${student.cgpa}</strong></td>
+                            <td>
+                                <div class="skills-tags">
+                                    ${student.key_skills.map(skill => `<span class="skill-tag-mini">${skill}</span>`).join('')}
+                                </div>
+                            </td>
+                            <td><span class="badge ${reportBadgeClass}">${student.report_status}</span></td>
+                            <td><span class="badge badge-neutral">${student.resume_count} Resumes</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-profile-btn" data-enrollment="${student.enrollment_no}">
+                                    View Profile
+                                </button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    // Add Event Listeners to "View Profile" buttons
+                    document.querySelectorAll('.view-profile-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const enrollmentNo = e.target.getAttribute('data-enrollment');
+                            // Switch to Reports tab
+                            const reportsTab = document.querySelector('.nav-link[href="#reports"]');
+                            if (reportsTab) reportsTab.click();
+
+                            // Select student in dropdown
+                            if (studentSelector) {
+                                studentSelector.value = enrollmentNo;
+                                // Trigger change event to load student data
+                                studentSelector.dispatchEvent(new Event('change'));
+                            }
+                        });
+                    });
+                }
+            })
+            .catch(err => console.error("Failed to load dashboard data:", err));
+    }
+
+    // Initial load if dashboard is active
+    if (document.querySelector('#dashboard.active')) {
+        loadDashboardData();
+    }
+
+}); // End of DOMContentLoaded

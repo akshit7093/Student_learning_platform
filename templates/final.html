@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Student Analyzer</title>
     <link rel="stylesheet" href="../static/final.css">
-    <link rel="stylesheet" href="../static/job_listings.css"> <!-- New CSS file for job listings -->
+    <link rel="stylesheet" href="../static/job_listings.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Include Chart.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Mermaid for flowcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <!-- svg-pan-zoom for better zoom/drag functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar -->
@@ -26,7 +31,7 @@
                     <li><a href="#students" class="nav-link">Students</a></li>
                     <li><a href="#reports" class="nav-link">Reports</a></li>
                     <li><a href="#job-analysis" class="nav-link">Job Analysis</a></li>
-                    <li><a href="#job-listings" class="nav-link">Job Listings</a></li> <!-- New Link -->
+                    <li><a href="#job-listings" class="nav-link">Job Listings</a></li>
                     <li><a href="#chat" class="nav-link">Chat</a></li>
                 </ul>
             </nav>
@@ -40,14 +45,13 @@
                     <label for="student-selector">Select Student</label>
                     <select id="student-selector">
                         <option value="">-- Select a Student --</option>
-                        <!-- Options will be populated by JS -->
                     </select>
                     <button id="generate-report-btn" class="btn btn-secondary" disabled>Generate Report</button>
                 </div>
                 <div class="input-group">
                     <label for="job-application-input">Job Application Link</label>
                     <input type="text" id="job-application-input" placeholder="Paste job application link here...">
-                     <button id="analyze-job-btn" class="btn btn-primary" disabled>Analyze</button>
+                    <button id="analyze-job-btn" class="btn btn-primary" disabled>Analyze</button>
                 </div>
             </header>
 
@@ -57,98 +61,184 @@
                 <p>Processing...</p>
             </div>
 
-            <!-- Dashboard / Overview -->
+            <!-- Dashboard / Overview (Simplified) -->
+            <!-- Dashboard / Class Overview -->
             <section id="dashboard" class="content-section active">
-                <h2>Dashboard Overview</h2>
+                <div class="section-header">
+                    <h2>Class Overview</h2>
+                    <div class="header-controls">
+                        <button id="refresh-dashboard-btn" class="btn btn-secondary btn-sm">Refresh Data</button>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
                 <div class="dashboard-grid">
-                    <!-- Metric Cards Row -->
                     <div class="metric-cards-grid">
-                        <div class="card">
-                            <h3>Total Students</h3>
-                            <p class="metric" id="total-students-count">1</p> <!-- ID added for JS -->
+                        <div class="card metric-card">
+                            <div class="metric-icon">👥</div>
+                            <div class="metric-info">
+                                <h3>Total Students</h3>
+                                <p class="metric" id="total-students-count">--</p>
+                            </div>
                         </div>
-                        <div class="card">
-                            <h3>Reports Generated</h3>
-                            <p class="metric" id="reports-generated-count">0</p> <!-- ID added for JS -->
+                        <div class="card metric-card">
+                            <div class="metric-icon">🎓</div>
+                            <div class="metric-info">
+                                <h3>Class Avg CGPA</h3>
+                                <p class="metric" id="class-avg-cgpa">--</p>
+                            </div>
                         </div>
-                        <div class="card">
-                            <h3>Job Analyses</h3>
-                            <p class="metric" id="job-analyses-count">0</p> <!-- ID added for JS -->
+                        <div class="card metric-card">
+                            <div class="metric-icon">📄</div>
+                            <div class="metric-info">
+                                <h3>Reports Ready</h3>
+                                <p class="metric" id="reports-ready-count">--</p>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Large Card for Skills Distribution -->
-                    <div class="card large-card chart-container">
-                        <h3>Skills Distribution (for selected student)</h3>
-                        <!-- Replace placeholder with canvas for Chart.js -->
-                        <canvas id="skills-chart-canvas"></canvas>
-                    </div>
-
-                    <!-- Row for DSA and Job Match -->
-                    <div class="chart-row">
-                        <div class="card chart-container">
-                            <h3>DSA Performance (for selected student)</h3>
-                             <!-- Replace placeholder with canvas for Chart.js -->
-                            <canvas id="dsa-chart-canvas"></canvas>
-                        </div>
-                        <div class="card chart-container">
-                            <h3>Job Match Score (for selected student)</h3>
-                             <!-- Replace placeholder with canvas for Chart.js -->
-                            <canvas id="job-match-chart-canvas"></canvas>
-                        </div>
+                <!-- Student List Table -->
+                <div class="card table-container">
+                    <h3>Student Performance & Status</h3>
+                    <div class="table-responsive">
+                        <table class="student-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Enrollment No</th>
+                                    <th>CGPA</th>
+                                    <th>Top Skills</th>
+                                    <th>Report Status</th>
+                                    <th>Resumes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-table-body">
+                                <!-- Rows will be populated by JS -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
 
-            <!-- Student Report Display Area -->
+            <!-- Student Report Display Area (Redesigned) -->
             <section id="reports" class="content-section hidden">
-                <h2 id="report-title">Student Performance Report</h2>
-                <div class="report-grid">
-                    <div class="report-section summary card">
-                        <h3>HR Summary</h3>
-                        <p id="summary-text">Summary will appear here...</p>
-                    </div>
-                    <div class="report-section resume card">
-                         <h3>Resume Analysis</h3>
-                        <div class="resume-section">
-                            <div class="resume-column">
-                                <h4>Key Skills</h4>
-                                <div class="skills-list" id="resume-skills"></div>
-                                <h4 style="margin-top: 20px;">Professional Links</h4>
-                                <ul class="links-list" id="resume-links"></ul>
-                            </div>
-                            <div class="resume-column">
-                                <h4>Missing Elements</h4>
-                                <ul id="resume-missing"></ul>
-                            </div>
+                <!-- Profile Card -->
+                <div class="student-profile-card card">
+                    <div class="student-header">
+                        <div class="student-photo">
+                            <img id="student-photo" src="/static/default-avatar.png" alt="Student Photo">
                         </div>
-                    </div>
-                    <div class="report-section scores card">
-                        <h3>Detailed Scores</h3>
-                        <div id="scores-grid"></div>
-                    </div>
-                    <div class="report-section analysis card">
-                        <h3>Analysis</h3>
-                        <div id="analysis-content">
-                            <div class="analysis-grid">
-                                <div class="analysis-column">
-                                    <h4>Strengths</h4>
-                                    <ul id="strengths-list"></ul>
+                        <div class="student-info">
+                            <h2 id="student-name">Student Name</h2>
+                            <p class="student-id" id="student-id">ID: N/A</p>
+                            <div class="student-contact">
+                                <div class="contact-item">
+                                    <span class="icon">📱</span>
+                                    <span id="student-phone">+91 9876543210</span>
                                 </div>
-                                <div class="analysis-column">
-                                    <h4>Weaknesses</h4>
-                                    <ul id="weaknesses-list"></ul>
+                                <div class="contact-item">
+                                    <span class="icon">✉️</span>
+                                    <span id="student-email">student@example.com</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="report-section advice card">
-                        <h3>Actionable Advice</h3>
-                        <ul id="advice-list"></ul>
+                </div>
+
+                <!-- AI Analysis Report with Tabs -->
+                <div class="ai-analysis-report card">
+                    <div class="section-header">
+                        <h2>AI Analysis Report</h2>
+                        <div class="header-controls">
+                            <button id="report-history-btn" class="btn btn-secondary btn-sm">History</button>
+                            <div class="report-tabs">
+                                <button class="tab-btn active" data-tab="summary">Summary</button>
+                                <button class="tab-btn" data-tab="skills">Skills</button>
+                                <button class="tab-btn" data-tab="performance">Performance</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="report-section youtube card">
-                        <h3>Recommended Learning Resources</h3>
-                        <div class="youtube-recommendations" id="youtube-recommendations"></div>
+
+                    <!-- Report History Modal -->
+                    <div id="report-history-modal" class="modal hidden">
+                        <div class="modal-content">
+                            <span class="close-modal">&times;</span>
+                            <h3>Report History</h3>
+                            <div id="report-history-list">
+                                <!-- List populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Tab -->
+                    <div id="summary-tab" class="tab-content active">
+                        <div class="summary-content">
+                            <h4>HR Summary</h4>
+                            <p id="hr-summary">Summary will appear here...</p>
+                        </div>
+                        <div class="strengths-weaknesses">
+                            <div class="strengths">
+                                <h4>✓ Strengths</h4>
+                                <ul id="summary-strengths"></ul>
+                            </div>
+                            <div class="weaknesses">
+                                <h4>✗ Weaknesses</h4>
+                                <ul id="summary-weaknesses"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Tab -->
+                    <div id="skills-tab" class="tab-content">
+                        <div class="skills-table">
+                            <div class="table-header">
+                                <div>Skill</div>
+                                <div>Category</div>
+                                <div>Progress</div>
+                            </div>
+                            <div id="skills-list">
+                                <!-- Skills rows will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Tab -->
+                    <div id="performance-tab" class="tab-content">
+                        <div class="performance-grid">
+                            <div class="chart-container">
+                                <h4>CGPA Trend</h4>
+                                <canvas id="cgpa-trend-chart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <h4>DSA Performance</h4>
+                                <canvas id="dsa-performance-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Suggestion Channel with Tabs -->
+                <div class="ai-suggestion-channel card">
+                    <div class="section-header">
+                        <h2>AI Suggestion Channel</h2>
+                        <div class="suggestion-tabs">
+                            <button class="tab-btn active" data-tab="action-plan">Actionable Plan</button>
+                            <button class="tab-btn" data-tab="learning-path">Personalized Learning Path</button>
+                        </div>
+                    </div>
+
+                    <div id="action-plan-tab" class="tab-content active">
+                        <div class="action-plan-content">
+                            <!-- Action items will be populated here -->
+                        </div>
+                    </div>
+
+                    <div id="learning-path-tab" class="tab-content">
+                        <div class="learning-path-content">
+                            <!-- Learning path items will be populated here -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -176,70 +266,132 @@
                 </div>
             </section>
 
-            <!-- New Job Listings Page -->
+            <!-- Job Listings Page -->
+            <!-- Job Listings Section -->
             <section id="job-listings" class="content-section hidden">
-                <h2>Job Listings</h2>
-                <div class="job-listings-container">
-                    <!-- Info Panel -->
-                    <div class="info-panel card">
-                        <h3>About Job Recommendations</h3>
-                        <p>
-                            <strong>Recommended Jobs:</strong> These jobs are highly aligned with your current profile, skills, and experience. Applying to these positions is likely to result in a higher success rate.
-                        </p>
-                        <p>
-                            <strong>Non-Recommended Jobs:</strong> These jobs may have requirements that differ significantly from your current profile. While you are free to apply, you might need to acquire additional skills or experience to be a strong candidate.
-                        </p>
-                    </div>
-
-                    <!-- Tabs for On-Campus / Off-Campus -->
-                    <div class="job-listings-tabs">
-                        <button class="tab-btn active" data-category="on-campus">On-Campus</button>
-                        <button class="tab-btn" data-category="off-campus">Off-Campus</button>
-                    </div>
-
-                    <!-- On-Campus Listings -->
-                    <div class="job-category-section" data-category="on-campus">
-                        <h3>Recommended</h3>
-                        <div class="job-listings-grid" id="on-campus-recommended-listings">
-                            <!-- Recommended jobs will be populated here by JS -->
-                        </div>
-
-                        <h3>Non-Recommended</h3>
-                        <div class="job-listings-grid" id="on-campus-non-recommended-listings">
-                            <!-- Non-recommended jobs will be populated here by JS -->
-                        </div>
-                    </div>
-
-                    <!-- Off-Campus Listings (Initially Hidden) -->
-                    <div class="job-category-section hidden" data-category="off-campus">
-                        <h3>Recommended</h3>
-                        <div class="job-listings-grid" id="off-campus-recommended-listings">
-                            <!-- Recommended jobs will be populated here by JS -->
-                        </div>
-
-                        <h3>Non-Recommended</h3>
-                        <div class="job-listings-grid" id="off-campus-non-recommended-listings">
-                            <!-- Non-recommended jobs will be populated here by JS -->
+                <div class="section-header">
+                    <h2>Job Market</h2>
+                    <div class="header-controls">
+                        <button id="resume-history-btn" class="btn btn-secondary btn-sm">My Resumes</button>
+                        <div class="job-tabs">
+                            <button class="tab-btn active" data-category="on-campus">On-Campus</button>
+                            <button class="tab-btn" data-category="off-campus">Off-Campus</button>
                         </div>
                     </div>
                 </div>
+
+                <div class="job-categories">
+                    <div class="job-category-section" data-category="on-campus">
+                        <h3>Recommended</h3>
+                        <div class="job-listings-grid" id="on-campus-recommended-listings"></div>
+                        <h3>Non-Recommended</h3>
+                        <div class="job-listings-grid" id="on-campus-non-recommended-listings"></div>
+                    </div>
+                    <div class="job-category-section hidden" data-category="off-campus">
+                        <h3>Recommended</h3>
+                        <div class="job-listings-grid" id="off-campus-recommended-listings"></div>
+                        <h3>Non-Recommended</h3>
+                        <div class="job-listings-grid" id="off-campus-non-recommended-listings"></div>
+                    </div>
+                </div>
             </section>
+
+            <!-- Resume History Modal -->
+            <div id="resume-history-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-modal" id="close-resume-history-modal">&times;</span>
+                    <h3>My Resumes</h3>
+                    <div id="resume-history-list">
+                        <!-- List populated by JS -->
+                    </div>
+                </div>
+            </div>
 
             <!-- Chatbot Interface -->
             <section id="chat" class="content-section hidden">
                 <h2>Student Q&A</h2>
-                <div class="chat-container card">
-                    <div id="chat-history"></div>
-                    <form id="chat-form">
-                        <input type="text" id="chat-input" placeholder="e.g., What are their strongest DSA topics?" autocomplete="off" required>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
+                <div class="chat-layout">
+                    <!-- Sidebar -->
+                    <div class="chat-sidebar">
+                        <button id="new-chat-btn" class="new-chat-btn">+ New Chat</button>
+                        <div id="chat-sessions-list" class="chat-sessions-list">
+                            <!-- Sessions populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Main Chat Area -->
+                    <div class="chat-main">
+                        <div id="chat-history" class="chat-container">
+                            <!-- Messages will appear here -->
+                            <div class="welcome-message">
+                                <p>Select a student to start chatting about their report.</p>
+                            </div>
+                        </div>
+                        <form id="chat-form" class="chat-input-container">
+                            <input type="text" id="chat-input" placeholder="Ask a question about the report..."
+                                autocomplete="off">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                    </div>
                 </div>
-            </section>
-        </main>
+    </div>
+    </main>
+    </div>
     </div>
 
-    <script src="../static/final.js"></script>
-    <script src="../static/job_listings.js"></script> <!-- New JS file for job listings -->
+    <!-- Job Details & Application Modal -->
+    <div id="apply-modal" class="modal hidden">
+        <div class="modal-content large-modal">
+            <span class="close-modal" id="close-apply-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="apply-role">Role Title</h2>
+                <h3 id="apply-company" class="company-name">Company Name</h3>
+                <p id="apply-salary" class="salary-tag">Salary</p>
+            </div>
+
+            <div class="modal-body-scroll">
+                <div class="job-section">
+                    <h4>About the Role</h4>
+                    <p id="apply-description"></p>
+                </div>
+
+                <div class="job-section">
+                    <h4>Key Responsibilities</h4>
+                    <ul id="apply-responsibilities"></ul>
+                </div>
+
+                <div class="job-section">
+                    <h4>Requirements</h4>
+                    <ul id="apply-requirements"></ul>
+                </div>
+
+                <div class="job-section">
+                    <h4>Benefits</h4>
+                    <ul id="apply-benefits" class="benefits-list"></ul>
+                </div>
+            </div>
+
+            <div class="modal-actions sticky-footer">
+                <button id="generate-resume-btn" class="btn btn-primary">Generate Best Fit Resume & Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Viewer Modal -->
+    <div id="resume-modal" class="modal hidden">
+        <div class="modal-content large-modal">
+            <span class="close-modal" id="close-resume-modal">&times;</span>
+            <h3>Tailored Resume</h3>
+            <div id="resume-content" class="markdown-content"></div>
+            <div class="modal-actions">
+                <button id="download-resume-btn" class="btn btn-secondary">Download Markdown</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='final.js') }}"></script>
+    <script src="{{ url_for('static', filename='job_listings.js') }}"></script>
 </body>
+
 </html>

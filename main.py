@@ -24,6 +24,29 @@ def home():
 def test_frontend():
     return render_template('indexx.html')
 
+@app.route('/api/students', methods=['GET'])
+def get_students_list():
+    import json
+    enrollment_no = request.args.get('enrollment_no')
+    json_path = os.path.join(os.path.dirname(__file__), 'final_cleaned_student_data.json')
+    if not os.path.exists(json_path):
+        return jsonify({'error': 'Student data file not found.'}), 404
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            all_students = json.load(f)
+        if enrollment_no:
+            student = all_students.get(enrollment_no)
+            if not student:
+                return jsonify({'error': 'Student not found.'}), 404
+            return jsonify(student)
+        return jsonify(list(all_students.values()))
+    except Exception:
+        return jsonify({'error': 'Failed to load student data.'}), 500
+
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204
+
 @app.route('/api/leetcode/<username>', methods=['GET'])
 def get_leetcode_profile_route(username: str):
     # Validate username

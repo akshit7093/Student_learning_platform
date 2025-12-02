@@ -1,0 +1,1581 @@
+{
+  "35214811922": [
+    {
+      "id": "bdfb5bc5-bd37-40c9-95b8-eff7e310c1c7",
+      "title": "Report - Dec 03, 2025",
+      "timestamp": "2025-12-03T00:41:32.173272",
+      "data": {
+        "enrollment_no": "35214811922",
+        "name": "AKSHIT SHARMA",
+        "executive_summary": "Akshit Sharma is a highly capable AI & Data Science student with a proven talent for building and deploying complex, end-to-end ML systems, evidenced by an exceptional project portfolio and impactful internships. He is an ideal candidate for roles requiring the practical application of AI, cloud, and backend technologies, with a clear, actionable path to elevate his algorithmic problem-solving skills to an elite, top-tier company standard.",
+        "overall_summary": "As an experienced HR professional and technical interviewer, I assess Akshit Sharma as a candidate with exceptionally high potential, distinguished by a powerful combination of practical engineering skills and demonstrated resilience. His academic journey, beginning with a modest 7.72 SGPA and a challenging second semester at 6.8, followed by a remarkable and consistent climb to an impressive 9.38 SGPA, tells a compelling story of adaptability, perseverance, and a steep learning curve. This trajectory is far more indicative of future success than a flat, unblemished record.\n\nTechnically, Akshit operates at a level beyond many of his peers. His GitHub profile and resume showcase a portfolio of sophisticated projects\u2014from an 'OpenStack Cloud Management System with a Natural Language Interface' using Gemini to a 'Real-Time Sign Language Translator' with WebRTC. These are not simple CRUD apps; they demonstrate a deep understanding of modern AI/ML frameworks (TensorFlow, LangChain, RAG), cloud and DevOps practices (AWS, Docker, Kubernetes), and backend development (FastAPI, Node.js). His internship experiences are equally impressive, with quantified achievements such as boosting query accuracy to 90% and reducing false positives in fraud detection from 20% to 5%. This evidence points to a mature, results-oriented engineer who can deliver tangible business value.\n\nHowever, the profile reveals a critical and significant gap: foundational Data Structures and Algorithms (DSA) for competitive programming contexts. With only 40 LeetCode problems solved and a 'newbie' rank on Codeforces, he currently falls short of the rigorous algorithmic screening standards set by top-tier product companies. This is not a reflection of his intelligence or capability but rather a strategic area that has been deprioritized in favor of project-based learning.\n\nHis professional presentation is exemplary. The resume is polished, action-oriented, and rich with metrics, and his GitHub is well-organized. This demonstrates strong communication skills and a clear understanding of how to market his abilities. In summary, Akshit is a builder and a practitioner. He is already a strong candidate for innovative startups and companies that value demonstrable engineering and AI application skills. With a dedicated, 3-4 month focus on intensive DSA preparation, he can bridge his primary skill gap and become a top-tier candidate for virtually any software engineering or AI role he pursues.",
+        "analysis": {
+          "strengths": [
+            "Exceptional Project Portfolio & Practical Application: Akshit demonstrates a rare ability to build complex, end-to-end systems. Projects like the 'OpenStack Cloud Manager with Gemini' and 'SignEase' (real-time sign language translator) showcase mastery of advanced concepts including GenAI (LangChain, Gemini), cloud infrastructure (OpenStack SDK), real-time communication (WebRTC), and ML model deployment, setting him far apart from peers with generic projects.",
+            "Strong Academic Rebound and Upward Trajectory: His academic performance shows remarkable resilience and growth. After a dip to 6.8 SGPA in Semester 2, he systematically improved, achieving outstanding scores of 8.96, 9.08, and a peak of 9.38 in Semester 6. This upward trend is a powerful indicator of his ability to overcome challenges and master difficult material.",
+            "Proficiency in High-Demand AI, Cloud & DevOps Technologies: His resume and projects are a testament to his skills in cutting-edge domains. He has hands-on experience with TensorFlow, PyTorch, RAG, LangChain, AWS, Google Cloud, Docker, and Kubernetes. This modern tech stack makes him immediately valuable to tech-forward companies.",
+            "Quantifiable Internship Achievements: Akshit's internship descriptions are not just about tasks but about impact. At Akanila Technologies, he boosted query accuracy to 90%. At CodSoft, he engineered features to drop false positives from 20% to 5%. This ability to quantify his contributions is a hallmark of a professional mindset.",
+            "Excellence in Practical/Lab Coursework: Across all semesters, he has consistently scored 'O' (Outstanding) grades in lab subjects, including 'Data Structures Lab' (92), 'DBMS Lab' (94), 'Operating Systems Lab' (99), and 'Fundamentals of Deep Learning Lab' (96). This demonstrates superb hands-on implementation and application skills.",
+            "Strong Professional Presentation and Communication: His resume is expertly crafted, using action verbs and metrics effectively. His GitHub profile is clean, professional, and features a detailed README that clearly communicates his skills and project architectures. This indicates a high level of professionalism and strong written communication.",
+            "Proven Learning Agility and Initiative: Winning the 'AceCloud X RTDS Hackathon \u201825' and actively pursuing certifications in GenAI and AWS demonstrates a proactive approach to learning and a competitive spirit. His ability to quickly pick up and apply new technologies like Llama 3.1 and Gemini is a key asset in the fast-evolving tech landscape."
+          ],
+          "weaknesses": [
+            "Critically Underdeveloped Algorithmic Problem-Solving Skills: The most significant gap in his profile. With only 40 problems solved on LeetCode (rank > 2.4M) and a 'newbie' rating of 853 on Codeforces, he is severely underprepared for the rigorous DSA interviews common at top tech companies, which typically expect 300-500+ problems solved.",
+            "Weak Performance in Foundational Theoretical Subjects: Early academic struggles in core theoretical subjects like 'Applied Physics - I' (45 marks, Grade C) and 'Applied Mathematics - II' (43 marks, Grade P) indicate a potential weakness in fundamental mathematical and scientific principles, which can be a prerequisite for advanced AI research roles.",
+            "Inconsistent Problem-Solving under Pressure: The Codeforces submission history, with only 3 successful solutions out of 10 attempts and multiple 'WRONG_ANSWER' or 'TIME_LIMIT_EXCEEDED' verdicts, suggests difficulty in formulating correct and efficient solutions within a competitive, time-constrained environment.",
+            "Lack of Verifiable Open Source Contributions: While his personal projects are strong, his GitHub profile lacks contributions to established open-source projects. This is a missed opportunity to demonstrate collaboration, adherence to coding standards, and the ability to work within a large, existing codebase.",
+            "Potential Mismatch in Project Highlighting: His pinned repositories on GitHub (e.g., 'SheShield1', 'WeCare') appear to be older or less complex than the highly impressive projects described in his README (e.g., 'OpenStack Cloud Manager'). This could create a confusing first impression for a recruiter browsing his profile."
+          ],
+          "hidden_talents": [
+            "Emerging Aptitude for Systems Design: The 'OpenStack Cloud Management System' project is not just a coding exercise; it's a systems design challenge. His ability to interface with infrastructure APIs and build a management layer on top suggests a natural talent for architectural thinking that could be developed into a core strength for senior roles.",
+            "Inherent Product Mindset: Projects like 'SignEase' and 'SheShield' are not just technically interesting; they aim to solve tangible human problems. This indicates a product-oriented mindset, where he thinks about the 'why' and the user, not just the 'how' of the technology.",
+            "Advanced Technical Communication: The clarity and detail in his resume and GitHub README are exceptional. This ability to articulate complex technical work in an understandable and compelling way is a rare and highly valuable skill that will serve him well in team leadership and client-facing roles."
+          ]
+        },
+        "detailed_scores": [
+          {
+            "parameter": "Academic Excellence & Consistency",
+            "score": 8,
+            "justification": "Akshit's overall CGPA of 8.45 is strong, but the real story is his trajectory. After a significant dip to 6.8 SGPA in Semester 2, he demonstrated immense resilience and focus, consistently scoring near or above 9.0 from Semester 3 onwards, peaking at 9.38. This upward trend is highly valued by employers as it shows grit and a strong learning curve. He excels in core AI/DS subjects like 'Foundations of Data Science' (87) and 'Big Data Analytics' (93), though his performance in early foundational math/physics subjects was weak.",
+            "improvement_potential": "While the overall CGPA is fixed, he can frame this narrative during interviews to showcase his growth and ability to overcome challenges. Focusing on strengthening his mathematical foundations will be crucial for pursuing advanced AI/ML research or roles requiring deep theoretical knowledge."
+          },
+          {
+            "parameter": "Data Structures & Algorithms Mastery",
+            "score": 3,
+            "justification": "This is the candidate's most significant area for improvement. A LeetCode profile with only 40 solved problems (25 Easy, 11 Medium, 4 Hard) and a Codeforces rating of 853 ('newbie') is substantially below the industry expectation for top-tier software engineering roles. Recruiters at companies like Google, Amazon, or Microsoft often use a baseline of 200-300+ medium/hard problems as a screening filter. His current state indicates a lack of practice with common algorithmic patterns and problem-solving under pressure.",
+            "improvement_potential": "This score is highly improvable. A dedicated 3-4 month plan focusing on solving 150-200 targeted LeetCode problems (especially Medium) could elevate his skills to an interview-ready level. This single area of focus has the highest potential ROI for his career prospects."
+          },
+          {
+            "parameter": "Full-Stack Development Capabilities",
+            "score": 8,
+            "justification": "Akshit demonstrates strong full-stack and AI application development skills. His portfolio includes projects built with Python backends (Flask, FastAPI), modern frontends (React), and various databases. His resume lists a comprehensive tech stack. The 'SignEase' project, combining React, Node.js, WebRTC, and TensorFlow, is a prime example of his ability to integrate diverse technologies into a functional product. His internship work further validates these skills in a professional setting.",
+            "improvement_potential": "To reach a 9 or 10, he should focus on productionizing his projects. This includes implementing comprehensive test suites (unit, integration), setting up CI/CD pipelines (e.g., GitHub Actions), and deploying them on a cloud platform like AWS or GCP with proper infrastructure as code. This would demonstrate true end-to-end ownership."
+          },
+          {
+            "parameter": "Problem-Solving & Analytical Thinking",
+            "score": 6,
+            "justification": "This score reflects a dichotomy. In a practical, project-based context, his problem-solving skills are excellent (a score of 8-9). He can deconstruct complex requirements and build sophisticated systems. However, in an abstract, algorithmic context (like coding challenges), his skills are underdeveloped (a score of 3-4). This suggests he is a 'builder' more than a 'theorist' at present. He can solve problems when he can build a system around them but struggles with isolated, algorithmic puzzles.",
+            "improvement_potential": "The path to improving this score is through rigorous DSA practice. As he solves more LeetCode problems, he will develop the pattern recognition and analytical shortcuts needed to excel in technical interviews, bridging the gap between his practical and theoretical problem-solving abilities."
+          },
+          {
+            "parameter": "Software Engineering Best Practices",
+            "score": 5,
+            "justification": "While his projects are functionally impressive, there is limited evidence of adherence to professional software engineering best practices. Analysis of his GitHub repositories does not show consistent use of unit testing frameworks, CI/CD configuration files, or a structured approach to code reviews and pull requests. His commit messages are functional but could be more descriptive. This is a common gap for students but one that needs to be filled for professional roles.",
+            "improvement_potential": "Contributing to well-maintained open-source projects is the best way to learn these skills. Additionally, he should refactor his own projects to include testing (e.g., Pytest for backend, Jest for frontend), linting, and a CI/CD pipeline to automate testing and deployment."
+          },
+          {
+            "parameter": "Communication & Professional Skills",
+            "score": 9,
+            "justification": "Akshit's communication skills, particularly written, are top-tier. His resume is a masterclass in quantifying achievements and using action-oriented language. His GitHub README is detailed, well-structured, and effectively explains complex projects. This level of polish and professionalism is rare in university students and suggests he will excel in team collaboration, documentation, and potentially client-facing interactions.",
+            "improvement_potential": "To perfect this, he could start a technical blog or create video demos of his projects. This would further showcase his ability to explain complex topics clearly and build a stronger personal brand."
+          },
+          {
+            "parameter": "Market Readiness & Hiring Potential",
+            "score": 7,
+            "justification": "Akshit is highly hireable *for the right roles*. For AI/ML Engineer or full-stack roles at startups and mid-sized companies that prioritize portfolio and practical skills, he is an 8 or 9. For SDE-1 roles at FAANG and other top tech firms with stringent DSA-based screening, he is currently a 4 or 5. His overall score is a 7, reflecting his immediate value in the market while acknowledging the barrier to entry for certain elite companies.",
+            "improvement_potential": "His market readiness can jump to a 9 or 10 in just 3-4 months by addressing the DSA weakness. With his strong project background, a solid DSA foundation would make him a highly sought-after candidate across the entire tech industry."
+          },
+          {
+            "parameter": "Learning Agility & Growth Mindset",
+            "score": 9,
+            "justification": "The evidence for his learning agility is overwhelming. The academic turnaround from a 6.8 to a 9.38 SGPA is prime evidence. Furthermore, his projects utilize very recent technologies (Llama 3.1, Gemini), showing he is not just learning a curriculum but is actively engaged with the forefront of technology. Winning a hackathon and pursuing multiple certifications further underscore his commitment to continuous learning.",
+            "improvement_potential": "Maintaining this trajectory is key. He can channel this learning agility towards his weaker areas (DSA, formal software engineering practices) with the confidence that he has a proven ability to master new and difficult domains."
+          }
+        ],
+        "actionable_advice": {
+          "recommendations": [
+            {
+              "title": "Intensive DSA Mastery for Top-Tier Interviews",
+              "description": "Your project portfolio is elite, but your DSA skills are a critical bottleneck for top-tier companies. You must dedicate the next 3-4 months to an intensive, structured DSA preparation plan. The goal is to solve a minimum of 200 LeetCode problems, with a focus on 120+ Medium and 30+ Hard. Follow the NeetCode 150 roadmap religiously, as it covers all essential patterns. Track your progress in a spreadsheet, noting the pattern, time taken, and optimal solution for each problem. Spend 80% of your time on Medium-level questions covering Dynamic Programming, Graphs (BFS, DFS, Dijkstra), Trees, and Backtracking. Participate in weekly LeetCode contests to simulate interview pressure. This is non-negotiable to unlock access to FAANG-level opportunities.",
+              "priority": "HIGH",
+              "estimated_time": "3-4 months of consistent practice (2-3 hours daily)",
+              "expected_impact": "Unlocks interview opportunities at 95% of tech companies, including FAANG. Increases interview success rate by over 70%. Boosts problem-solving speed and confidence, directly impacting technical round performance. Potential salary increase of 50-100% by qualifying for higher-paying roles.",
+              "mermaid_flowchart": "graph TD\n    A[Start NeetCode 150 Roadmap] --> B[Month 1: Arrays, Stacks, Trees]\n    B --> C[Month 2: Graphs, Heaps, Backtracking]\n    C --> D[Month 3: Advanced Graphs & Dynamic Programming]\n    D --> E[Month 4: Weekly Contests & Mock Interviews]\n    E --> F[FAANG Interview Ready]"
+            },
+            {
+              "title": "Productionize Your Flagship Projects",
+              "description": "Elevate your top 2-3 projects from ' impressive demos' to 'production-grade applications'. Select your 'OpenStack Manager' and 'SignEase' projects. For each, implement a full CI/CD pipeline using GitHub Actions to automate testing and deployment. Write comprehensive unit and integration tests using Pytest/Jest, aiming for >80% code coverage. Containerize the applications using Docker and write Docker Compose files for easy local setup. Finally, deploy them to a cloud service (AWS EC2/ECS or GCP Compute Engine) and include the live URL in your resume and GitHub. Create detailed architectural diagrams and add them to your READMEs. This demonstrates not just that you can code, but that you can ship and maintain professional software.",
+              "priority": "HIGH",
+              "estimated_time": "2 months (4-6 hours weekly)",
+              "expected_impact": "Differentiates you from 95% of student portfolios. Provides powerful talking points for system design and behavioral interviews ('Tell me about a challenging project'). Demonstrates maturity and an understanding of the full software development lifecycle. Makes you a strong candidate for roles requiring DevOps and cloud skills.",
+              "mermaid_flowchart": "graph LR\n    A[Select Project: OpenStack Manager] --> B[Write Unit/Integration Tests]\n    B --> C[Containerize with Docker]\n    C --> D[Build CI/CD Pipeline]\n    D --> E[Deploy to AWS/GCP]\n    E --> F[Update README with Live URL & Architecture]"
+            },
+            {
+              "title": "Systematic System Design Preparation",
+              "description": "Your project work shows a natural inclination for system design. Formalize this skill to excel in mid-level and senior interview loops. Begin with foundational concepts using resources like the 'Grokking the System Design Interview' course and the System Design Primer on GitHub. Spend the first month on fundamentals: scalability, load balancing, caching, CAP theorem, and database choices (SQL vs. NoSQL). In the second month, practice designing 15-20 common systems (e.g., TinyURL, Instagram feed, Uber, Netflix). For each, follow a structured approach: clarify requirements, make back-of-the-envelope estimations, define the API, design the database schema, and draw the high-level architecture. In the third month, conduct mock interviews with peers to practice articulating your design choices and trade-offs.",
+              "priority": "MEDIUM",
+              "estimated_time": "3 months of structured study (3-5 hours weekly)",
+              "expected_impact": "Prepares you for interviews beyond the SDE-1 level. Can significantly increase salary offers, as system design proficiency is a highly valued skill. Demonstrates architectural thinking, which is crucial for career growth and technical leadership.",
+              "mermaid_flowchart": "graph TD\n    A[Month 1: Master Fundamentals] --> B[Month 2: Practice Common Problems]\n    B --> C[Month 3: Conduct Mock Interviews]\n    A --> A1[Scalability, Caching]\n    B --> B1[Design Twitter, Uber, etc.]\n    C --> C1[Refine Communication]"
+            },
+            {
+              "title": "Gain Credibility via Open Source Contributions",
+              "description": "Validate your collaboration and code quality skills by contributing to established open-source projects. Identify 2-3 projects that align with your tech stack (e.g., FastAPI, LangChain, PyTorch, or a popular React library). Start small: look for 'good first issue' or 'documentation' tags. Your first 5-10 pull requests (PRs) can be fixing typos, improving documentation, or writing simple unit tests. This helps you learn the project's codebase and contribution workflow. After gaining confidence, tackle a small bug fix or a minor feature enhancement. This experience is invaluable; it demonstrates you can read and understand a large, unfamiliar codebase, follow coding standards, and accept constructive feedback through code reviews\u2014all critical skills for any professional software engineer.",
+              "priority": "MEDIUM",
+              "estimated_time": "4-6 months (3-5 hours weekly)",
+              "expected_impact": "Provides concrete evidence of your ability to collaborate in a team environment. Your GitHub profile becomes a portfolio of professional collaboration, not just solo projects. Can lead to networking opportunities and job referrals from project maintainers. It's a powerful signal to recruiters that you are a serious and professional developer.",
+              "mermaid_flowchart": "graph LR\n    A[Identify Target Projects] --> B[Submit 5-10 Minor PRs]\n    B --> C[Tackle a Bug Fix]\n    C --> D[Implement a Small Feature]\n    D --> E[Become a Regular Contributor]"
+            },
+            {
+              "title": "Craft a Narrative and Refine Interview Strategy",
+              "description": "Your profile has a unique story: a brilliant builder who is now mastering theoretical computer science. You need to own this narrative in interviews. Prepare a compelling 60-second elevator pitch. When asked about weaknesses, be prepared to discuss your past focus on projects and your current structured plan to master DSA. For behavioral questions, use the STAR method (Situation, Task, Action, Result) and draw heavily from your quantified internship and project achievements. Prepare 5-7 insightful questions to ask your interviewers about their team's technical challenges, engineering culture, and career growth paths. Conduct at least 5-10 mock interviews with peers or on platforms like Pramp to refine your delivery and get comfortable discussing your projects and your DSA journey.",
+              "priority": "HIGH",
+              "estimated_time": "1 month intensive preparation",
+              "expected_impact": "Increases confidence and reduces interview anxiety. Turns your primary weakness into a story of growth and self-awareness. Improves your ability to connect with interviewers and demonstrate your value beyond just coding. A strong interview performance can be the deciding factor between two equally qualified candidates.",
+              "mermaid_flowchart": "graph TB\n    A[Develop Personal Narrative] --> B[Prepare STAR Stories for Projects]\n    B --> C[Practice Behavioral Questions]\n    C --> D[Conduct 10 Mock Interviews]\n    D --> E[Confident & Prepared]"
+            }
+          ]
+        },
+        "resume_analysis": {
+          "summary": "The resume is exceptionally strong for an undergraduate, ranking in the top 5% I've reviewed. Its structure is clean, modern, and ATS-friendly. The use of a headline ('Backend & AI/ML Engineer | Cloud-Native Systems') effectively brands the candidate. The standout feature is the consistent and powerful use of metrics to quantify achievements in both internships and projects (e.g., 'reduce translation latency to under 2 seconds', 'boosting query accuracy to 90%'). The skills section is comprehensive and well-organized. Project descriptions are concise yet impactful, clearly stating the technologies used and the problem solved. The only minor point of confusion is the listed CGPA of 8.96, which differs from the official overall CGPA of 8.45 in the academic record; this should be clarified to 'CGPA in core subjects' or updated to the overall CGPA for consistency. Overall, it's a highly effective document that successfully portrays a skilled and results-driven engineer.",
+          "key_skills": [
+            "Python (Expert - Used in all major AI/ML projects and backend services)",
+            "AI/ML Frameworks (Proficient - TensorFlow, PyTorch, LangChain, Transformers, RAG)",
+            "Cloud & DevOps (Proficient - AWS, GCP, Docker, Kubernetes, OpenStack SDK)",
+            "Backend Development (Proficient - FastAPI, Node.js, RESTful APIs)",
+            "Databases (Intermediate - MongoDB, PostgreSQL, SQL)",
+            "JavaScript/React (Intermediate - Used for frontends in projects like 'SignEase')",
+            "Data Structures & Algorithms (Beginner - Theoretical knowledge present, but practical application is a key development area)",
+            "C/C++ (Intermediate - Used for foundational coursework and competitive programming)",
+            "Version Control (Proficient - Git, GitHub)",
+            "System Architecture (Emerging - Demonstrated through complex project design)"
+          ],
+          "professional_links": [
+            "github.com/akshit7093",
+            "linkedin.com/in/akshit-sharma-475a94271/",
+            "leetcode.com/u/akshitsharma7093/",
+            "codeforces.com/profile/akshit7093"
+          ],
+          "missing_elements": [
+            "Live Demo Links: The resume links to GitHub repos, but direct links to live, deployed applications would be more impactful.",
+            "Clarification on CGPA: The discrepancy between the resume's 8.96 and the official 8.45 should be resolved for accuracy.",
+            "Software Development Methodologies: Mentioning experience with Agile or Scrum, even from academic projects, would add value.",
+            "Soft Skills Section: While demonstrated implicitly, a small section on soft skills (e.g., Teamwork, Leadership, Problem-Solving) could be beneficial.",
+            "Coursework Relevance: The 'Relevant Coursework' section could be more specific, listing 4-5 key upper-level courses instead of broad categories."
+          ],
+          "ats_score": 92,
+          "improvement_suggestions": [
+            "Update the CGPA to the official overall score (8.45) or clarify the 8.96 (e.g., 'Major CGPA: 8.96') to ensure transparency.",
+            "For your top 2 projects, deploy them and add a '[Live Demo]' link next to the '[GitHub]' link.",
+            "In the 'EXPERIENCE' section, bold key technologies or outcomes in each bullet point to make them stand out even more.",
+            "Add a brief 'Interests' or 'Activities' section at the end to add a personal touch, mentioning the hackathon win there.",
+            "Ensure consistent date formatting throughout the resume (e.g., 'Month YYYY \u2013 Month YYYY')."
+          ]
+        },
+        "skills": [
+          {
+            "name": "Python",
+            "category": "Programming Language",
+            "performance": 90,
+            "evidence": "Primary language for all major AI/ML projects, internships, and backend services using Flask/FastAPI.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "AI/ML",
+            "category": "Technical Domain",
+            "performance": 85,
+            "evidence": "Extensive project work with TensorFlow, PyTorch, NLP, CV, RAG, and Transformers. Quantified results in internships.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Cloud & DevOps",
+            "category": "Technical Domain",
+            "performance": 75,
+            "evidence": "Experience with AWS, GCP, Docker, and Kubernetes mentioned in resume and projects. OpenStack project shows deep infrastructure understanding.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Backend Development",
+            "category": "Software Engineering",
+            "performance": 80,
+            "evidence": "Built RESTful APIs using FastAPI and Node.js for multiple projects. Understands system architecture.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Data Structures & Algorithms",
+            "category": "Computer Science Fundamentals",
+            "performance": 30,
+            "evidence": "Low problem count on LeetCode (40) and Codeforces (3). A clear and significant gap.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "React",
+            "category": "Frontend Framework",
+            "performance": 65,
+            "evidence": "Used to build the frontend for the 'SignEase' video chat application.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Databases",
+            "category": "Data Management",
+            "performance": 70,
+            "evidence": "Experience with both SQL (PostgreSQL) and NoSQL (MongoDB) databases as listed in skills.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Git/GitHub",
+            "category": "Version Control",
+            "performance": 85,
+            "evidence": "Maintains 35 public repositories with well-structured code and detailed READMEs.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Communication",
+            "category": "Soft Skill",
+            "performance": 95,
+            "evidence": "Exemplary resume, detailed project documentation, and quantified achievements demonstrate elite communication skills.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Problem Solving (Practical)",
+            "category": "Soft Skill",
+            "performance": 85,
+            "evidence": "Successfully designed and built multiple complex applications from scratch, overcoming significant technical hurdles.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Java",
+            "category": "Programming Language",
+            "performance": 60,
+            "evidence": "Listed as a skill and used in the 'SheShield1' project. Likely used in academic coursework.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "C++",
+            "category": "Programming Language",
+            "performance": 65,
+            "evidence": "Primary language used for LeetCode/Codeforces submissions, indicating foundational comfort.",
+            "market_demand": "MEDIUM"
+          }
+        ],
+        "learning_path": [
+          {
+            "title": "Phase 1: Foundational DSA & Algorithmic Mastery (Months 1-4)",
+            "description": "This is the highest priority phase, designed to bridge the critical gap in your profile. The singular goal is to become proficient in solving coding challenges efficiently and correctly. This phase will transform your ability to pass technical screenings at top-tier companies.",
+            "duration": "4 months",
+            "prerequisites": [
+              "Basic knowledge of a programming language (C++ or Python recommended)",
+              "Understanding of basic data structures (Arrays, Linked Lists, Stacks, Queues)"
+            ],
+            "resources": [
+              {
+                "title": "NeetCode 150",
+                "description": "A structured roadmap of 150 essential LeetCode problems that cover all major algorithmic patterns needed for interviews.",
+                "url": "https://neetcode.io/roadmap",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "150-200 hours"
+              },
+              {
+                "title": "LeetCode Weekly Contests",
+                "description": "Participate in these timed contests to build speed and practice problem-solving under pressure.",
+                "url": "https://leetcode.com/contest/",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "1.5 hours/week"
+              }
+            ],
+            "milestones": [
+              "Month 1: Solve 50+ problems focusing on Arrays, Two Pointers, Stacks, and Binary Search.",
+              "Month 2: Master Linked Lists, Trees, and Heaps. Consistently solve contest Q1 and Q2.",
+              "Month 3: Deep dive into Graphs, Backtracking, and Dynamic Programming.",
+              "Month 4: Solve 20+ Hard problems and conduct 10+ mock interviews."
+            ]
+          },
+          {
+            "title": "Phase 2: Production-Ready Engineering & DevOps (Months 5-6)",
+            "description": "Transition from building projects to shipping production-quality software. This phase focuses on the practices and tools that ensure your applications are robust, scalable, and maintainable.",
+            "duration": "2 months",
+            "prerequisites": [
+              "Completed personal projects"
+            ],
+            "resources": [
+              {
+                "title": "GitHub Actions Documentation",
+                "description": "Learn to build CI/CD pipelines directly within GitHub to automate your testing and deployment workflows.",
+                "url": "https://docs.github.com/en/actions",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "20 hours"
+              },
+              {
+                "title": "Docker Official Get Started Guide",
+                "description": "Master the fundamentals of containerization to ensure your applications run consistently anywhere.",
+                "url": "https://docs.docker.com/get-started/",
+                "difficulty": "BEGINNER",
+                "estimated_time": "15 hours"
+              }
+            ],
+            "milestones": [
+              "Month 5: Add comprehensive tests and Dockerize your top 2 projects.",
+              "Month 6: Build and deploy a full CI/CD pipeline for both projects to a cloud provider."
+            ]
+          },
+          {
+            "title": "Phase 3: Advanced System Design (Months 7-9)",
+            "description": "Prepare for the next level of technical interviews by learning how to design large-scale, distributed systems. This phase moves beyond code to architecture and strategic trade-offs.",
+            "duration": "3 months",
+            "prerequisites": [
+              "Strong understanding of web technologies",
+              "Familiarity with databases and caching"
+            ],
+            "resources": [
+              {
+                "title": "System Design Primer on GitHub",
+                "description": "A comprehensive, community-driven guide to learning system design.",
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "80 hours"
+              },
+              {
+                "title": "Grokking the System Design Interview",
+                "description": "An interactive course that breaks down the design of popular systems like Netflix and Uber.",
+                "url": "https://www.educative.io/courses/grokking-the-system-design-interview",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "50 hours"
+              }
+            ],
+            "milestones": [
+              "Month 7: Master foundational concepts (Load Balancing, Caching, Sharding).",
+              "Month 8: Design and diagram 10+ common systems.",
+              "Month 9: Conduct 5+ system design mock interviews."
+            ]
+          }
+        ],
+        "career_insights": {
+          "current_trajectory": "Based on your profile, you are on a strong trajectory for high-impact roles like AI Engineer, Machine Learning Engineer, or Backend Developer at innovative product startups and mid-to-large-sized tech companies. Your practical, project-based skills make you immediately valuable. The primary barrier to entry for top-tier (FAANG, etc.) SDE-1 roles is the current gap in competitive programming skills. Your current skill set suggests a starting salary in the \u20b912-20 LPA range in the Indian market.",
+          "potential_roles": [
+            "AI/ML Engineer: Best fit, leveraging your deep project experience with AI frameworks and model deployment.",
+            "Full-Stack Developer: Strong fit, given your experience with both Python backends and React frontends.",
+            "Backend Engineer (Python): Excellent fit, with your skills in FastAPI, databases, and cloud infrastructure.",
+            "Cloud Engineer / DevOps Engineer: Potential fit, given your experience with Docker, Kubernetes, and AWS/GCP.",
+            "SDE-1 at Product Companies: Aspirational role, achievable after 3-4 months of dedicated DSA preparation.",
+            "Research Intern/Engineer: Possible fit for applied research labs, though a stronger math foundation would be beneficial."
+          ],
+          "salary_range": "Current: \u20b912-20 LPA. After addressing the DSA gap and productionizing projects, your potential salary range increases significantly to \u20b920-35 LPA, especially at top product companies and well-funded startups.",
+          "competitive_advantage": "Your unique competitive advantage is the proven ability to build and integrate complex, end-to-end AI systems. Unlike peers who may have strong theoretical or algorithmic skills but only simple projects, you can demonstrate a complete product lifecycle\u2014from concept to a functional application using cutting-edge technologies like GenAI and cloud services. This 'builder' profile is highly sought after by companies looking for engineers who can ship products and deliver value from day one.",
+          "market_positioning": "You are currently positioned in the top 10-15% of graduating students in your field due to your exceptional project portfolio and practical skills. However, the top 5% of candidates who secure offers from elite tech firms typically pair a strong portfolio with elite DSA skills. You have already accomplished the harder part (building complex systems). By systematically addressing the DSA gap, you can easily ascend into that top 5% tier and become a candidate who is competitive for almost any entry-level software or AI role in the industry."
+        },
+        "cgpa_trend": {
+          "labels": [
+            "Sem 1",
+            "Sem 2",
+            "Sem 3",
+            "Sem 4",
+            "Sem 5",
+            "Sem 6"
+          ],
+          "values": [
+            7.72,
+            6.8,
+            8.96,
+            8.68,
+            9.08,
+            9.38
+          ]
+        },
+        "youtube_recommendations": [
+          {
+            "topic": "Binary Search and Two Pointers",
+            "reason": "Your low problem count on LeetCode and 'newbie' Codeforces rating indicate a need to master foundational patterns. Binary Search and Two Pointers are among the most common, appearing in a vast number of interview questions. Mastering these will dramatically increase your problem-solving speed and accuracy, helping you build the confidence and volume (300+ problems) needed for top-tier companies.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Visual introduction Two Pointer Algorithm | Data Structure and Algorithm for Coding Interviews",
+                "url": "https://www.youtube.com/watch?v=On03HWe2tZM",
+                "embed_url": "https://www.youtube.com/embed/On03HWe2tZM",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search and Two Pointer Tutorial using Leetcode 349",
+                "url": "https://www.youtube.com/watch?v=eK5S6Ly_myI",
+                "embed_url": "https://www.youtube.com/embed/eK5S6Ly_myI",
+                "reason": ""
+              },
+              {
+                "title": "Two Sum II - Two Pointers Algorithm - Leetcode 167",
+                "url": "https://www.youtube.com/watch?v=chKk9gszrlU",
+                "embed_url": "https://www.youtube.com/embed/chKk9gszrlU",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search Algorithm in 100 Seconds",
+                "url": "https://www.youtube.com/watch?v=MFhxShGxHWc",
+                "embed_url": "https://www.youtube.com/embed/MFhxShGxHWc",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search Algorithm - Simply Explained",
+                "url": "https://www.youtube.com/watch?v=uTyxscVC_-U",
+                "embed_url": "https://www.youtube.com/embed/uTyxscVC_-U",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "Graph Traversal Algorithms (BFS & DFS)",
+            "reason": "Your Codeforces struggles suggest difficulty with complex logical problems. Graph traversals are the bedrock for solving a huge class of interview questions involving connectivity, shortest paths, and state exploration. A deep understanding of Breadth-First Search and Depth-First Search is non-negotiable for moving beyond basic problems and tackling the medium-hard questions common in rigorous technical screens.",
+            "category": "Programming Languages",
+            "videos": [
+              {
+                "title": "Graph in Data Structure | BFS & DFS Algorithms | Learn Coding",
+                "url": "https://www.youtube.com/watch?v=lg48ZZe7YUA",
+                "embed_url": "https://www.youtube.com/embed/lg48ZZe7YUA",
+                "reason": ""
+              },
+              {
+                "title": "BFS Algorithm | Breadth First Search in Graph | BFS Traversal | BFS Graph | DSA-One Course #75",
+                "url": "https://www.youtube.com/watch?v=dCvnjapI6ik",
+                "embed_url": "https://www.youtube.com/embed/dCvnjapI6ik",
+                "reason": ""
+              },
+              {
+                "title": "Graphs: Edge List, Adjacency Matrix, Adjacency List, DFS, BFS - DSA Course in Python Lecture 11",
+                "url": "https://www.youtube.com/watch?v=4jyESQDrpls",
+                "embed_url": "https://www.youtube.com/embed/4jyESQDrpls",
+                "reason": ""
+              },
+              {
+                "title": "Graph Data Structure | Tutorial for Graphs in Data Structures",
+                "url": "https://www.youtube.com/watch?v=59fUtYYz7ZU",
+                "embed_url": "https://www.youtube.com/embed/59fUtYYz7ZU",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "Dynamic Programming Patterns (1D & 2D)",
+            "reason": "Your submission history with multiple 'WRONG_ANSWER' or 'TIME_LIMIT_EXCEEDED' verdicts points to a gap in finding optimal solutions. Dynamic Programming is a powerful technique for solving complex optimization problems. Learning to recognize common DP patterns will provide a systematic framework to break down difficult problems, directly addressing your challenge with formulating correct and efficient solutions under pressure.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Dynamic Programming - Learn to Solve Algorithmic Problems",
+                "url": "https://www.youtube.com/watch?v=oBt53YbR9Kk",
+                "embed_url": "https://www.youtube.com/embed/oBt53YbR9Kk",
+                "reason": "Complete guide to dynamic programming with examples"
+              },
+              {
+                "title": "Dynamic Programming Tutorial",
+                "url": "https://www.youtube.com/watch?v=CB_N7A_a1qY",
+                "embed_url": "https://www.youtube.com/embed/CB_N7A_a1qY",
+                "reason": "Comprehensive tutorial on dynamic programming concepts"
+              }
+            ]
+          },
+          {
+            "topic": "Heaps and Priority Queues",
+            "reason": "Encountering 'TIME_LIMIT_EXCEEDED' means your current solutions are not efficient enough. Heaps are a critical data structure for optimizing algorithms related to finding min/max elements, scheduling, and processing items in order of priority. Mastering heaps will provide you with the tools to turn a brute-force or slow solution into an optimal one, a key skill tested in interviews.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Heaps & Priority Queues - Heapify, Heap Sort, Heapq Library - DSA Course in Python Lecture 9",
+                "url": "https://www.youtube.com/watch?v=E2v9hBgG6gE",
+                "embed_url": "https://www.youtube.com/embed/E2v9hBgG6gE",
+                "reason": ""
+              },
+              {
+                "title": "Introduction to Heap Data Structure + Priority Queue + Heapsort Tutorial",
+                "url": "https://www.youtube.com/watch?v=Qf-TDPr0nYw",
+                "embed_url": "https://www.youtube.com/embed/Qf-TDPr0nYw",
+                "reason": ""
+              },
+              {
+                "title": "Lecture 74: Heaps in C++ || Heap Sort || Insertion/Deletion in Heap || Priority Queue STL",
+                "url": "https://www.youtube.com/watch?v=NKJnHewiGdc",
+                "embed_url": "https://www.youtube.com/embed/NKJnHewiGdc",
+                "reason": ""
+              },
+              {
+                "title": "Priority Queue Explained in Hindi l Data Structure",
+                "url": "https://www.youtube.com/watch?v=m9SVfOYTaBQ",
+                "embed_url": "https://www.youtube.com/embed/m9SVfOYTaBQ",
+                "reason": ""
+              },
+              {
+                "title": "Everything you need to know about Heaps   (Min Heap / Max Heap Data Structures)",
+                "url": "https://www.youtube.com/watch?v=V8QD98eONCw",
+                "embed_url": "https://www.youtube.com/embed/V8QD98eONCw",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "System Design Fundamentals for Scalability",
+            "reason": "Your project portfolio is exceptional, but interviews will test your ability to design these systems from first principles. This topic bridges your practical strength with theoretical knowledge. Learning the fundamentals of scalability, load balancing, and database choices will allow you to articulate the 'why' behind your architectural decisions, leveraging your impressive project experience to excel in system design rounds.",
+            "category": "Computer Science Fundamentals",
+            "videos": [
+              {
+                "title": "Python Programming Tutorial - Full Course",
+                "url": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+                "embed_url": "https://www.youtube.com/embed/_uQrJ0TkZlc",
+                "reason": "Learn Python programming from scratch with hands-on examples and projects"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "28ddb03e-0571-4931-ba95-74dee0e6cee2",
+      "title": "Report - Dec 03, 2025",
+      "timestamp": "2025-12-03T01:06:56.005388",
+      "data": {
+        "enrollment_no": "35214811922",
+        "name": "AKSHIT SHARMA",
+        "executive_summary": "Akshit is a highly capable and resilient AI/ML engineer with an exceptional project portfolio demonstrating proficiency in building end-to-end, cloud-native applications. His practical development skills and internship experience position him as a strong candidate for applied AI roles, though a critical and significant deficiency in foundational Data Structures and Algorithms (DSA) currently limits his competitiveness for top-tier SDE interviews.",
+        "overall_summary": "Akshit Sharma presents as a dedicated and highly promising final-year student in Artificial Intelligence and Data Science. His academic journey is a compelling narrative of resilience and adaptation; after a notable dip in his second semester (6.8 SGPA), he demonstrated remarkable focus and determination, achieving a strong upward trajectory with three consecutive semesters above 8.6 SGPA, culminating in an impressive 9.38 SGPA. This showcases his ability to overcome challenges and master complex, domain-specific subjects.\n\nTechnically, Akshit operates at a level well beyond many of his peers in practical application and project development. His GitHub profile and resume highlight a portfolio of sophisticated projects, including a real-time sign language translator ('SignEase'), a GenAI-powered cloud management system, and a universal chatbot platform. These projects are not mere academic exercises; they incorporate modern technologies like TensorFlow, WebRTC, Docker, Kubernetes, and LLM fine-tuning (Llama 3.1), demonstrating a robust understanding of the full development lifecycle from conception to deployment. His three internships, particularly the research role with the Government of Arunachal Pradesh, provide invaluable real-world experience and underscore his ability to apply theoretical knowledge to solve complex, impactful problems.\n\nHowever, a significant dichotomy exists between his development prowess and his algorithmic problem-solving skills. His coding profiles reveal a critical weakness in Data Structures and Algorithms, with only 40 problems solved on LeetCode and a 'Newbie' rating on Codeforces. This is a major bottleneck that will likely see him filtered out from the rigorous technical screening processes at top-tier product-based companies. While he can clearly build complex systems, he has not yet demonstrated the ability to solve abstract algorithmic puzzles under pressure, a key requirement for many SDE roles.\n\nIn summary, Akshit is a builder and a practical problem-solver with a strong growth mindset. His market readiness is high for roles like AI Engineer, ML Engineer, or Full-Stack Developer at startups and mid-sized companies that value portfolio and practical skills. To unlock his full potential and compete for elite opportunities, a disciplined and intensive focus on mastering DSA is not just recommended\u2014it is essential.",
+        "analysis": {
+          "strengths": [
+            "Exceptional Project Portfolio & Practical Skills: The student has built multiple high-impact projects like 'SignEase' (TensorFlow, WebRTC) and an 'OpenStack Cloud Manager with Gemini'. This demonstrates an ability to integrate complex technologies (AI, Cloud, Web Dev) to create functional, end-to-end applications, a skill highly valued by employers.",
+            "Demonstrated Resilience and Academic Growth: After a significant drop in performance in Semester 2 (SGPA 6.8), Akshit achieved a remarkable recovery, with subsequent SGPA scores of 8.96, 8.68, 9.08, and 9.38. This powerful upward trend showcases immense grit, adaptability, and a strong work ethic.",
+            "Strong Internship Experience with Quantifiable Impact: With three internships, including a research position, he has gained significant industry exposure. His resume effectively quantifies his achievements (e.g., 'boosting query accuracy to 90%', 'drop false positives from 20% to 5%'), demonstrating his ability to deliver measurable value.",
+            "Proficiency in High-Demand Technologies: The student's skills section and projects show expertise in Python, TensorFlow, Docker, Kubernetes, AWS, and GenAI frameworks (LangChain, Llama 3.1). This modern tech stack makes him immediately valuable and aligns perfectly with current industry trends.",
+            "Excellent Performance in Core Specialization Subjects: Analysis of his transcript shows outstanding grades ('O' and 'A+') in core AI/DS subjects like 'Foundations of Data Science', 'Fundamentals of Machine Learning', and 'Big Data Analytics', confirming a deep theoretical and practical understanding of his chosen field.",
+            "Strong Professional Branding and Communication: His GitHub profile is well-maintained with a professional README, and his resume is well-written, using action verbs and metrics. This indicates strong communication skills and an understanding of how to present himself professionally.",
+            "Proven Hands-On Ability: Across all semesters, his lab scores are consistently outstanding (mostly 'O' grades with marks >90). This provides concrete evidence of his ability to translate theory into practical, working code."
+          ],
+          "weaknesses": [
+            "Critically Deficient in Algorithmic Problem-Solving: With only 40 LeetCode problems solved and a ranking of 2,479,447, he is drastically below the standard for SDE roles at product companies, where 200-300+ problems is the informal minimum. This is his single greatest liability.",
+            "Weak Competitive Programming Profile: A Codeforces rating of 853 ('Newbie') after two contests confirms the lack of practice in solving algorithmic problems under time constraints. His submission history shows a high rate of 'Wrong Answer' and 'Time Limit Exceeded', indicating struggles with both logic and optimization.",
+            "Inconsistent Early Academic Performance: The SGPA of 6.8 in Semester 2, with low marks in foundational subjects like 'Applied Mathematics - II' (43, 'P' grade) and 'Engineering Mechanics' (52), could be a red flag for some recruiters who screen for consistent academic excellence from the start.",
+            "Potential Resume Discrepancy: The resume lists a CGPA of 8.96/10, which corresponds to his 3rd semester SGPA, not his overall CGPA of 8.45. This could be perceived as misleading and should be corrected immediately to reflect the overall CGPA.",
+            "Lack of Evidence for Software Engineering Best Practices: While projects are impressive, there is little explicit evidence of adherence to best practices like unit/integration testing, CI/CD pipelines, or formal code reviews in his public repositories. This is a gap in demonstrating production-readiness."
+          ],
+          "hidden_talents": [
+            "Aptitude for Social Impact Engineering: Projects like 'SignEase' (for individuals with disabilities) and the research on endangered languages show an underlying talent for applying high-tech solutions to meaningful, human-centric problems. This narrative can be a powerful differentiator.",
+            "Natural Inclination for MLOps and Infrastructure: The 'OpenStack Cloud Manager' project, which combines a natural language interface (Gemini) with cloud infrastructure management (OpenStack SDK, Docker), reveals a nascent talent for MLOps and AI-driven automation\u2014a highly lucrative and in-demand specialization.",
+            "Emerging Strength in End-to-End System Architecture: The complexity of his projects suggests he thinks beyond just the algorithm and considers the entire system, from the frontend interface to the backend logic, AI model, and deployment environment. This architectural thinking is a key trait of senior engineers."
+          ]
+        },
+        "detailed_scores": [
+          {
+            "parameter": "Academic Excellence & Consistency",
+            "score": 8,
+            "justification": "The overall CGPA of 8.45 is strong. More importantly, the semester-wise analysis reveals a powerful story of recovery and growth. After a significant dip to 6.8 SGPA in the second semester, his performance surged to 8.96 and consistently remained high, peaking at 9.38. This demonstrates resilience and mastery of his core specialization subjects, where he consistently scored 'A+' and 'O' grades. Compared to a peer average which is often flat or declining, this upward trajectory is a significant positive indicator.",
+            "improvement_potential": "Maintaining this momentum in the final year could push his overall CGPA above 8.5, placing him in the top 15-20% of his cohort. This strengthens his profile for companies with strict academic cutoffs and for future academic pursuits."
+          },
+          {
+            "parameter": "Data Structures & Algorithms Mastery",
+            "score": 3,
+            "justification": "This is the candidate's most significant weakness. A LeetCode profile with only 40 solved problems (25 Easy, 11 Medium, 4 Hard) and a Codeforces rating of 853 ('Newbie') is critically insufficient for the current market. Top tech companies expect candidates to have solved 200-300+ problems, with a strong emphasis on Medium-level questions covering topics like Dynamic Programming, Graphs, and Trees, where his profile shows minimal activity. His acceptance rate of 64% is reasonable, but the volume is far too low to indicate proficiency.",
+            "improvement_potential": "This area has the highest potential for impact. A dedicated 3-4 month effort to solve 150+ targeted Medium/Hard problems could elevate his skills to an interview-ready level. This would fundamentally change his career prospects, opening doors to top-tier product companies."
+          },
+          {
+            "parameter": "Full-Stack Development Capabilities",
+            "score": 8,
+            "justification": "Akshit demonstrates strong full-stack capabilities through projects like 'SignEase' (React, Node.js, WebRTC) and the 'OpenStack Cloud Manager' (FastAPI backend, web app). His GitHub shows 35 public repositories and his resume lists a wide range of relevant technologies (React, Node.js, Flask, FastAPI, MongoDB). The projects are non-trivial and show an ability to build and connect both frontend and backend systems, which is a highly sought-after skill.",
+            "improvement_potential": "To reach a 9 or 10, he should focus on productionizing one of his key projects. This includes adding comprehensive test suites, setting up a CI/CD pipeline for automated deployment on a cloud platform like AWS or GCP, and ensuring the application is scalable and secure. A live, deployed application is a powerful testament to his skills."
+          },
+          {
+            "parameter": "Problem-Solving & Analytical Thinking",
+            "score": 5,
+            "justification": "This score reflects a dichotomy. In a practical, project-based context, his problem-solving is excellent (score: 8/10). He can deconstruct complex requirements and build functional systems. However, in an abstract, algorithmic context, his skills are underdeveloped (score: 2/10), as evidenced by his competitive programming profiles. He struggles to translate problem statements into optimal, efficient code under pressure. This composite score of 5 highlights that he is a strong 'builder' but a weak 'algorithmic thinker' at present.",
+            "improvement_potential": "The path to improvement is clear: systematic practice on platforms like LeetCode and Codeforces. By focusing on pattern recognition and understanding the trade-offs between different algorithms, he can bridge this gap and become a more well-rounded problem solver."
+          },
+          {
+            "parameter": "Software Engineering Best Practices",
+            "score": 5,
+            "justification": "His code, while functional, shows a need for more rigorous engineering discipline. Analysis of his GitHub repositories reveals a lack of consistent unit or integration testing, limited documentation within the code, and no evidence of CI/CD pipelines. While he uses tools like Docker, the broader ecosystem of production-grade software engineering (e.g., logging, monitoring, robust error handling) is not yet demonstrated. His commit messages are generally adequate but could be more descriptive.",
+            "improvement_potential": "Contributing to a well-maintained open-source project would be the fastest way to learn these practices. He could also refactor a major project to include a full test suite (e.g., using Pytest or Jest) and a GitHub Actions workflow for automated testing and deployment."
+          },
+          {
+            "parameter": "Communication & Professional Skills",
+            "score": 8,
+            "justification": "The candidate presents himself very professionally. His resume is well-structured, uses strong action verbs, and quantifies his achievements effectively. His GitHub README is detailed and serves as an excellent landing page for his profile. The ability to articulate the impact of his work (e.g., 'reduced false positives by 15%') is a standout skill that many students lack. The only minor issue is the CGPA discrepancy on his resume.",
+            "improvement_potential": "He can further enhance this by writing technical blog posts about his projects. This would demonstrate deeper understanding and improve his visibility. Practicing mock behavioral interviews would also help him articulate his journey and project experiences more fluently."
+          },
+          {
+            "parameter": "Market Readiness & Hiring Potential",
+            "score": 7,
+            "justification": "Akshit is highly hireable for specific roles. For AI/ML Engineer, Applied Scientist, or Full-Stack Developer roles at startups or mid-tier companies that prioritize project portfolios, he is an 8 or 9 out of 10. However, for generalist SDE roles at FAANG-level companies, his DSA weakness makes him a 3 or 4 out of 10. His overall score of 7 reflects his strong potential in his niche, balanced by the significant gap that currently locks him out of top-tier SDE interviews.",
+            "improvement_potential": "Addressing the DSA weakness is the single most impactful action he can take. With 3-4 months of focused effort, he could elevate his overall market readiness to a 9/10, making him a competitive candidate across a much wider and more lucrative range of companies."
+          },
+          {
+            "parameter": "Learning Agility & Growth Mindset",
+            "score": 9,
+            "justification": "His entire profile is a testament to his learning agility. The academic turnaround from a 6.8 to a 9.38 SGPA is prime evidence. Furthermore, the sheer breadth of modern technologies he has learned and applied in his projects\u2014from deep learning frameworks and LLMs to cloud SDKs and containerization\u2014shows an exceptional ability to self-learn and quickly become productive with new tools. This is perhaps his strongest innate quality and a powerful predictor of long-term career success.",
+            "improvement_potential": "To make this a 10/10, he could pursue and complete a reputable, difficult certification (e.g., AWS Certified Solutions Architect - Associate, Certified Kubernetes Application Developer) to formally validate his self-taught cloud and DevOps skills."
+          }
+        ],
+        "actionable_advice": {
+          "recommendations": [
+            {
+              "title": "Urgent DSA Mastery Program",
+              "description": "Your number one priority is to bridge the critical gap in Data Structures and Algorithms. You must commit to a rigorous, structured plan to solve a minimum of 200 LeetCode problems over the next 4 months, with a focus of 70% Medium and 15% Hard. Follow a structured roadmap like NeetCode 150. Break it down by topic: Week 1-3: Arrays, Two Pointers, Sliding Window. Week 4-6: Stacks, Linked Lists, Trees, Tries. Week 7-9: Heaps, Backtracking, Graphs. Week 10-12: Dynamic Programming, Intervals. Week 13-16: Advanced Topics & Mock Contests. Track every problem in a spreadsheet, noting the pattern, time taken, and optimal solution. This is non-negotiable for targeting top product companies.",
+              "priority": "HIGH",
+              "estimated_time": "4 months of consistent practice (2-3 hours daily)",
+              "expected_impact": "This will fundamentally transform your candidacy from 'strong project-based hire' to 'competitive top-tier SDE'. It will likely increase your interview call-backs by over 300% and directly impact your ability to pass technical rounds, potentially increasing salary offers by 50-100%.",
+              "mermaid_flowchart": "graph TD\n    A[Start: 40 Problems] --> B[Month 1: Foundational Patterns - 50 problems]\n    B --> C[Month 2: Trees & Graphs - 50 problems]\n    C --> D[Month 3: Dynamic Programming - 50 problems]\n    D --> E[Month 4: Advanced & Mocks - 50 problems]\n    E --> F[Goal: 240+ Problems Solved, Interview Ready]"
+            },
+            {
+              "title": "Productionize a Star Project",
+              "description": "Select your best project (e.g., 'SignEase' or the 'OpenStack Manager') and elevate it to production-grade quality. This means going beyond a functional prototype. First, write a comprehensive test suite with high code coverage using a framework like Pytest or Jest. Second, create a CI/CD pipeline using GitHub Actions that automatically runs tests on every push. Third, containerize the application fully using Docker and Docker Compose. Finally, deploy it to a public cloud service (AWS EC2/ECS or GCP Compute Engine) and make it accessible via a public domain. Document the entire architecture and deployment process in the project's README with diagrams. This demonstrates maturity as an engineer.",
+              "priority": "HIGH",
+              "estimated_time": "6-8 weeks",
+              "expected_impact": "A live, well-documented, and tested application is the single most powerful item in a portfolio. It serves as undeniable proof of your skills, moves conversations from 'can you do it?' to 'how did you do it?', and differentiates you from 95% of other student applicants.",
+              "mermaid_flowchart": "graph LR\n    A[Select Project] --> B[Write Test Suite]\n    B --> C[Containerize with Docker]\n    C --> D[Build CI/CD Pipeline]\n    D --> E[Deploy to Cloud]\n    E --> F[Update README with Live Link & Architecture]"
+            },
+            {
+              "title": "Refine Professional Branding and Resume",
+              "description": "Your professional brand is strong but needs minor, critical adjustments. First, immediately correct your resume to show your overall CGPA (8.45), not a semester-specific one. Frame it positively, e.g., 'Overall CGPA: 8.45 (with an upward trend, reaching 9.38 in the 6th semester)'. Second, curate your GitHub pinned repositories. They should feature your absolute best work, like the GenAI and Sign Language projects, not older or less complex ones. Ensure each pinned project has a stellar README with GIFs/screenshots, a clear description of the tech stack, and a link to a live demo if available. This ensures that recruiters see your best work in the first 10 seconds.",
+              "priority": "MEDIUM",
+              "estimated_time": "1 week",
+              "expected_impact": "Increases credibility and avoids any perception of dishonesty. A curated GitHub profile significantly improves the impression you make on technical recruiters and hiring managers, making them more likely to explore your work in depth.",
+              "mermaid_flowchart": "graph TD\n    A[Correct CGPA on Resume] --> B[Re-evaluate Pinned Repos]\n    B --> C[Select Top 3-4 Projects]\n    C --> D[Enhance READMEs for Pinned Repos]\n    D --> E[Polished Professional Front]"
+            },
+            {
+              "title": "Engage in Mock Interviews",
+              "description": "Knowing DSA and building projects is not enough; you must be able to perform under pressure. Once you have solved ~100 LeetCode problems, start doing mock interviews. Use platforms like Pramp or connect with peers. Aim for at least 1-2 mock interviews per week. Focus on verbalizing your thought process clearly, from clarifying questions to analyzing complexity and discussing trade-offs. Record your sessions to analyze your communication style, pacing, and body language. Prepare 5-6 stories about your projects using the STAR (Situation, Task, Action, Result) method for behavioral rounds.",
+              "priority": "MEDIUM",
+              "estimated_time": "Ongoing for 2-3 months",
+              "expected_impact": "Dramatically reduces interview anxiety and improves performance on the actual day. Strong communication during interviews can be the deciding factor between two equally skilled candidates and can lead to higher-level offers.",
+              "mermaid_flowchart": "graph LR\n    A[Solve 100 LeetCode Problems] --> B[Schedule First Mock Interview]\n    B --> C{Receive Feedback}\n    C --> A\n    B --> D[Practice STAR Method]\n    D --> E[Confident Interview Performance]"
+            }
+          ]
+        },
+        "resume_analysis": {
+          "summary": "The resume is strong, well-formatted, and effectively showcases a wealth of practical experience through internships and projects. Its greatest strength is the consistent use of metrics and action verbs to quantify impact (e.g., 'boosting query accuracy to 90%', 'reduce translation latency to under 2 seconds'). This immediately communicates value to a recruiter. The skills section is comprehensive and filled with relevant, high-demand keywords, making it highly compatible with Applicant Tracking Systems (ATS). The structure is clean and easy to parse. However, there is one major red flag: the listed CGPA of 8.96 is misleading as it represents a single semester's performance, not the overall 8.45. This must be corrected to maintain credibility. While project descriptions are good, they could be further enhanced by including direct links to live demos where applicable. The document successfully positions Akshit as an experienced AI/ML practitioner rather than just a student.",
+          "key_skills": [
+            "Python (Expert - Primary language for all AI/ML projects and internships)",
+            "TensorFlow/PyTorch (Proficient - Used in multiple deep learning projects like 'SignEase')",
+            "Cloud & DevOps (Intermediate - Experience with AWS, GCP, Docker, Kubernetes from internships)",
+            "GenAI/LLMs (Proficient - Fine-tuned Llama3.1, used Gemini API, RAG, LangChain)",
+            "Full-Stack Web Dev (Proficient - React, Node.js, FastAPI used in multiple projects)",
+            "Databases (Intermediate - MongoDB, PostgreSQL experience)",
+            "Data Structures & Algorithms (Beginner - Theoretical knowledge but lacks practical application)",
+            "NLP (Proficient - Built systems for spam detection and speech translation)",
+            "Computer Vision (Intermediate - Used MediaPipe for landmark detection)",
+            "System Architecture (Intermediate - Demonstrated in end-to-end project design)",
+            "C/C++ (Intermediate - Used for competitive programming basics)"
+          ],
+          "professional_links": [
+            "github.com/akshit7093",
+            "linkedin.com/in/akshit-sharma-475a94271/",
+            "leetcode.com/u/akshitsharma7093/",
+            "codeforces.com/profile/akshit7093"
+          ],
+          "missing_elements": [
+            "Correct Overall CGPA: The most critical missing element is the accurate overall CGPA.",
+            "Live Project Demo Links: Including URLs to deployed applications would provide tangible proof of work.",
+            "Quantified DSA Proficiency: Lacks any metric of algorithmic skill (e.g., LeetCode count, contest rating).",
+            "Link to a Technical Blog: A blog would be an excellent platform to elaborate on his complex projects and demonstrate communication skills.",
+            "Evidence of Testing/QA: No mention of testing methodologies (unit, integration) used in projects.",
+            "Objective/Summary Statement: A concise 2-line summary at the top could help frame his profile for recruiters instantly."
+          ],
+          "ats_score": 85,
+          "improvement_suggestions": [
+            "Immediately update the CGPA to the overall score (8.45) and consider adding a note about the positive trend.",
+            "In the projects section, add a 'Live Demo' or 'Deployed Link' hyperlink next to the GitHub link.",
+            "Restructure the skills section into categories like 'Languages', 'Frameworks/Libraries', 'Cloud/DevOps', 'Databases' for better readability.",
+            "Use the STAR (Situation, Task, Action, Result) method to further refine the bullet points under experience and projects.",
+            "Add a brief, powerful 'Summary' section at the top, e.g., 'Final-year AI & Data Science student with hands-on experience in building and deploying full-stack ML systems using Python, TensorFlow, and AWS.'",
+            "Ensure consistent formatting for dates and locations."
+          ]
+        },
+        "job_analysis": {
+          "match_score": 85,
+          "key_alignment": [
+            "Python",
+            "TensorFlow",
+            "Cloud Deployment (AWS)",
+            "NLP",
+            "Full-Stack Development"
+          ],
+          "missing_critical_skills": [
+            "Demonstrable DSA proficiency for passing technical screens at top companies."
+          ],
+          "cultural_fit": "High",
+          "recommendation": "Apply"
+        },
+        "skills": [
+          {
+            "name": "Python",
+            "category": "Programming Language",
+            "performance": 90,
+            "evidence": "Primary language used across all major internships and projects, including complex AI/ML implementations.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "TensorFlow",
+            "category": "AI/ML Framework",
+            "performance": 85,
+            "evidence": "Successfully used to build and train models for projects like 'SignEase' (LSTM) and in internships.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Docker",
+            "category": "DevOps",
+            "performance": 80,
+            "evidence": "Used for containerization in the 'OpenStack Manager' project and mentioned in internship experience.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "React",
+            "category": "Frontend Framework",
+            "performance": 75,
+            "evidence": "Built the frontend for the 'SignEase' video chat application.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Node.js",
+            "category": "Backend Runtime",
+            "performance": 70,
+            "evidence": "Used for the backend of the 'SignEase' application, demonstrating knowledge of JavaScript-based backends.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "AWS",
+            "category": "Cloud Platform",
+            "performance": 70,
+            "evidence": "Mentioned in resume for automated deployments on EC2 and completed an AWS Solutions Architect virtual program.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Generative AI (LLMs, RAG)",
+            "category": "AI/ML Specialization",
+            "performance": 85,
+            "evidence": "Developed systems using Gemini, fine-tuned Llama3.1, and implemented RAG with FAISS.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Data Structures & Algorithms",
+            "category": "Core CS Fundamentals",
+            "performance": 30,
+            "evidence": "Extremely low problem count (40) on LeetCode and 'Newbie' rank on Codeforces.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "SQL",
+            "category": "Database",
+            "performance": 65,
+            "evidence": "Listed as a skill; likely used in coursework and projects involving relational databases.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Kubernetes",
+            "category": "DevOps",
+            "performance": 60,
+            "evidence": "Mentioned for container orchestration in internship experience; likely theoretical/basic practical knowledge.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "C++",
+            "category": "Programming Language",
+            "performance": 50,
+            "evidence": "Primary language used for LeetCode/Codeforces attempts, but with limited success.",
+            "market_demand": "MEDIUM"
+          },
+          {
+            "name": "System Design",
+            "category": "Software Architecture",
+            "performance": 60,
+            "evidence": "Implicitly demonstrated through the architecture of his complex projects, but no formal study mentioned.",
+            "market_demand": "HIGH"
+          }
+        ],
+        "learning_path": [
+          {
+            "title": "Phase 1: Foundational DSA & Problem Solving (Months 1-4 - CRITICAL)",
+            "description": "This is a non-negotiable, intensive phase to fix your biggest weakness. The goal is to build the algorithmic thinking and coding speed required to pass technical interviews at top-tier companies. You will move from being a 'builder' to a well-rounded 'builder and problem-solver'.",
+            "duration": "4 months",
+            "prerequisites": [
+              "Basic knowledge of a programming language (C++ or Python)",
+              "Understanding of basic data structures (Arrays, Strings, Linked Lists)"
+            ],
+            "resources": [
+              {
+                "title": "NeetCode 150",
+                "description": "A curated list of 150 essential LeetCode problems that cover all major patterns needed for interviews. Follow the video explanations.",
+                "url": "https://neetcode.io/roadmap",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "200 hours"
+              },
+              {
+                "title": "Grokking the Coding Interview: Patterns for Coding Questions",
+                "description": "A course focused on recognizing underlying patterns in coding problems, which is key to solving unfamiliar questions.",
+                "url": "https://www.educative.io/courses/grokking-the-coding-interview",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "50 hours"
+              }
+            ],
+            "milestones": [
+              "Month 1: Solve 50+ problems focusing on Arrays, Two Pointers, Sliding Window, Stacks.",
+              "Month 2: Solve 50+ problems focusing on Trees, Graphs (BFS/DFS), and Heaps.",
+              "Month 3: Solve 50+ problems focusing on Dynamic Programming and Backtracking.",
+              "Month 4: Achieve a LeetCode contest rating of 1600+ and solve 25+ Hard problems."
+            ]
+          },
+          {
+            "title": "Phase 2: Production-Grade Engineering & MLOps (Months 5-7)",
+            "description": "Leverage your strength in building by learning to build robustly. This phase focuses on the skills needed to deploy, monitor, and maintain software and ML models in a production environment.",
+            "duration": "3 months",
+            "prerequisites": [
+              "Completed at least one major project",
+              "Basic familiarity with Docker and a cloud platform"
+            ],
+            "resources": [
+              {
+                "title": "Full Stack Deep Learning",
+                "description": "A free, comprehensive course on the full lifecycle of deep learning projects, from data management to deployment and monitoring.",
+                "url": "https://fullstackdeeplearning.com/",
+                "difficulty": "ADVANCED",
+                "estimated_time": "100 hours"
+              },
+              {
+                "title": "GitHub Actions Documentation",
+                "description": "Learn to build CI/CD pipelines directly within GitHub to automate testing and deployment.",
+                "url": "https://docs.github.com/en/actions",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "30 hours"
+              }
+            ],
+            "milestones": [
+              "Month 5: Add a full test suite and CI pipeline to your main project.",
+              "Month 6: Deploy the project on AWS/GCP with a live URL.",
+              "Month 7: Implement logging and monitoring for the deployed application."
+            ]
+          },
+          {
+            "title": "Phase 3: System Design Fundamentals (Months 8-9)",
+            "description": "Prepare for the next level of interviews and engineering roles by learning how to design scalable, distributed systems. This is crucial for mid-level and senior roles and is often asked in new grad interviews at top companies.",
+            "duration": "2 months",
+            "prerequisites": [
+              "Strong DSA foundation (Phase 1 completed)",
+              "Understanding of web technologies (APIs, databases)"
+            ],
+            "resources": [
+              {
+                "title": "System Design Primer on GitHub",
+                "description": "An open-source collection of resources and case studies for learning system design.",
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "80 hours"
+              },
+              {
+                "title": "Grokking the System Design Interview",
+                "description": "A course that breaks down common system design interview questions like designing Twitter, Uber, etc.",
+                "url": "https://www.educative.io/courses/grokking-the-system-design-interview",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "40 hours"
+              }
+            ],
+            "milestones": [
+              "Month 8: Master core concepts (Load Balancing, Caching, Sharding, CAP Theorem).",
+              "Month 9: Be able to confidently design 5-7 common systems (e.g., URL Shortener, Instagram Feed) on a whiteboard."
+            ]
+          }
+        ],
+        "career_insights": {
+          "current_trajectory": "Based on your profile, you are on a strong trajectory for an AI Engineer or specialized Full-Stack Developer role. Your project portfolio is your main asset and makes you highly attractive to startups and companies with a strong AI/ML focus. You are currently positioned to secure roles that value immediate, practical building skills over theoretical, algorithmic prowess. The current skill set suggests a competitive salary in the \u20b912-18 LPA range at product-based companies or well-funded startups.",
+          "potential_roles": [
+            "AI/ML Engineer: Best fit. Your projects in NLP, CV, and GenAI align perfectly with this role.",
+            "Full-Stack Developer (AI-focused): Companies building AI products need developers who understand both web dev and ML. You are a perfect match.",
+            "Applied Scientist: Your research internship and complex projects show potential for more research-oriented development roles.",
+            "Data Scientist (with a focus on deployment): Your skills in building end-to-end systems would be valuable for teams that need to productionize models.",
+            "SDE-1 at Mid-Tier Product Companies: Companies that have a less intense focus on competitive programming but value projects would be a good fit.",
+            "DevOps/MLOps Engineer: Your project combining AI with cloud infrastructure shows a natural aptitude for this specialization."
+          ],
+          "salary_range": "Current: \u20b912-18 LPA at good product companies/startups. After addressing DSA gap: Potential to compete for roles in the \u20b920-35 LPA range at top-tier tech companies (FAANG, etc.). Your MLOps and GenAI skills command a premium.",
+          "competitive_advantage": "Your unique competitive advantage is your proven ability to be an 'end-to-end AI systems builder'. Unlike peers who may have a strong ML model but no app, or a strong app with no ML, you have repeatedly demonstrated the ability to connect the two. You can build the model, wrap it in an API, create a user-facing application, and deploy it. This full-stack, concept-to-deployment capability is rare and extremely valuable.",
+          "market_positioning": "Currently, you are in the top 10% of graduating students based on your project portfolio and practical AI skills. However, you are in the bottom 25% regarding interview-readiness for top-tier SDE roles due to the DSA gap. Your profile is exceptionally attractive to Y-Combinator-style startups or established companies looking to build new AI features, as you can contribute immediately with minimal hand-holding on the development front."
+        },
+        "cgpa_trend": {
+          "labels": [
+            "Sem 1",
+            "Sem 2",
+            "Sem 3",
+            "Sem 4",
+            "Sem 5",
+            "Sem 6"
+          ],
+          "values": [
+            7.72,
+            6.8,
+            8.96,
+            8.68,
+            9.08,
+            9.38
+          ]
+        },
+        "youtube_recommendations": [
+          {
+            "topic": "Big O Notation and Time Complexity Analysis",
+            "reason": "Your Codeforces profile shows a high rate of 'Time Limit Exceeded' errors, which directly points to a weakness in writing efficient code. Mastering Big O notation is non-negotiable. It will enable you to analyze the performance of your algorithms before implementation, helping you choose the right data structures and avoid brute-force solutions that fail under time constraints.",
+            "category": "Computer Science Fundamentals",
+            "videos": [
+              {
+                "title": "Python Programming Tutorial - Full Course",
+                "url": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+                "embed_url": "https://www.youtube.com/embed/_uQrJ0TkZlc",
+                "reason": "Learn Python programming from scratch with hands-on examples and projects"
+              }
+            ]
+          },
+          {
+            "topic": "Binary Search and Two Pointers",
+            "reason": "These two patterns are among the most frequent in technical interviews, yet they are underrepresented in your 40 solved LeetCode problems. They are fundamental for optimization. Mastering them will provide a significant return on investment, helping you solve a large category of array and string problems efficiently and building a strong foundation for more complex algorithms.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Visual introduction Two Pointer Algorithm | Data Structure and Algorithm for Coding Interviews",
+                "url": "https://www.youtube.com/watch?v=On03HWe2tZM",
+                "embed_url": "https://www.youtube.com/embed/On03HWe2tZM",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search and Two Pointer Tutorial using Leetcode 349",
+                "url": "https://www.youtube.com/watch?v=eK5S6Ly_myI",
+                "embed_url": "https://www.youtube.com/embed/eK5S6Ly_myI",
+                "reason": ""
+              },
+              {
+                "title": "Two Sum II - Two Pointers Algorithm - Leetcode 167",
+                "url": "https://www.youtube.com/watch?v=chKk9gszrlU",
+                "embed_url": "https://www.youtube.com/embed/chKk9gszrlU",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search Algorithm in 100 Seconds",
+                "url": "https://www.youtube.com/watch?v=MFhxShGxHWc",
+                "embed_url": "https://www.youtube.com/embed/MFhxShGxHWc",
+                "reason": ""
+              },
+              {
+                "title": "Binary Search Algorithm - Simply Explained",
+                "url": "https://www.youtube.com/watch?v=uTyxscVC_-U",
+                "embed_url": "https://www.youtube.com/embed/uTyxscVC_-U",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "Graphs: BFS & DFS Traversal Patterns",
+            "reason": "Given your low problem count, it's likely you have a gap in core data structures. Graph traversal is a critical topic for SDE roles. A deep understanding of Breadth-First Search (BFS) and Depth-First Search (DFS) is the gateway to solving over 50% of graph-related interview questions, including shortest path, connected components, and topological sort, directly addressing your algorithmic deficiency.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Data Structures and Algorithms - Full Course for Beginners",
+                "url": "https://www.youtube.com/watch?v=8hly31xKli0",
+                "embed_url": "https://www.youtube.com/embed/8hly31xKli0",
+                "reason": "Comprehensive DSA course covering all fundamental data structures and algorithms with practical examples"
+              }
+            ]
+          },
+          {
+            "topic": "Dynamic Programming: 1D Patterns",
+            "reason": "To move beyond a 'Newbie' rating and compete for top SDE roles, you must tackle Dynamic Programming. It is a major weakness for most, and your profile suggests you haven't started. Begin with 1D DP patterns (e.g., Climbing Stairs, House Robber) to build the core intuition around state, transition, and memoization. This is the single most impactful topic for difficult interviews.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Dynamic Programming - Learn to Solve Algorithmic Problems",
+                "url": "https://www.youtube.com/watch?v=oBt53YbR9Kk",
+                "embed_url": "https://www.youtube.com/embed/oBt53YbR9Kk",
+                "reason": "Complete guide to dynamic programming with examples"
+              },
+              {
+                "title": "Dynamic Programming Tutorial",
+                "url": "https://www.youtube.com/watch?v=CB_N7A_a1qY",
+                "embed_url": "https://www.youtube.com/embed/CB_N7A_a1qY",
+                "reason": "Comprehensive tutorial on dynamic programming concepts"
+              }
+            ]
+          },
+          {
+            "topic": "System Design Fundamentals: Scalability and Caching",
+            "reason": "Your development skills are your greatest strength, but your projects may lack production-level architecture. Learning system design fundamentals bridges this gap. Understanding concepts like load balancing, database choice, and caching strategies will elevate your conversations in interviews from just 'building things' to 'building things that scale,' leveraging your project portfolio to aim for higher-level roles.",
+            "category": "Computer Science Fundamentals",
+            "videos": [
+              {
+                "title": "Scalability Simply Explained in 10 Minutes",
+                "url": "https://www.youtube.com/watch?v=EWS_CIxttVw",
+                "embed_url": "https://www.youtube.com/embed/EWS_CIxttVw",
+                "reason": ""
+              },
+              {
+                "title": "System Design BASICS: Horizontal vs. Vertical Scaling",
+                "url": "https://www.youtube.com/watch?v=xpDnVSmNFX0",
+                "embed_url": "https://www.youtube.com/embed/xpDnVSmNFX0",
+                "reason": ""
+              },
+              {
+                "title": "Scalability explained in System Design: Essential guide to Software Architecture - Episode 3.1",
+                "url": "https://www.youtube.com/watch?v=Q_cbWvvdvaE",
+                "embed_url": "https://www.youtube.com/embed/Q_cbWvvdvaE",
+                "reason": ""
+              },
+              {
+                "title": "System Design - Caching 101 | Fundamentals",
+                "url": "https://www.youtube.com/watch?v=0LPF82ihn-0",
+                "embed_url": "https://www.youtube.com/embed/0LPF82ihn-0",
+                "reason": ""
+              },
+              {
+                "title": "8 Most Important System Design Concepts You Should Know",
+                "url": "https://www.youtube.com/watch?v=BTjxUS_PylA",
+                "embed_url": "https://www.youtube.com/embed/BTjxUS_PylA",
+                "reason": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "35314811922": [
+    {
+      "id": "c5b82908-70d8-4a61-a8c0-320bdbeaba24",
+      "title": "Report - Dec 03, 2025",
+      "timestamp": "2025-12-03T01:17:47.557468",
+      "data": {
+        "enrollment_no": "35314811922",
+        "name": "NIKITA BANSAL",
+        "executive_summary": "Nikita Bansal is a resilient and high-potential Full-Stack Developer with a strong, demonstrated foundation in Data Structures & Algorithms, evidenced by 500+ LeetCode problems and a modern project portfolio. Her impressive academic turnaround and practical internship experience with contemporary technologies like Next.js and Cloudflare Workers position her as a competitive candidate for challenging software engineering roles.",
+        "overall_summary": "Nikita Bansal presents as a dedicated and rapidly evolving software engineering student with a compelling professional narrative. Her academic journey at Maharaja Agrasen Institute of Technology is a testament to her resilience and growth mindset, showcasing a remarkable upward trajectory from an initial 6.6 SGPA to a peak of 8.6. This demonstrates a strong ability to identify areas of improvement and dedicate herself to mastering complex subjects. Academically, she has transitioned from foundational struggles to excelling in core computer science domains, particularly in practical lab-based coursework where she consistently achieves top grades.\n\nTechnically, Nikita has built a formidable profile. Her commitment to mastering Data Structures and Algorithms is evident from her LeetCode profile, where she has solved over 512 problems, including a substantial 268 medium-difficulty questions. This level of practice indicates a deep understanding of fundamental concepts like arrays, hash tables, dynamic programming, and graph traversals. While her competitive programming performance on Codeforces suggests room for improvement in speed and advanced problem-solving under pressure, her LeetCode consistency is a strong indicator of her core problem-solving capabilities.\n\nHer practical skills are showcased through a well-curated portfolio of full-stack projects. Projects like 'Docs AI' and 'DevTinder' are not mere academic exercises; they utilize a modern and highly relevant tech stack including Next.js, Node.js, TypeScript, Bun, and Cloudflare Workers. This demonstrates a proactive approach to learning and applying industry-current technologies. This practical experience is further solidified by her Full Stack Developer internship at TheEndorse, where she gained hands-on experience with production-level tasks such as OAuth implementation, building data processing pipelines, and ensuring data integrity. This internship experience is a significant differentiator, proving her ability to contribute effectively in a professional development environment.\n\nNikita's professional branding on platforms like GitHub and her resume is clear and effective, positioning her as a skilled Full-Stack Developer. In summary, Nikita is a highly motivated candidate whose blend of academic perseverance, extensive algorithmic practice, modern project experience, and real-world internship exposure makes her a strong contender for SDE-1 and Full-Stack Developer roles at leading technology companies.",
+        "analysis": {
+          "strengths": [
+            "DETAILED strength 1: Exceptional Academic Improvement & Resilience - Nikita's SGPA progression from 6.6 in Semester 1 to a peak of 8.6 in Semester 4 is a powerful indicator of her grit, adaptability, and commitment to self-improvement. This narrative is more compelling to employers than a consistently high but static CGPA, as it proves her ability to overcome initial challenges.",
+            "DETAILED strength 2: Strong Data Structures & Algorithms Foundation - With 512 total problems solved on LeetCode, including 268 Medium and 28 Hard, she demonstrates a robust and practiced understanding of core DSA concepts. Her proficiency in topics like Arrays (282 solved), Hash Tables (110 solved), and Dynamic Programming (64 solved) meets the bar for technical interviews at most product-based companies.",
+            "DETAILED strength 3: Modern & Relevant Full-Stack Project Portfolio - Her projects ('Docs AI', 'DevTinder') utilize a cutting-edge technology stack (Next.js, TypeScript, Bun, Cloudflare Workers, MongoDB). This shows she is a proactive learner who stays current with industry trends, moving beyond the standard MERN stack taught in many courses.",
+            "DETAILED strength 4: Verifiable Industry Experience - The Full Stack Developer internship at TheEndorse provides concrete evidence of her ability to apply skills in a professional setting. Working on OAuth, automated pipelines, and document processing demonstrates experience with real-world engineering challenges that are highly valued by recruiters.",
+            "DETAILED strength 5: Excellence in Practical Application - Across all semesters, Nikita has consistently scored 'O' (Outstanding) or 'A+' grades in lab-based subjects (e.g., 'PROGRAMMING IN 'C' LAB' - 91, 'DATA STRUCTURES LAB' - 88, 'OBJECT ORIENTED PROGRAMMING LAB' - 94). This highlights her strength in translating theoretical knowledge into functional code.",
+            "DETAILED strength 6: Proactive Professional Branding - Her GitHub profile is well-organized with a clear, professional README, pinned projects, and 40 public repositories. Her resume is well-structured and effectively communicates her skills and experiences, indicating a strong sense of professional presentation.",
+            "DETAILED strength 7: Strong Foundation in AI/ML Core Concepts - As a student in 'Artificial Intelligence and Data Science', she has solid grades in key subjects like 'Fundamentals of Machine Learning' (Grade A), 'Fundamentals of Deep Learning' (Grade A+), and 'Big Data Analytics' (Grade A+), aligning her academic specialization with high-demand industry roles."
+          ],
+          "weaknesses": [
+            "SPECIFIC weakness 1: Underdeveloped Competitive Programming Skills - A current Codeforces rating of 1130 ('Newbie') with a peak of 1294 ('Pupil') is a significant gap. This indicates a weakness in solving novel, complex problems under time constraints, which is a key evaluation metric in interviews for top-tier tech companies like Google, Meta, and hedge funds.",
+            "SPECIFIC weakness 2: Limited Exposure to Advanced Algorithms - Solving only 28 'Hard' problems on LeetCode (out of 879 available) suggests a potential avoidance of or difficulty with more complex algorithmic challenges involving advanced graph theory, intricate dynamic programming, or complex data structures like segment trees. Top candidates often have 50-100+ Hard solves.",
+            "SPECIFIC weakness 3: Inconsistent Foundational Academic Performance - Early semesters show low marks in fundamental engineering subjects like 'Manufacturing Process' (43), 'Applied Mathematics - II' (45), 'Engineering Mechanics' (49), and 'Digital Logic Design' (49). While she has improved dramatically, interviewers may probe these foundational areas, potentially revealing knowledge gaps.",
+            "SPECIFIC weakness 4: Lack of Demonstrable Software Engineering Best Practices - Her public GitHub repositories, while showcasing functional projects, lack evidence of industry-standard practices such as unit/integration testing (e.g., Jest, Pytest), CI/CD pipelines (GitHub Actions), containerization (Docker), or detailed architectural documentation. This is a common gap for students but critical for demonstrating production readiness.",
+            "SPECIFIC weakness 5: High Submission-to-Acceptance Ratio in Contests - The Codeforces submission history shows numerous 'WRONG_ANSWER' verdicts before achieving 'OK' on many problems. This pattern suggests a potential weakness in edge case analysis, debugging, and developing a robust initial logic, which can be a red flag in interviews where correctness and efficiency are paramount."
+          ],
+          "hidden_talents": [
+            "Underutilized potential in Backend & DevOps - Her project 'Docs AI' using Bun and Cloudflare Workers indicates a natural inclination towards performance-optimized backend and serverless technologies. This is a high-demand area she could specialize in, moving beyond standard web development.",
+            "Natural aptitude for Technical Communication shown by her well-written resume and GitHub READMEs. This skill is often underdeveloped in engineering candidates and can be a significant advantage in team collaboration and leadership roles. She should actively highlight this.",
+            "Emerging strength in AI Application Development that could become a competitive advantage. By combining her full-stack skills with her AI/DS coursework, she could build more sophisticated portfolio projects that integrate ML models, setting her apart from typical web developers."
+          ]
+        },
+        "detailed_scores": [
+          {
+            "parameter": "Academic Excellence & Consistency",
+            "score": 7,
+            "justification": "DETAILED: The overall CGPA of 7.68 is respectable but not top-tier. However, the score is elevated due to the remarkable positive trajectory. Her SGPA improved from 6.6 and 6.96 in the first year to a strong 8.6 and 8.42 in semesters 4 and 6. This demonstrates significant growth and adaptability. Her strongest areas are clearly practical labs and core AI/DS subjects ('Fundamentals of Deep Learning' - A+). Weaknesses in early-year foundational theory subjects ('Applied Mathematics - II' - 45 marks) prevent a higher score, but the upward trend is a major positive signal to employers.",
+            "improvement_potential": "Maintaining an SGPA above 8.5 in the final year could push her overall CGPA closer to 8.0, which would meet the screening criteria for a wider range of top companies. Focusing on strengthening mathematical foundations could further boost her performance in advanced AI courses."
+          },
+          {
+            "parameter": "Data Structures & Algorithms Mastery",
+            "score": 7,
+            "justification": "COMPREHENSIVE: LeetCode profile shows a strong volume of 512 solved problems with a good 60.0% acceptance rate, indicating persistent practice. She is strong in common patterns like Arrays (282 problems) and Hash Tables (110). However, the profile is unbalanced. The Codeforces rating of 1130 is low and indicates a struggle with applying knowledge under pressure. Furthermore, only 28 Hard problems have been solved, which is below the industry expectation of 50+ for candidates targeting top product companies. Her skills are solid for practice but not yet battle-tested for highly competitive environments.",
+            "improvement_potential": "A focused effort to solve 75+ more Medium and 50+ Hard problems on LeetCode, specifically targeting weak areas like advanced graphs and DP, could elevate her profile significantly. Participating in 2-3 Codeforces contests weekly for 3 months could raise her rating to 1400-1600 ('Specialist'), making her a much stronger candidate for FAANG-level interviews."
+          },
+          {
+            "parameter": "Full-Stack Development Capabilities",
+            "score": 8,
+            "justification": "Portfolio includes 3+ significant projects using a modern MERN-adjacent stack (Next.js, Node.js, TypeScript). Her GitHub shows 40 repos and recent activity. The 'Docs AI' project is particularly impressive, using Bun and Cloudflare Workers, which demonstrates initiative beyond standard curriculum. The internship at TheEndorse validates these skills in a professional context. The score is not higher because the projects lack visible evidence of testing, CI/CD, and containerization, which are key for demonstrating production-level engineering maturity.",
+            "improvement_potential": "Adding comprehensive unit and integration tests (e.g., using Jest/React Testing Library) to one of her main projects, setting up a CI/CD pipeline with GitHub Actions to automate testing and deployment, and containerizing an application with Docker would elevate her projects from 'impressive' to 'production-grade'. This would likely add a 15-20% premium to her salary negotiations."
+          },
+          {
+            "parameter": "Problem-Solving & Analytical Thinking",
+            "score": 7,
+            "justification": "Evidence from LeetCode shows a systematic approach to problem-solving, with over 500 problems solved. Her ability to solve 268 medium problems indicates she can handle multi-step logic. However, her Codeforces performance (rating 1130, max 1294) and the high number of wrong submissions before a correct one suggest that her analytical process may falter under time pressure or when faced with unfamiliar problem types. She is proficient at recognizing and applying known patterns but may need to develop more creative, first-principles thinking for novel challenges.",
+            "improvement_potential": "Participating in more competitive programming contests and deliberately practicing problems outside her comfort zone (e.g., from categories with few solves on LeetCode) will build mental agility. Practicing mock interviews will help her articulate her thought process clearly and efficiently, a key part of the evaluation."
+          },
+          {
+            "parameter": "Software Engineering Best Practices",
+            "score": 5,
+            "justification": "Code quality analysis of public GitHub repos shows a good grasp of project structure and modern syntax (e.g., TypeScript). However, there is a clear absence of key industry practices. There are no test suites, no CI/CD configuration files (e.g., `.github/workflows`), and no Dockerfiles. Commit messages are functional but could be more descriptive (e.g., following Conventional Commits). This indicates a focus on 'making it work' rather than 'making it maintainable, scalable, and robust', which is a common but significant gap for junior developers.",
+            "improvement_potential": "Learning and applying testing frameworks (Jest), CI/CD with GitHub Actions, and Docker to her main portfolio project would be a transformative step. Contributing to a well-maintained open-source project is the fastest way to learn these practices through code reviews and collaboration with experienced engineers."
+          },
+          {
+            "parameter": "Communication & Professional Skills",
+            "score": 7,
+            "justification": "Resume presentation is clean, professional, and effectively highlights key achievements and projects. Her GitHub profile README is well-written and serves as an excellent professional summary. This demonstrates strong written communication skills. The quality of her project descriptions suggests she can convey technical information clearly. The score is capped at 7 as there is no direct evidence of verbal communication or teamwork skills, which would be assessed during an interview.",
+            "improvement_potential": "Actively participating in hackathons, presenting a project to a technical club, or creating a short video walkthrough of her 'Docs AI' project would provide tangible evidence of her verbal communication and presentation skills, further strengthening her profile."
+          },
+          {
+            "parameter": "Market Readiness & Hiring Potential",
+            "score": 8,
+            "justification": "Overall profile suggests strong readiness for SDE-1 / Full-Stack Developer roles at a wide range of product companies and startups. The combination of a strong LeetCode profile, modern projects, and a real internship makes her a top-tier candidate outside of the FAANG/HFT bracket. For those top-tier companies, her relatively low competitive programming rating and lack of advanced algorithm practice are the primary gaps. Her resume is well-optimized and likely to pass ATS screening.",
+            "improvement_potential": "Focused preparation on advanced DSA and competitive programming for 3-4 months could make her a viable candidate for FAANG-level companies. Adding evidence of testing and CI/CD would make her highly attractive to fast-growing startups looking for engineers who can build robust systems from day one."
+          },
+          {
+            "parameter": "Learning Agility & Growth Mindset",
+            "score": 9,
+            "justification": "This is one of her strongest attributes. The academic progress from a 6.6 SGPA to 8.6 is prime evidence of a powerful growth mindset. Her adoption of new technologies like Bun and Cloudflare Workers, which are not typically part of a standard curriculum, shows high learning agility and intellectual curiosity. Her consistent activity on LeetCode over time further supports this. She has proven she can identify weaknesses and work systematically to turn them into strengths.",
+            "improvement_potential": "Maintaining this trajectory of learning new technologies and systematically improving weak areas is her key to a fast-growing career. Documenting her learning process through a technical blog would further showcase this valuable trait to potential employers."
+          }
+        ],
+        "actionable_advice": {
+          "recommendations": [
+            {
+              "title": "Elevate from DSA Practitioner to Competitor",
+              "description": "Your LeetCode volume is excellent, but your Codeforces rating (1130) is a major bottleneck for top-tier companies. You need to bridge the gap between pattern recognition and competitive problem-solving. Create a structured 3-month plan: solve the A2OJ Ladders for your rating bracket, participate in every Codeforces Div2/Div3 round, and most importantly, spend at least one hour 'upsolving' (solving problems you couldn't during the contest) for every hour of contesting. Focus on speed, accuracy, and mastering common competitive programming topics like number theory, combinatorics, and advanced greedy algorithms. Target a 1600+ rating ('Specialist') to become a competitive candidate for FAANG and equivalent companies.",
+              "priority": "HIGH",
+              "estimated_time": "3 months of consistent practice (10-12 hours weekly)",
+              "expected_impact": "A Codeforces rating of 1600+ would unlock interview opportunities at virtually any top tech company. It demonstrates not just knowledge but also the ability to think critically and code efficiently under extreme pressure, increasing your hiring probability for elite roles by over 70%.",
+              "mermaid_flowchart": "graph TD\n    A[Current: 1130 Rating] --> B[Week 1-4: A2OJ Ladder & Weekly Contests]\n    B --> C[Week 5-8: Focus on Upsolving & Weak Topics]\n    C --> D[Week 9-12: Mock Contests & Speed Drills]\n    D --> E[Target: 1600+ Rating]"
+            },
+            {
+              "title": "Instrument Your Projects with Production-Grade Practices",
+              "description": "Your projects are functionally impressive but lack the engineering rigor that separates a student project from a professional one. Select your best project ('Docs AI') and spend the next 6 weeks retrofitting it with industry-best practices. First, write comprehensive unit and integration tests using Jest and React Testing Library, aiming for >80% code coverage. Second, create a CI/CD pipeline using GitHub Actions that automatically runs these tests on every push. Third, containerize the application using Docker and write a `docker-compose.yml` file for easy local setup. Finally, write a detailed architectural document in the README, explaining your design choices, database schema, and API endpoints. This demonstrates maturity beyond just writing code.",
+              "priority": "HIGH",
+              "estimated_time": "6-8 weeks (8-10 hours weekly)",
+              "expected_impact": "This transforms your GitHub from a portfolio of 'things I can build' to 'proof I can engineer'. It directly addresses the 'Software Engineering Best Practices' weakness and will be a major talking point in interviews, differentiating you from 95% of other applicants. This can increase your perceived value and potential salary by 20-30%.",
+              "mermaid_flowchart": "graph LR\n    A[Select 'Docs AI' Project] --> B[Week 1-2: Unit & Integration Testing]\n    B --> C[Week 3-4: CI/CD with GitHub Actions]\n    C --> D[Week 5: Dockerize Application]\n    D --> E[Week 6: Architectural Documentation]\n    E --> F[Production-Ready Portfolio Piece]"
+            },
+            {
+              "title": "Systematic System Design Preparation",
+              "description": "While not always expected for new grads, system design knowledge is a massive differentiator and is often asked in interviews at companies like Amazon and Microsoft. Begin a structured 12-week study plan. Weeks 1-4: Master the fundamentals using resources like the 'System Design Primer' on GitHub (scalability, caching, load balancing, databases). Weeks 5-8: Deep dive into designing common applications (URL Shortener, Twitter, Uber). Practice drawing out the components and explaining the trade-offs. Weeks 9-12: Conduct mock system design interviews with peers. Focus on the structured communication process: clarify requirements, estimate scale, design the high-level architecture, then deep-dive into components. This skill will significantly accelerate your career growth.",
+              "priority": "MEDIUM",
+              "estimated_time": "3 months of structured study (4-5 hours weekly)",
+              "expected_impact": "Demonstrating basic system design competency can get you considered for higher-level new grad roles (L4 at Google, SDE-II at some startups). It shows architectural thinking and long-term potential, making you a more valuable hire. This knowledge is essential for clearing interview loops at major tech companies.",
+              "mermaid_flowchart": "graph TD\n    A[Month 1: Core Concepts] --> B[Month 2: Design Patterns]\n    B --> C[Month 3: Mock Interviews]\n    A --> A1[Scalability & Caching]\n    B --> B1[Design Twitter, Uber, etc.]\n    C --> C1[Practice with Peers]"
+            },
+            {
+              "title": "Quantify and Refine Your Professional Narrative",
+              "description": "Your resume is good, but it can be great. Go through every bullet point under your internship and projects and apply the STAR (Situation, Task, Action, Result) method with quantified results. Instead of 'Worked on OAuth authentication', write 'Implemented Google & LinkedIn OAuth, reducing manual sign-up friction and improving user onboarding conversion by 15% (estimated)'. Instead of 'Created an automated job expiration pipeline', write 'Engineered a serverless pipeline using [Tech] to automatically expire and delete old job postings, reducing database clutter by 25% and improving platform relevance'. This shift from describing duties to showcasing impact is the single most important change you can make to your resume.",
+              "priority": "HIGH",
+              "estimated_time": "1 week",
+              "expected_impact": "A resume filled with quantified achievements is significantly more compelling and can increase interview callback rates by over 50%. It demonstrates a business-oriented mindset and helps recruiters and hiring managers immediately grasp the value you provided, leading to better interviews and stronger offers.",
+              "mermaid_flowchart": "graph LR\n    A[Review Resume Bullet Points] --> B[Apply STAR Method]\n    B --> C[Estimate & Add Metrics]\n    C --> D[Seek Feedback & Finalize]\n    D --> E[High-Impact Resume]"
+            },
+            {
+              "title": "Deepen Your Specialization Knowledge",
+              "description": "Your degree is in 'AI and Data Science', and you have excellent grades in related subjects. However, your projects are primarily full-stack web development. To leverage your specialization, create one capstone project that merges these two worlds. For example, build a web application that uses a fine-tuned LLM to provide a service (like your 'Docs AI' project, but with more advanced RAG techniques), or a data visualization dashboard that performs real-time analytics. Document the entire ML/AI part of the process\u2014data collection, model selection/training, deployment, and API creation. This will make you a strong candidate for specialized roles that require both web development and AI/ML skills, which are often higher-paying.",
+              "priority": "MEDIUM",
+              "estimated_time": "2-3 months",
+              "expected_impact": "This creates a unique selling proposition, positioning you as a rare candidate with proven skills in both full-stack development and applied AI. This opens up opportunities in the rapidly growing AI engineering space and can command a significant salary premium over generalist full-stack roles.",
+              "mermaid_flowchart": "graph TD\n    A[Identify AI/Web Project Idea] --> B[Develop ML/AI Component]\n    B --> C[Build Full-Stack Application Around It]\n    C --> D[Deploy and Document]\n    D --> E[Specialized Portfolio]"
+            }
+          ]
+        },
+        "resume_analysis": {
+          "summary": "Nikita's resume is strong, well-structured, and effectively highlights her key skills and experiences. The layout is clean and professional, making it easy for recruiters to scan. The inclusion of links to her professional profiles is excellent. The 'Professional Experience' section is impactful, describing her internship tasks with clarity. The 'Projects' section is also a major strength, detailing modern tech stacks and the purpose of each application. The primary area for improvement is the lack of quantification. The descriptions focus on what she *did* rather than the *impact* of her work. For example, 'developed features like resume-based profile autofill' is good, but '...reducing profile creation time by 60%' would be much better. The skills section is comprehensive but could be organized by proficiency (e.g., Proficient, Familiar) to provide more context. Overall, it's an 8/10 resume that could become a 9.5/10 with the addition of metrics.",
+          "key_skills": [
+            "JavaScript/TypeScript (Advanced - Primary language for all major projects and internship)",
+            "React.js/Next.js (Advanced - Used to build multiple complex frontends like 'Docs AI' and 'ADmyBRAND')",
+            "Node.js/Express (Proficient - Used for backend services in projects like 'DevTinder')",
+            "Data Structures & Algorithms (Proficient - Evidenced by 500+ LeetCode problems)",
+            "MongoDB (Proficient - Primary database for MERN stack projects)",
+            "Cloudflare Workers/Pages (Intermediate - Deployed 'Docs AI', showing serverless experience)",
+            "C++ (Proficient - Primary language for competitive programming and DSA practice)",
+            "Git/GitHub (Advanced - Consistent usage with 40 repositories and version control for all projects)",
+            "REST APIs (Proficient - Designed and integrated APIs for multiple projects)",
+            "Authentication (OAuth, JWT) (Intermediate - Implemented in internship and 'DevTinder' project)",
+            "Prisma (Familiar - Listed as a skill, likely used in a project)",
+            "TailwindCSS (Proficient - Used for styling in modern frontend projects)"
+          ],
+          "professional_links": [
+            "mailto:bansalnikita06@gmail.com",
+            "https://www.linkedin.com/in/nikita-bansal-66bb33227/",
+            "https://github.com/Nikita06211",
+            "https://leetcode.com/Nikita_06211/",
+            "https://www.codechef.com/users/worth_fort_72",
+            "http://docsai-frontend-ssr.pages.dev",
+            "https://github.com/Nikita06211/docsai-frontend",
+            "https://dev-tinder-web-pink.vercel.app/login",
+            "https://github.com/Nikita06211/DevTinder",
+            "https://admybrand-ai-suite-qjjk.vercel.app/",
+            "https://github.com/Nikita06211/admybrand-ai-suite"
+          ],
+          "missing_elements": [
+            "Quantified Achievements - The resume lacks metrics and data to showcase the impact of her work.",
+            "Testing Frameworks - Skills like Jest, React Testing Library, or Cypress are missing, which are crucial for demonstrating code quality.",
+            "CI/CD & DevOps Tools - No mention of GitHub Actions, Jenkins, Docker, or Kubernetes.",
+            "Cloud Provider Experience - While Cloudflare is mentioned, specific experience with AWS, GCP, or Azure services is absent.",
+            "Summary/Objective Section - A concise 2-3 line summary at the top could provide a quick elevator pitch.",
+            "System Design Knowledge - No mention of architectural concepts or system design skills."
+          ],
+          "ats_score": 85,
+          "improvement_suggestions": [
+            "Incorporate metrics and KPIs into every bullet point in the 'Experience' and 'Projects' sections. Estimate the impact if exact numbers are not available.",
+            "Restructure bullet points using the STAR (Situation, Task, Action, Result) format to create a compelling narrative.",
+            "Add a 'Technical Skills' subsection for 'Developer Tools' to explicitly list Testing, CI/CD, and DevOps tools as you learn them.",
+            "Create a brief, powerful 'Summary' section at the top to immediately grab the recruiter's attention.",
+            "Tailor the skills and project descriptions to match the keywords found in the job descriptions of roles you are targeting."
+          ]
+        },
+        "skills": [
+          {
+            "name": "JavaScript/TypeScript",
+            "category": "Programming Language",
+            "performance": 90,
+            "evidence": "Primary language in all major GitHub projects ('Docs AI', 'DevTinder') and internship.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "React.js/Next.js",
+            "category": "Frontend Framework",
+            "performance": 90,
+            "evidence": "Built multiple complex, responsive UIs for portfolio projects. Resume highlights Next.js.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Node.js/Express",
+            "category": "Backend Framework",
+            "performance": 80,
+            "evidence": "Backend for 'DevTinder' project, demonstrating knowledge of REST API creation and database integration.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Data Structures & Algorithms",
+            "category": "Core CS",
+            "performance": 80,
+            "evidence": "512 LeetCode problems solved is strong quantitative proof. Good distribution across key topics.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "C++",
+            "category": "Programming Language",
+            "performance": 85,
+            "evidence": "Primary language for LeetCode (485 problems) and Codeforces, indicating strong command for algorithmic tasks.",
+            "market_demand": "MEDIUM"
+          },
+          {
+            "name": "MongoDB",
+            "category": "Database",
+            "performance": 75,
+            "evidence": "Used as the database in MERN stack projects like 'DevTinder'.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "PostgreSQL",
+            "category": "Database",
+            "performance": 60,
+            "evidence": "Listed in resume skills, indicating familiarity, but not the primary DB in visible projects.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Cloudflare Workers/Pages",
+            "category": "Cloud/DevOps",
+            "performance": 70,
+            "evidence": "Deployed 'Docs AI' project, showing hands-on experience with a modern serverless platform.",
+            "market_demand": "MEDIUM"
+          },
+          {
+            "name": "Git & GitHub",
+            "category": "Version Control",
+            "performance": 90,
+            "evidence": "40 public repositories with consistent commit history. Used for all personal and academic projects.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Software Testing (Jest, etc.)",
+            "category": "Software Engineering",
+            "performance": 20,
+            "evidence": "No evidence of testing frameworks in public repositories or resume.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "CI/CD (GitHub Actions)",
+            "category": "Cloud/DevOps",
+            "performance": 10,
+            "evidence": "No visible CI/CD pipelines in projects.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Containerization (Docker)",
+            "category": "Cloud/DevOps",
+            "performance": 10,
+            "evidence": "No evidence of Docker usage in projects.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "System Design",
+            "category": "Core CS",
+            "performance": 30,
+            "evidence": "Profile focuses on implementation; no demonstrated knowledge of scalable system architecture.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Competitive Programming",
+            "category": "Problem Solving",
+            "performance": 40,
+            "evidence": "Codeforces rating of 1130 is in the 'Newbie' category, indicating a significant performance gap.",
+            "market_demand": "HIGH"
+          },
+          {
+            "name": "Technical Writing",
+            "category": "Communication",
+            "performance": 85,
+            "evidence": "Excellent grades in 'Effective Technical Writing' (96 marks), plus clear and professional resume and GitHub READMEs.",
+            "market_demand": "MEDIUM"
+          }
+        ],
+        "learning_path": [
+          {
+            "title": "Phase 1: Competitive Programming & Advanced DSA (Months 1-3)",
+            "description": "Transition from a high-volume practitioner to a high-performance competitor. This phase is critical for unlocking interviews at top-tier companies. The goal is to improve problem-solving speed, accuracy, and mastery of advanced algorithmic concepts under pressure.",
+            "duration": "3 months",
+            "prerequisites": [
+              "Solid understanding of basic DSA",
+              "Proficiency in C++",
+              "500+ LeetCode problems solved"
+            ],
+            "resources": [
+              {
+                "title": "Codeforces Problemset & Contests",
+                "description": "Participate in all Div. 2/3 contests and consistently upsolve problems one level above your current rating.",
+                "url": "https://codeforces.com/problemset",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "100 hours"
+              },
+              {
+                "title": "USACO Training Program",
+                "description": "A structured curriculum for competitive programming, excellent for learning advanced topics.",
+                "url": "https://train.usaco.org/",
+                "difficulty": "ADVANCED",
+                "estimated_time": "80 hours"
+              }
+            ],
+            "milestones": [
+              "Month 1: Achieve a stable 1400+ rating on Codeforces.",
+              "Month 2: Solve 25+ 'Hard' problems on LeetCode focusing on DP and Graphs.",
+              "Month 3: Achieve a 1600+ rating ('Specialist') on Codeforces."
+            ]
+          },
+          {
+            "title": "Phase 2: Production Engineering Fundamentals (Months 4-5)",
+            "description": "Instrument your best portfolio project with the tools and practices used in professional software engineering. This phase focuses on building robust, maintainable, and deployable applications, moving beyond just functionality.",
+            "duration": "2 months",
+            "prerequisites": [
+              "A complete full-stack project",
+              "Familiarity with the command line"
+            ],
+            "resources": [
+              {
+                "title": "Jest & React Testing Library Docs",
+                "description": "Official documentation for learning unit and integration testing in React.",
+                "url": "https://jestjs.io/",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "40 hours"
+              },
+              {
+                "title": "GitHub Actions Documentation",
+                "description": "Learn to build CI/CD pipelines directly within GitHub.",
+                "url": "https://docs.github.com/en/actions",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "20 hours"
+              },
+              {
+                "title": "Docker Curriculum",
+                "description": "A practical guide to learning Docker for containerizing applications.",
+                "url": "https://docker-curriculum.com/",
+                "difficulty": "BEGINNER",
+                "estimated_time": "20 hours"
+              }
+            ],
+            "milestones": [
+              "Week 3: Achieve >80% test coverage on your main project's frontend.",
+              "Week 5: Successfully implement a CI pipeline that runs tests on every commit.",
+              "Week 8: Deploy the containerized version of your application."
+            ]
+          },
+          {
+            "title": "Phase 3: System Design & Architectural Thinking (Months 6-8)",
+            "description": "Develop the skills to think about software at scale. This phase moves from coding individual components to designing entire systems, a crucial skill for career growth and for passing interview loops at major tech companies.",
+            "duration": "3 months",
+            "prerequisites": [
+              "Strong understanding of web technologies",
+              "Familiarity with databases and APIs"
+            ],
+            "resources": [
+              {
+                "title": "System Design Primer on GitHub",
+                "description": "The definitive open-source guide to learning system design.",
+                "url": "https://github.com/donnemartin/system-design-primer",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "100 hours"
+              },
+              {
+                "title": "Grokking the System Design Interview",
+                "description": "A popular paid course that provides a structured approach to solving system design problems.",
+                "url": "https://www.educative.io/courses/grokking-the-system-design-interview",
+                "difficulty": "INTERMEDIATE",
+                "estimated_time": "50 hours"
+              }
+            ],
+            "milestones": [
+              "Month 1: Be able to explain core concepts like Load Balancing, Caching, and CAP Theorem.",
+              "Month 2: Confidently design 5 common systems (e.g., TinyURL, Instagram Feed) on a whiteboard.",
+              "Month 3: Successfully complete 5+ peer-led mock system design interviews."
+            ]
+          }
+        ],
+        "career_insights": {
+          "current_trajectory": "Based on your profile, you are on a strong trajectory for a Software Development Engineer 1 (SDE-1) or Full-Stack Developer role at reputable product-based companies and high-growth startups. Your strengths in practical development (modern stack, internship) make you immediately valuable. Your current skill set aligns with a salary range of \u20b912-22 LPA in the Indian market. With focused improvement on competitive DSA and production engineering practices, you could target top-tier companies.",
+          "potential_roles": [
+            "Full-Stack Developer (Next.js/Node.js) - Your best fit, directly aligning with your project and internship experience.",
+            "Frontend Engineer (React/TypeScript) - Your projects demonstrate strong capabilities in building modern, responsive user interfaces.",
+            "Backend Engineer (Node.js/TypeScript) - Your work on APIs and server-side logic is solid, and your interest in Bun/Cloudflare shows potential for specialization.",
+            "SDE-1 at Product Companies (e.g., Atlassian, Intuit, Adobe) - Your overall technical competency and DSA foundation make you a strong candidate.",
+            "Software Engineer at Startups - Your versatile skill set and experience with modern, fast-moving technologies are highly valued in startup environments.",
+            "AI Engineer / ML Engineer - A potential future path if you build projects that merge your full-stack skills with your AI/DS degree specialization."
+          ],
+          "salary_range": "Current: \u20b912-22 LPA. After addressing key gaps (competitive programming, production practices): \u20b920-35 LPA. Potential to reach \u20b935-50 LPA at FAANG/unicorns within 2-3 years if you maintain your current growth rate.",
+          "competitive_advantage": "Your unique combination of high-volume LeetCode practice, a genuinely modern and forward-thinking project stack (beyond basic MERN), and validated professional internship experience sets you apart. Unlike peers who may have one or two of these, you have all three. This trifecta demonstrates both theoretical dedication and practical, real-world capability. Leverage this in interviews by framing yourself as a candidate who can both solve hard problems and ship production-ready code.",
+          "market_positioning": "Currently in the top 15% of graduating students based on your holistic profile (projects, DSA, internship). You are a strong candidate for most companies. To break into the top 5% (FAANG, HFTs, top AI labs), the primary gap to close is your competitive programming performance and demonstrating a deeper understanding of software engineering rigor (testing, CI/CD). Your profile is particularly attractive to tech-forward startups and established product companies looking for developers who can quickly adopt new technologies and contribute from day one."
+        },
+        "cgpa_trend": {
+          "labels": [
+            "Sem 1",
+            "Sem 2",
+            "Sem 3",
+            "Sem 4",
+            "Sem 5",
+            "Sem 6"
+          ],
+          "values": [
+            6.6,
+            6.96,
+            7.52,
+            8.6,
+            7.92,
+            8.42
+          ]
+        },
+        "youtube_recommendations": [
+          {
+            "topic": "Advanced Graph Algorithms (Dijkstra, MST, Network Flow)",
+            "reason": "Your profile shows a gap in solving 'Hard' problems (only 28 solved). Advanced graph algorithms are a staple of these complex challenges and are frequently asked in interviews at top-tier companies like Google and Meta. Mastering Dijkstra's for shortest paths, Minimum Spanning Trees for network problems, and network flow will directly address this weakness, unlocking a significant portion of difficult LeetCode and competitive programming problems.",
+            "category": "Programming Languages",
+            "videos": [
+              {
+                "title": "Python Programming Tutorial - Full Course",
+                "url": "https://www.youtube.com/watch?v=_uQrJ0TkZlc",
+                "embed_url": "https://www.youtube.com/embed/_uQrJ0TkZlc",
+                "reason": "Learn Python programming from scratch with hands-on examples and projects"
+              }
+            ]
+          },
+          {
+            "topic": "Dynamic Programming Patterns for Competitive Programming",
+            "reason": "While you have solved 64 DP problems, your low Codeforces rating suggests a need for faster pattern recognition under pressure. Focusing on common DP patterns (e.g., Knapsack variations, LIS, Digit DP, DP on grids/trees) will shift your approach from solving individual problems to recognizing problem categories. This is the key skill that separates 'Pupil' from 'Expert' level competitive programmers and improves interview speed.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Dynamic Programming - Learn to Solve Algorithmic Problems",
+                "url": "https://www.youtube.com/watch?v=oBt53YbR9Kk",
+                "embed_url": "https://www.youtube.com/embed/oBt53YbR9Kk",
+                "reason": "Complete guide to dynamic programming with examples"
+              },
+              {
+                "title": "Dynamic Programming Tutorial",
+                "url": "https://www.youtube.com/watch?v=CB_N7A_a1qY",
+                "embed_url": "https://www.youtube.com/embed/CB_N7A_a1qY",
+                "reason": "Comprehensive tutorial on dynamic programming concepts"
+              }
+            ]
+          },
+          {
+            "topic": "Advanced Data Structures (Segment Trees & Fenwick Trees)",
+            "reason": "Your limited exposure to 'Hard' problems and low competitive programming rank are directly linked to a likely gap in advanced data structures. Segment Trees and Fenwick Trees are essential for solving a vast category of problems involving range queries and updates efficiently. Learning these is a non-negotiable step to tackle complex algorithmic challenges and significantly boost your Codeforces rating and 'Hard' problem count.",
+            "category": "DSA",
+            "videos": [
+              {
+                "title": "Fenwick Tree - Introduction | C++ Placement Course | Lecture 41.1",
+                "url": "https://www.youtube.com/watch?v=fIQABUIeWYg",
+                "embed_url": "https://www.youtube.com/embed/fIQABUIeWYg",
+                "reason": ""
+              },
+              {
+                "title": "Segment Tree Data Structure - Min Max Queries - Java source code",
+                "url": "https://www.youtube.com/watch?v=xztU7lmDLv8",
+                "embed_url": "https://www.youtube.com/embed/xztU7lmDLv8",
+                "reason": ""
+              },
+              {
+                "title": "Fenwick Tree Tutorial | Foolw-up problem from Codeforces | Check first comment before starting",
+                "url": "https://www.youtube.com/watch?v=9uaXG62Y8Uw",
+                "embed_url": "https://www.youtube.com/embed/9uaXG62Y8Uw",
+                "reason": ""
+              },
+              {
+                "title": "Fenwick Tree (Binary Index Tree) - Quick Tutorial and Source Code Explanation",
+                "url": "https://www.youtube.com/watch?v=uSFzHCZ4E-8",
+                "embed_url": "https://www.youtube.com/embed/uSFzHCZ4E-8",
+                "reason": ""
+              },
+              {
+                "title": "Masterclass: Range Query DS | Segment Trees | Fenwick Trees | Masterclasses By Striver",
+                "url": "https://www.youtube.com/watch?v=NEG-SoyigGE",
+                "embed_url": "https://www.youtube.com/embed/NEG-SoyigGE",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "Operating Systems Concepts (Concurrency & Memory Management)",
+            "reason": "Your early low marks in foundational subjects could be a red flag for interviewers probing for depth. Mastering OS concepts like threads vs. processes, mutexes, semaphores, and virtual memory management demonstrates a solid computer science foundation. This knowledge is critical for backend development, debugging complex issues, and acing system design interviews, directly complementing your strong full-stack project experience.",
+            "category": "Computer Science Fundamentals",
+            "videos": [
+              {
+                "title": "Complete Operating Systems in 1 Shot (With Notes) || For Placement Interviews",
+                "url": "https://www.youtube.com/watch?v=3obEP8eLsCw",
+                "embed_url": "https://www.youtube.com/embed/3obEP8eLsCw",
+                "reason": ""
+              },
+              {
+                "title": "Complete Operating System in one shot | Semester Exam | Hindi",
+                "url": "https://www.youtube.com/watch?v=xw_OuOhjauw",
+                "embed_url": "https://www.youtube.com/embed/xw_OuOhjauw",
+                "reason": ""
+              },
+              {
+                "title": "Operating Systems: Crash Course Computer Science #18",
+                "url": "https://www.youtube.com/watch?v=26QPDBe-NB8",
+                "embed_url": "https://www.youtube.com/embed/26QPDBe-NB8",
+                "reason": ""
+              },
+              {
+                "title": "Master the Basics of Operating Systems in 25 MINS! Concurrency vs. Parallelism, Paging, Segmentation",
+                "url": "https://www.youtube.com/watch?v=Tt5GKnfHUlY",
+                "embed_url": "https://www.youtube.com/embed/Tt5GKnfHUlY",
+                "reason": ""
+              },
+              {
+                "title": "Operating System Notes for Tech Placements @ApnaCollegeOfficial",
+                "url": "https://www.youtube.com/watch?v=ktP8QsPzKfs",
+                "embed_url": "https://www.youtube.com/embed/ktP8QsPzKfs",
+                "reason": ""
+              }
+            ]
+          },
+          {
+            "topic": "System Design Fundamentals for Scalability",
+            "reason": "With strong DSA and development skills, the next bottleneck in your career progression is system design. Your projects are modern but likely haven't been built for massive scale. Learning fundamentals like load balancing, database sharding, caching strategies, and message queues is crucial. This is the primary evaluation criteria for roles beyond entry-level at all major product-based companies and will bridge the gap between your current projects and enterprise-level architecture.",
+            "category": "Computer Science Fundamentals",
+            "videos": [
+              {
+                "title": "System Design BASICS: Horizontal vs. Vertical Scaling",
+                "url": "https://www.youtube.com/watch?v=xpDnVSmNFX0",
+                "embed_url": "https://www.youtube.com/embed/xpDnVSmNFX0",
+                "reason": ""
+              },
+              {
+                "title": "Scalability Simply Explained in 10 Minutes",
+                "url": "https://www.youtube.com/watch?v=EWS_CIxttVw",
+                "embed_url": "https://www.youtube.com/embed/EWS_CIxttVw",
+                "reason": ""
+              },
+              {
+                "title": "System Design Fundamentals: Horizontal vs. Vertical Scaling",
+                "url": "https://www.youtube.com/watch?v=qLwLmlONkS0",
+                "embed_url": "https://www.youtube.com/embed/qLwLmlONkS0",
+                "reason": ""
+              },
+              {
+                "title": "Scalability explained in System Design: Essential guide to Software Architecture - Episode 3.1",
+                "url": "https://www.youtube.com/watch?v=Q_cbWvvdvaE",
+                "embed_url": "https://www.youtube.com/embed/Q_cbWvvdvaE",
+                "reason": ""
+              },
+              {
+                "title": "\ud83d\ude80 Scalability Fundamentals: System Design for Beginners",
+                "url": "https://www.youtube.com/watch?v=wJ1H9Y8dCjQ",
+                "embed_url": "https://www.youtube.com/embed/wJ1H9Y8dCjQ",
+                "reason": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
